@@ -99,6 +99,30 @@ margin:40px auto;
 max-width:900px;
 }
 
+/* FIXED SIDE ADS */
+
+.ads-left, .ads-right {
+    position: fixed;
+    top: 200px;
+    width: 120px;
+    z-index: 9999;
+}
+
+.ads-left { left: 0; }
+.ads-right { right: 0; }
+
+/* BOTTOM AD */
+.ads-bottom {
+    display: block;
+    text-align: center;
+    margin: 40px auto 0;
+}
+
+/* Hide side ads on mobile */
+@media (max-width: 900px) {
+    .ads-left, .ads-right { display: none; }
+}
+
 /* FOOTER */
 
 .footer{
@@ -117,12 +141,32 @@ text-decoration:none;
 </head>
 <body>
 
+<!-- Left Fixed Ad -->
+<div class="ads-left">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6814079272498306"
+     data-ad-slot="5829190376"
+     data-ad-format="auto"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
+<!-- Right Fixed Ad -->
+<div class="ads-right">
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-client="ca-pub-6814079272498306"
+     data-ad-slot="5829190376"
+     data-ad-format="auto"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
+
 <div class="header">
 <h1>🚀 My Project Hub</h1>
 <p>All tools, dashboards and projects I built</p>
 </div>
 
-<!-- AdSense Ad -->
+<!-- Top/Regular Ad -->
 <div class="ad">
 
 <ins class="adsbygoogle"
@@ -158,29 +202,10 @@ data-full-width-responsive="true"></ins>
 <div class="desc">Blog Posts</div>
 </a>
 
-<!-- 
-<a href="https://aman7263.github.io/web-tools/" class="card">
-<div class="icon">🛠️</div>
-<div class="title">Web Tools</div>
-<div class="desc">Developer tools & helpers</div>
-</a>
-
-<a href="https://aman7263.github.io/games/" class="card">
-<div class="icon">🎮</div>
-<div class="title">Mini Games</div>
-<div class="desc">Fun browser games</div>
-</a>
-
-<a href="https://aman7263.github.io/experiments/" class="card">
-<div class="icon">🧪</div>
-<div class="title">Experiments</div>
-<div class="desc">Random web experiments</div>
-</a> -->
-
 </div>
 
-<!-- AdSense Ad -->
-<div class="ad">
+<!-- Bottom Ad -->
+<div class="ads-bottom">
 
 <ins class="adsbygoogle"
 style="display:block; text-align:center;"
