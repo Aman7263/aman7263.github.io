@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gemini AI - Beginner Safe Market Dashboard</title>
+
+<style>
+:root { 
+  --bg: #0d1117; 
+  --card: #161b22; 
+  --text: #c9d1d9; 
+  --blue: #58a6ff; 
+}
+
+* { box-sizing:border-box; }
+
+body { 
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  background: var(--bg); 
+  color: var(--text); 
+  padding: 15px; 
+  margin: 0;
+}
+
+.container { max-width:1400px; margin:auto; text-align:center; }
+
+.header-box { margin-bottom:25px; border-bottom:1px solid #30363d; padding-bottom:20px; }
+
+.btn { 
+  background: var(--blue); 
+  color:white; 
+  border:none; 
+  padding:14px 30px; 
+  border-radius:8px; 
+  cursor:pointer; 
+  font-weight:bold; 
+}
+
+.btn:hover { background:#4b94e6; }
+
+.grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; text-align:left; }
+
+.section { 
+  background:var(--card); 
+  padding:20px; 
+  border-radius:12px; 
+  border:1px solid #30363d; 
+  overflow-x:auto;
+}
+
+h3 { border-left:4px solid var(--blue); padding-left:10px; }
+
+table { width:100%; border-collapse:collapse; margin-top:10px; min-width:700px;}
+
+th { border-bottom:2px solid #30363d; padding:6px; font-size:0.7rem; text-transform:uppercase; color:#8b949e; text-align:left;}
+
+td { padding:6px; border-bottom:1px solid #21262d; font-size:0.7rem; }
+
+.rank { color:#f2cc60; font-weight:bold;}
+
+.buy-signal { color:#39d353; font-weight:700;}
+
+.target-price { color: var(--blue); font-weight:bold;}
+
+.stop-loss { color:#ff7b72; font-weight:bold;}
+
+.reason { font-size:0.65rem; color:#8b949e;}
+
+#loader { display:none; margin:15px; padding:10px; background:rgba(88,166,255,0.1); border-radius:8px; }
+
+input { 
+  padding:10px; 
+  margin:10px; 
+  border-radius:6px; 
+  border:1px solid #30363d; 
+  width:220px; 
+  background:var(--card);
+  color:var(--text);
+}
+
+@media(max-width:900px){
+.grid { grid-template-columns:1fr; }
+}
+</style>
+
+<meta name="google-adsense-account" content="ca-pub-6814079272498306">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6814079272498306"
+crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="header-box">
+<h1>Gemini AI: Beginner Safe Market Analyzer</h1>
+<p>AI-based recovery trading suggestions with strict risk control.</p>
+
+<input type="number" id="investmentAmount" placeholder="Enter investment ₹1000 - ₹50000" min="1000" max="50000">
+
+<button class="btn" onclick="callGemini()">GENERATE SAFE SIGNALS</button>
+
+<!-- AdSense Ad -->
+<div class="ad">
+
+<ins class="adsbygoogle"
+style="display:block; text-align:center;"
+data-ad-client="ca-pub-6814079272498306"
+data-ad-slot="5829190376"
+data-ad-format="auto"
+data-full-width-responsive="true"></ins>
+
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+
+</div>
+<div id="loader"></div>
+</div>
+
+<div class="grid">
+
+<div class="section">
+<h3>🇮🇳 Indian Stocks</h3>
+
+<table id="stockTable">
+<thead>
+<tr>
+<th>Rank</th><th>Symbol</th><th>Sector</th>
+<th>Entry</th><th>Alloc %</th><th>Qty</th>
+<th>Target</th><th>Stop</th><th>Hold</th><th>Risk</th><th>Reason</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+</div>
+
+<div class="section">
+<h3>🪙 Cryptocurrencies</h3>
+
+<table id="cryptoTable">
+<thead>
+<tr>
+<th>Rank</th><th>Asset</th>
+<th>Entry</th><th>Alloc %</th><th>Qty</th>
+<th>Target</th><th>Stop</th>
+<th>Hold</th><th>Risk</th><th>Reason</th>
+</tr>
+</thead>
+<tbody></tbody>
+</table>
+
+</div>
+
+</div>
+</div>
+
+<script src="gemini.js"></script>
+
+<script>
+
+function parseInvestmentAmount(input) {
+
+  const amount = Number(input);
+
+  if (!amount || amount < 1000 || amount > 50000) {
+    return null;
+  }
+
+  return amount;
+}
+
+async function callGemini(){
+
+const input = document.getElementById("investmentAmount").value;
+
+const loader = document.getElementById("loader");
+
+const stockBody = document.querySelector("#stockTable tbody");
+
+const cryptoBody = document.querySelector("#cryptoTable tbody");
+
+const investment = parseInvestmentAmount(input);
+
+if(!investment){
+
+loader.style.display="block";
+loader.style.color="#ff7b72";
+loader.innerHTML="⚠ Investment must be between ₹1000 and ₹50,000";
+
+return;
+
+}
+
+loader.style.display="block";
+loader.style.color="#58a6ff";
+loader.innerHTML="🔄 Gemini analyzing markets...";
+
+const prompt = `
+
+Act as a conservative financial advisor for beginner Indian investors.
+
+Total investment capital = ₹${investment}
+
+Rules:
+
+- Capital range ₹1000 to ₹50000
+- Maximum 10% allocation per asset
+- Calculate quantity using allocation amount
+- Prefer large-cap safe stocks
+- Prefer top cryptocurrencies only
+- Stop loss 3-5%
+- Target 5-12%
+- Holding 5-20 days
+
+IMPORTANT:
+
+You MUST calculate quantity using this formula:
+
+allocation_amount = (allocation_percent / 100) * capital  
+qty = allocation_amount / entry_price
+
+Return 10 stocks and 10 crypto.
+
+Return ONLY JSON.
+
+{
+"stocks":[
+{
+"rank":1,
+"symbol":"RELIANCE",
+"sector":"Energy",
+"entry":2800,
+"allocation_percent":10,
+"qty":0,
+"target":3000,
+"stop":2700,
+"hold":"10 days",
+"risk":"Low",
+"reason":"Strong fundamentals"
+}
+],
+"crypto":[
+{
+"rank":1,
+"asset":"BTC",
+"entry":6500000,
+"allocation_percent":10,
+"qty":0,
+"target":7000000,
+"stop":6200000,
+"hold":"15 days",
+"risk":"Medium",
+"reason":"Market leader"
+}
+]
+}
+
+`;
+
+try{
+
+let result = await generateWithGemini(prompt);
+
+stockBody.innerHTML="";
+cryptoBody.innerHTML="";
+
+result.stocks.forEach(s=>{
+
+stockBody.innerHTML+=`
+
+<tr>
+
+<td class="rank">${s.rank}</td>
+
+<td class="buy-signal">${s.symbol}</td>
+
+<td>${s.sector}</td>
+
+<td>₹${Number(s.entry).toLocaleString('en-IN')}</td>
+
+<td>${s.allocation_percent}%</td>
+
+<td>${Number(s.qty).toFixed(2)}</td>
+
+<td class="target-price">₹${Number(s.target).toLocaleString('en-IN')}</td>
+
+<td class="stop-loss">₹${Number(s.stop).toLocaleString('en-IN')}</td>
+
+<td>${s.hold}</td>
+
+<td>${s.risk}</td>
+
+<td class="reason">${s.reason}</td>
+
+</tr>
+
+`;
+
+});
+
+result.crypto.forEach(c=>{
+
+cryptoBody.innerHTML+=`
+
+<tr>
+
+<td class="rank">${c.rank}</td>
+
+<td class="buy-signal">${c.asset}</td>
+
+<td>₹${Number(c.entry).toLocaleString('en-IN')}</td>
+
+<td>${c.allocation_percent}%</td>
+
+<td>${Number(c.qty).toFixed(4)}</td>
+
+<td class="target-price">₹${Number(c.target).toLocaleString('en-IN')}</td>
+
+<td class="stop-loss">₹${Number(c.stop).toLocaleString('en-IN')}</td>
+
+<td>${c.hold}</td>
+
+<td>${c.risk}</td>
+
+<td class="reason">${c.reason}</td>
+
+</tr>
+
+`;
+
+});
+
+loader.innerHTML="✅ Signals Generated";
+
+}catch(err){
+
+loader.style.color="#ff7b72";
+loader.innerHTML="❌ Error loading signals";
+
+console.error(err);
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
