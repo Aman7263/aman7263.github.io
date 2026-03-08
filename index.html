@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>My Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yano Projects Hub</title>
 
 <meta name="google-adsense-account" content="ca-pub-6814079272498306">
 
@@ -11,70 +13,104 @@ crossorigin="anonymous"></script>
 
 <style>
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f4f6f9;
-    margin: 0;
-    padding: 20px;
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: "Segoe UI", Arial, sans-serif;
 }
 
-/* Header */
-.header {
-    text-align: center;
-    margin-bottom: 30px;
+body{
+background: linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+min-height:100vh;
+color:white;
+padding:20px;
 }
 
-.header h1 {
-    color: #333;
+/* HEADER */
+
+.header{
+text-align:center;
+margin-bottom:40px;
 }
 
-/* Responsive Dashboard Grid */
-.dashboard {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 20px;
-    max-width: 1000px;
-    margin: auto;
+.header h1{
+font-size:38px;
+letter-spacing:1px;
 }
 
-/* Card */
-.card {
-    background: white;
-    border-radius: 12px;
-    padding: 30px;
-    text-align: center;
-    text-decoration: none;
-    color: #333;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: 0.3s;
+.header p{
+opacity:0.8;
+margin-top:8px;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+/* DASHBOARD GRID */
+
+.dashboard{
+max-width:1200px;
+margin:auto;
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
 }
 
-/* Icon */
-.icon {
-    font-size: 40px;
-    margin-bottom: 10px;
+/* PROJECT CARD */
+
+.card{
+background:rgba(255,255,255,0.08);
+backdrop-filter: blur(12px);
+border-radius:15px;
+padding:35px 20px;
+text-align:center;
+text-decoration:none;
+color:white;
+
+transition:0.3s;
+border:1px solid rgba(255,255,255,0.1);
 }
 
-/* Title */
-.title {
-    font-size: 18px;
-    font-weight: bold;
+.card:hover{
+transform:translateY(-8px) scale(1.03);
+background:rgba(255,255,255,0.15);
+box-shadow:0 10px 25px rgba(0,0,0,0.3);
 }
 
-/* Mobile spacing improvement */
-@media (max-width: 480px) {
-    body {
-        padding: 10px;
-    }
+.icon{
+font-size:42px;
+margin-bottom:12px;
+}
 
-    .card {
-        padding: 20px;
-    }
+.title{
+font-size:19px;
+font-weight:600;
+margin-bottom:6px;
+}
+
+.desc{
+font-size:13px;
+opacity:0.7;
+}
+
+/* ADS */
+
+.ad{
+margin:40px auto;
+max-width:900px;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+margin-top:60px;
+opacity:0.7;
+font-size:14px;
+}
+
+.footer a{
+color:#fff;
+text-decoration:none;
 }
 
 </style>
@@ -82,10 +118,12 @@ body {
 <body>
 
 <div class="header">
-    <h1>Collage Dashboard</h1>
+<h1>🚀 My Project Hub</h1>
+<p>All tools, dashboards and projects I built</p>
 </div>
 
-    <!-- AdSense Ad -->
+<div class="ad">
+
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-client="ca-pub-6814079272498306"
@@ -96,17 +134,51 @@ body {
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+
+</div>
 
 <div class="dashboard">
 
-    <a href="https://aman7263.github.io/Final-Year-Projects/" class="card">
-        <div class="icon">🎓</div>
-        <div class="title">Collage Dashboard</div>
-    </a>
-    
+<a href="https://aman7263.github.io/Final-Year-Projects/" class="card">
+<div class="icon">🎓</div>
+<div class="title">Final Year Projects</div>
+<div class="desc">College project collection</div>
+</a>
+
+<!-- <a href="https://aman7263.github.io/crypto-dashboard/" class="card">
+<div class="icon">📈</div>
+<div class="title">Crypto Dashboard</div>
+<div class="desc">Market tracker & analytics</div>
+</a>
+
+<a href="https://aman7263.github.io/ai-tools/" class="card">
+<div class="icon">🤖</div>
+<div class="title">AI Tools</div>
+<div class="desc">Useful AI utilities</div>
+</a>
+
+<a href="https://aman7263.github.io/web-tools/" class="card">
+<div class="icon">🛠️</div>
+<div class="title">Web Tools</div>
+<div class="desc">Developer tools & helpers</div>
+</a>
+
+<a href="https://aman7263.github.io/games/" class="card">
+<div class="icon">🎮</div>
+<div class="title">Mini Games</div>
+<div class="desc">Fun browser games</div>
+</a>
+
+<a href="https://aman7263.github.io/experiments/" class="card">
+<div class="icon">🧪</div>
+<div class="title">Experiments</div>
+<div class="desc">Random web experiments</div>
+</a> -->
+
 </div>
 
-    <!-- AdSense Ad -->
+<div class="ad">
+
 <ins class="adsbygoogle"
      style="display:block; text-align:center;"
      data-ad-client="ca-pub-6814079272498306"
@@ -117,6 +189,12 @@ body {
 <script>
 (adsbygoogle = window.adsbygoogle || []).push({});
 </script>
+
+</div>
+
+<div class="footer">
+<p>Built with ❤️ | Hosted on GitHub Pages</p>
+</div>
 
 </body>
 </html>
