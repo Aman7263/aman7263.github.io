@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="category-title">Category</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <meta name="google-adsense-account" content="ca-pub-6814079272498306">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6814079272498306"
+crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <header>
+    <h1 id="header-title">Category</h1>
+    <div class="theme-toggle">
+      <button id="lightBtn">Light</button>
+      <button id="darkBtn">Dark</button>
+      <button id="readingBtn">Reading</button>
+    </div>
+    <img src="assets/logo.png" class="logo" alt="Logo">
+    <a href="join.html" class="join-btn">💰 Join Us</a>
+  </header>
+
+  <div class="ad-container">
+    <!-- Left Ad -->
+    <div class="ad-left">
+      <ins class="adsbygoogle"
+        style="display:block;"
+        data-ad-client="ca-pub-6814079272498306"
+        data-ad-slot="1234567890"
+        data-ad-format="vertical"
+        data-full-width-responsive="false"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+      <input type="text" id="search" placeholder="Search...">
+      <div id="posts-container"></div>
+    </main>
+
+    <!-- Right Ad -->
+    <div class="ad-right">
+      <ins class="adsbygoogle"
+        style="display:block;"
+        data-ad-client="ca-pub-6814079272498306"
+        data-ad-slot="1234567890"
+        data-ad-format="vertical"
+        data-full-width-responsive="false"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <!-- Bottom Ad -->
+  <div class="ad-bottom">
+    <ins class="adsbygoogle"
+      style="display:block;text-align:center;"
+      data-ad-client="ca-pub-6814079272498306"
+      data-ad-slot="5829190376"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/supabase.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Theme toggle ---
+      const body = document.body;
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      body.className = savedTheme;
+      const setTheme = (theme) => { body.className = theme; localStorage.setItem('theme', theme); };
+      document.getElementById('lightBtn').onclick = () => setTheme('light');
+      document.getElementById('darkBtn').onclick = () => setTheme('dark');
+      document.getElementById('readingBtn').onclick = () => setTheme('reading');
+
+      // --- Get category ---
+      const params = new URLSearchParams(window.location.search);
+      const category = params.get('category') || '';
+      const formatted = category.charAt(0).toUpperCase() + category.slice(1);
+      document.getElementById('header-title').textContent = formatted;
+      document.getElementById('category-title').textContent = formatted;
+
+      // --- Load posts ---
+      const container = document.getElementById('posts-container');
+      const limit = 20;
+      let currentPage = 1;
+      let totalCount = 0;
+      let currentSearch = '';
+
+      async function loadPosts(searchTerm = '', page = 1) {
+        currentPage = page;
+        currentSearch = searchTerm;
+        const offset = (page - 1) * limit;
+        const { posts, count } = await window.getPosts(category, searchTerm, limit, offset);
+        totalCount = count;
+        container.innerHTML = '';
+
+        if (!posts.length) {
+          container.innerHTML = `<p>No posts found for "${searchTerm}"</p>`;
+          updatePagination();
+          return;
+        }
+
+        posts.forEach(post => {
+          const div = document.createElement('div');
+          div.classList.add('post-preview');
+          div.innerHTML = `
+            <h2 data-id="${post.id}" class="post-link">${post.heading}</h2>
+            <p>Category: ${post.category} | Published: ${new Date(post.published_date).toLocaleDateString()}</p>
+          `;
+          container.appendChild(div);
+        });
+
+        document.querySelectorAll('.post-link').forEach(el => {
+          el.addEventListener('click', () => {
+            window.location.href = `post.html?id=${el.dataset.id}&category=${category}`;
+          });
+        });
+
+        updatePagination();
+      }
+
+      function updatePagination() {
+        const totalPages = Math.ceil(totalCount / limit);
+        const start = (currentPage - 1) * limit + 1;
+        const end = Math.min(currentPage * limit, totalCount);
+
+        let paginationHtml = `<div style="text-align:center;margin:20px 0;font-size:14px;color:#555;">`;
+        if (totalCount > 0) {
+          paginationHtml += `Showing ${start} to ${end} of ${totalCount} posts`;
+        }
+        paginationHtml += `<br>`;
+        if (currentPage > 1) {
+          paginationHtml += `<button id="prev-btn" style="margin:5px;padding:8px 16px;background:#3498db;color:#fff;border:none;border-radius:5px;cursor:pointer;">Previous</button>`;
+        }
+        if (currentPage < totalPages) {
+          paginationHtml += `<button id="next-btn" style="margin:5px;padding:8px 16px;background:#3498db;color:#fff;border:none;border-radius:5px;cursor:pointer;">Next</button>`;
+        }
+        paginationHtml += `</div>`;
+
+        // Remove existing pagination
+        const existing = document.getElementById('pagination');
+        if (existing) existing.remove();
+
+        const paginationDiv = document.createElement('div');
+        paginationDiv.id = 'pagination';
+        paginationDiv.innerHTML = paginationHtml;
+        container.appendChild(paginationDiv);
+
+        // Add event listeners
+        const prevBtn = document.getElementById('prev-btn');
+        if (prevBtn) prevBtn.addEventListener('click', () => loadPosts(currentSearch, currentPage - 1));
+
+        const nextBtn = document.getElementById('next-btn');
+        if (nextBtn) nextBtn.addEventListener('click', () => loadPosts(currentSearch, currentPage + 1));
+
+        // Add back button at bottom
+        const backBtn = document.createElement('a');
+        backBtn.href = 'index.html';
+        backBtn.textContent = '← Back to Categories';
+        backBtn.style.cssText = 'display:block;text-align:center;margin-top:30px;padding:10px;color:#3498db;text-decoration:none;font-weight:bold;';
+        container.appendChild(backBtn);
+      }
+
+      loadPosts();
+      document.getElementById('search').addEventListener('input', e => {
+        loadPosts(e.target.value, 1);
+      });
+    });
+  </script>
+</body>
+</html>

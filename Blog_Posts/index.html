@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Blog Project</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <meta name="google-adsense-account" content="ca-pub-6814079272498306">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6814079272498306"
+crossorigin="anonymous"></script>
+
+</head>
+<body>
+  <header>
+    <h1>My Blog</h1>
+    <div class="theme-toggle">
+      <button id="lightBtn">Light</button>
+      <button id="darkBtn">Dark</button>
+      <button id="readingBtn">Reading</button>
+    </div>
+    <img src="assets/logo.png" class="logo" alt="Logo">
+    <a href="join.html" class="join-btn">💰 Join Us</a>
+  </header>
+
+  <div class="ad-container">
+    <!-- Left Ad -->
+    <div class="ad-left">
+      <ins class="adsbygoogle"
+        style="display:block;"
+        data-ad-client="ca-pub-6814079272498306"
+        data-ad-slot="1234567890"
+        data-ad-format="vertical"
+        data-full-width-responsive="false"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+      <div class="category-grid">
+        <div class="category-box" data-category="kids"><img src="assets/Kids.png" alt="Kids"><h2>Kids</h2></div>
+        <div class="category-box" data-category="youth"><img src="assets/Youth.png" alt="Youth"><h2>Youth</h2></div>
+        <div class="category-box" data-category="golden"><img src="assets/Elders.png" alt="Golden"><h2>Elders</h2></div>
+        <div class="category-box" data-category="news"><img src="assets/News.png" alt="News"><h2>News</h2></div>
+        <div class="category-box" data-category="shayari"><img src="assets/Shayari.png" alt="Shayari"><h2>Shayari</h2></div>
+        <div class="category-box" data-category="songs"><img src="assets/Songs.png" alt="Songs"><h2>Songs</h2></div>
+      </div>
+    </main>
+
+    <!-- Right Ad -->
+    <div class="ad-right">
+      <ins class="adsbygoogle"
+        style="display:block;"
+        data-ad-client="ca-pub-6814079272498306"
+        data-ad-slot="1234567890"
+        data-ad-format="vertical"
+        data-full-width-responsive="false"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <!-- Bottom Ad -->
+  <div class="ad-bottom">
+    <ins class="adsbygoogle"
+      style="display:block;text-align:center;"
+      data-ad-client="ca-pub-6814079272498306"
+      data-ad-slot="5829190376"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/supabase.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Theme toggle ---
+      const body = document.body;
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      body.className = savedTheme;
+
+      const setTheme = (theme) => { body.className = theme; localStorage.setItem('theme', theme); };
+      document.getElementById('lightBtn').onclick = () => setTheme('light');
+      document.getElementById('darkBtn').onclick = () => setTheme('dark');
+      document.getElementById('readingBtn').onclick = () => setTheme('reading');
+
+      // --- Navigate to category page ---
+      document.querySelectorAll('.category-box').forEach(box => {
+        box.addEventListener('click', () => {
+          window.location.href = `category.html?category=${box.dataset.category}`;
+        });
+      });
+    });
+  </script>
+</body>
+</html>

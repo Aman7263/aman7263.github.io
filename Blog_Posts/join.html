@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Us - Support Us</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="google-adsense-account" content="ca-pub-6814079272498306">
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6814079272498306"
+crossorigin="anonymous"></script>
+
+  <style>
+    .join-container {
+      max-width: 700px;
+      margin: 30px auto;
+      padding: 30px;
+      background: #f9f9f9;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      box-sizing: border-box;
+    }
+
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #3498db;
+      box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+    }
+
+    .optional {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .amount-section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .qr-section {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .qr-section img {
+      max-width: 250px;
+      margin: 15px 0;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 8px;
+    }
+
+    .qr-info {
+      color: #666;
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 14px;
+      background: #27ae60;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .submit-btn:hover {
+      background: #229954;
+    }
+
+    .back-link {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .back-link a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Dark Theme */
+    body.dark .join-container {
+      background: #1b1f28;
+      color: #eee;
+    }
+
+    body.dark .form-group label {
+      color: #eee;
+    }
+
+    body.dark .form-group input,
+    body.dark .form-group textarea,
+    body.dark .amount-section,
+    body.dark .qr-section {
+      background: #0d1117;
+      color: #eee;
+      border-color: #30363d;
+    }
+
+    /* Reading Theme */
+    body.reading .join-container {
+      background: #fef9e7;
+      font-size: 1.1rem;
+    }
+
+    body.reading .form-group input,
+    body.reading .form-group textarea,
+    body.reading .amount-section,
+    body.reading .qr-section {
+      background: #fdf6e3;
+      border-color: #e0d4b4;
+    }
+
+    /* Mobile */
+    @media (max-width: 768px) {
+      .join-container {
+        margin: 20px 10px;
+        padding: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .join-container {
+        margin: 15px 5px;
+        padding: 15px;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        font-size: 16px;
+      }
+
+      .qr-section img {
+        max-width: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>💰 Join & Support Us</h1>
+    <div class="theme-toggle">
+      <button id="lightBtn">Light</button>
+      <button id="darkBtn">Dark</button>
+      <button id="readingBtn">Reading</button>
+    </div>
+    <img src="assets/logo.png" class="logo" alt="Logo">
+    <a href="index.html" class="join-btn">← Back</a>
+  </header>
+
+  <div class="ad-container">
+    <!-- Left Ad -->
+    <div class="ad-left">
+      <ins class="adsbygoogle"
+        style="display:block;"
+        data-ad-client="ca-pub-6814079272498306"
+        data-ad-slot="1234567890"
+        data-ad-format="vertical"
+        data-full-width-responsive="false"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+      <div class="join-container">
+      <h2 style="text-align:center;margin-bottom:30px;color:#2c3e50;">Support Our Blog</h2>
+
+      <form id="paymentForm">
+        <!-- Name -->
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+
+        <!-- Phone -->
+        <div class="form-group">
+          <label for="phone">Phone Number <span class="optional">(optional)</span></label>
+          <input type="tel" id="phone" name="phone" placeholder="e.g., +91 XXXXX XXXXX">
+        </div>
+
+        <!-- Opinion Letter -->
+        <div class="form-group">
+          <label for="opinion">Your Opinion / Message</label>
+          <textarea id="opinion" name="opinion" placeholder="Share your thoughts or feedback..."></textarea>
+        </div>
+
+        <!-- Amount -->
+        <div class="amount-section">
+          <div class="form-group">
+            <label for="amount">Amount to Pay (₹) <span class="optional">*</span></label>
+            <input type="number" id="amount" name="amount" placeholder="Enter amount in rupees" min="1" required>
+          </div>
+          <p style="color:#666;font-size:0.9rem;margin:0;">Minimum amount: ₹10</p>
+        </div>
+
+        <!-- QR Code Section -->
+        <div class="qr-section">
+          <h3>Payment Method</h3>
+          <p>Scan the QR code below to complete the payment:</p>
+          <img id="qrCode" src="assets/qr-code.png" alt="Payment QR Code">
+          <div class="qr-info">
+            <p>Amount to pay: <strong id="displayAmount">₹0</strong></p>
+            <p>After payment, your details will be saved.</p>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="submit-btn">Generate Payment QR</button>
+      </form>
+
+      <div class="back-link">
+        <a href="index.html">← Back to Blog</a>
+      </div>
+    </div>
+    </main>
+
+    <!-- Right Ad -->
+    <div class="ad-right">
+      <ins class="adsbygoogle"
+        style="display:block;"
+        data-ad-client="ca-pub-6814079272498306"
+        data-ad-slot="1234567890"
+        data-ad-format="vertical"
+        data-full-width-responsive="false"></ins>
+      <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
+    </div>
+  </div>
+
+  <!-- Bottom Ad -->
+  <div class="ad-bottom">
+    <ins class="adsbygoogle"
+      style="display:block;text-align:center;"
+      data-ad-client="ca-pub-6814079272498306"
+      data-ad-slot="5829190376"
+      data-ad-format="auto"
+      data-full-width-responsive="true"></ins>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <script type="module" src="js/join.js"></script>
+</body>
+</html>
