@@ -15,6 +15,24 @@ body {
   padding: 0;
 }
 
+.home-btn {
+  display: inline-block;
+  margin: 10px 0;
+  padding: 8px 16px;
+  background: #21262d;
+  color: #58a6ff;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.home-btn:hover {
+  background: #30363d;
+  color: #58a6ff;
+}
+
 /* Ad Sidebar Container */
 .ad-container {
   display: flex;

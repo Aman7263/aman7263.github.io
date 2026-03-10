@@ -20,7 +20,9 @@ crossorigin="anonymous"></script>
       <button id="darkBtn">Dark</button>
       <button id="readingBtn">Reading</button>
     </div>
-    <img src="assets/logo.png" class="logo" alt="Logo">
+    <a href="index.html">
+  <img src="assets/logo.png" class="logo" alt="Logo">
+</a>
     <a href="join.html" class="join-btn">💰 Join Us</a>
   </header>
 
@@ -95,16 +97,22 @@ crossorigin="anonymous"></script>
       }
 
       container.innerHTML = `
-        <h1 style="text-align:center; color:#2c3e50; margin-bottom:20px;">${post.heading}</h1>
-        ${post.content}
-        <div style="margin-top:40px;padding-top:20px;border-top:1px solid #ddd;font-style:italic;color:#777;text-align:center;">
-          📅 Published on ${new Date(post.published_date).toLocaleString()}
-        </div>
-        <div style="margin-top:30px;text-align:center;">
-          <a href="category.html?category=${category}" style="color:#3498db;text-decoration:none;font-weight:bold;">← Back to ${category.charAt(0).toUpperCase() + category.slice(1)}</a>
-        </div>
-      `;
-      // document.getElementById('post-title').textContent = post.heading;
+  <h1 style="text-align:center; color:#2c3e50; margin-bottom:20px;">${post.heading}</h1>
+  ${post.content}
+  <div style="margin-top:40px;padding-top:20px;border-top:1px solid #ddd;font-style:italic;color:#777;text-align:center;">
+    📅 Published on ${new Date(post.published_date).toLocaleString()}
+  </div>
+  <div style="margin-top:30px;text-align:center;">
+    <a href="category.html?category=${category}" style="color:#3498db;text-decoration:none;font-weight:bold;">
+      ← Back to ${category.charAt(0).toUpperCase() + category.slice(1)}
+    </a>
+  </div>
+  <div style="margin-top:20px;text-align:center;">
+    <a href="index.html" style="color:#3498db;text-decoration:none;font-weight:bold;">
+      ← Back to Blog
+    </a>
+  </div>
+`;
     });
   </script>
 </body>
