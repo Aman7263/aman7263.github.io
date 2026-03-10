@@ -4,7 +4,7 @@ const SUPABASE_URL = "https://pcjunoldozpddssszoke.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_9mLZyK-_kNxvfOopEnHbEg_b_1oPBNg";
 
 // Use ESM import for Supabase
-import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
+import { createClient } from 'https://esm.sh/@supabase/supabase-js@2'; 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 // Get all posts from a category

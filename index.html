@@ -42,6 +42,10 @@ letter-spacing:1px;
 .header p{
 opacity:0.8;
 margin-top:8px;
+max-width:900px;
+margin-left:auto;
+margin-right:auto;
+line-height:1.5;
 }
 
 /* DASHBOARD GRID */
@@ -58,6 +62,9 @@ gap:25px;
 /* PROJECT CARD */
 
 .card{
+position:relative;
+overflow:hidden;
+
 background:rgba(255,255,255,0.08);
 backdrop-filter: blur(12px);
 border-radius:15px;
@@ -90,6 +97,59 @@ margin-bottom:6px;
 .desc{
 font-size:13px;
 opacity:0.7;
+}
+
+/* HOVER DETAILS */
+
+.details{
+position:absolute;
+bottom:-100%;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.85);
+padding:20px;
+font-size:13px;
+line-height:1.4;
+transition:0.35s;
+text-align:left;
+
+overflow:auto;          /* allow scrolling inside */
+pointer-events:none;    /* prevents blocking page scroll */
+}
+
+.card:hover .details{
+bottom:0;
+pointer-events:auto;
+}
+
+.details h4{
+margin-bottom:6px;
+font-size:14px;
+}
+
+/* MOBILE FRIENDLY */
+
+@media (max-width:768px){
+
+.card{
+padding:25px 18px;
+}
+
+.details{
+position:relative;
+bottom:0;
+height:auto;
+background:rgba(0,0,0,0.35);
+margin-top:10px;
+border-radius:10px;
+pointer-events:auto;
+}
+
+.card:hover .details{
+bottom:0;
+}
+
 }
 
 /* ADS */
@@ -163,10 +223,13 @@ text-decoration:none;
 
 <div class="header">
 <h1>🚀 My Project Hub</h1>
-<p>All tools, dashboards and projects I built</p>
+<p>
+A centralized portfolio showcasing multiple projects including web platforms, backend systems, and mobile applications.
+Projects demonstrate development using React Native, HTML/CSS/JS, Supabase, and GitHub with focus on real-world application architecture, API integrations, and scalable backend systems.
+</p>
 </div>
 
-<!-- Top/Regular Ad -->
+<!-- Top Ad -->
 <div class="ad">
 
 <ins class="adsbygoogle"
@@ -188,18 +251,56 @@ data-full-width-responsive="true"></ins>
 <div class="icon">🎓</div>
 <div class="title">Final Year Projects</div>
 <div class="desc">College project collection</div>
+
+<div class="details">
+<h4>Tech Used</h4>
+HTML, CSS, JavaScript
+
+<h4>Purpose</h4>
+Collection of projects created throughout my college journey for experiments, daily tasks, and learning web development.
+
+<h4>How It Works</h4>
+Each project demonstrates different frontend logic, UI experiments, and browser-based tools built purely with client-side technologies.
+</div>
+
 </a>
 
 <a href="Investment_Analyzer/index.html" class="card">
 <div class="icon">📈</div>
 <div class="title">Investment Analyzer</div>
 <div class="desc">Market tracker & analytics</div>
+
+<div class="details">
+<h4>Tech Used</h4>
+HTML, CSS, JavaScript, Gemini API
+
+<h4>Purpose</h4>
+AI powered investment analysis tool for stocks and cryptocurrency.
+
+<h4>How It Works</h4>
+User submits a prompt describing a stock or crypto query.  
+The system sends the request to the Gemini API and returns AI-generated market insights, analysis, and suggestions based on the user input.
+</div>
+
 </a>
 
 <a href="Blog_Posts/index.html" class="card">
 <div class="icon">🤖</div>
 <div class="title">AI Blog</div>
-<div class="desc">Blog Posts</div>
+<div class="desc">Automated blog system</div>
+
+<div class="details">
+<h4>Tech Used</h4>
+GitHub Actions, Gemini API, Supabase, Google Blogger API
+
+<h4>Purpose</h4>
+Fully automated AI blogging platform that generates and publishes content.
+
+<h4>How It Works</h4>
+A GitHub workflow runs on a scheduled time interval.  
+The workflow calls an AI API to generate blog content, stores the article in Supabase, and automatically publishes it to Blogger using Google's Blogger API.
+</div>
+
 </a>
 
 </div>

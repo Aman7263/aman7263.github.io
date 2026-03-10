@@ -4,7 +4,7 @@
 const body = document.body;
 
 // Load saved theme
-const savedTheme = localStorage.getItem('theme') || 'light';
+const savedTheme = localStorage.getItem('theme') || 'light'; 
 body.className = savedTheme;
 
 function setTheme(theme) {
