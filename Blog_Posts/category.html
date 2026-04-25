@@ -42,8 +42,28 @@
 
     <!-- Main Content -->
     <main>
-      <input type="text" id="search" placeholder="Search...">
-      <div id="posts-container"></div>
+      <div class="controls-bar"
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 20px; flex-wrap: wrap;">
+        <div class="search-wrapper" style="flex: 1; min-width: 250px; position: relative;">
+          <i class="fas fa-search"
+            style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-dim-light);"></i>
+          <input type="text" id="search" placeholder="Search posts..."
+            style="width: 100%; padding: 12px 15px 12px 45px; border-radius: 12px; border: 1px solid var(--border-light); background: var(--card-light); font-family: inherit; font-size: 15px; outline: none; transition: var(--transition);">
+        </div>
+
+        <div class="pagination-controls" style="display: flex; align-items: center; gap: 10px;">
+          <label for="post-limit" style="font-size: 14px; font-weight: 500; color: var(--text-dim-light);">Show:</label>
+          <select id="post-limit"
+            style="padding: 10px 15px; border-radius: 10px; border: 1px solid var(--border-light); background: var(--card-light); cursor: pointer; font-family: inherit; outline: none;">
+            <option value="10">10 posts</option>
+            <option value="25" selected>25 posts</option>
+            <option value="50">50 posts</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="posts-container"
+        style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;"></div>
     </main>
 
     <!-- Right Ad -->
@@ -87,16 +107,16 @@
 
       // --- Load posts ---
       const container = document.getElementById('posts-container');
-      const limit = 20;
       let currentPage = 1;
       let totalCount = 0;
       let currentSearch = '';
 
       async function loadPosts(searchTerm = '', page = 1) {
+        const currentLimit = parseInt(document.getElementById('post-limit').value);
         currentPage = page;
         currentSearch = searchTerm;
-        const offset = (page - 1) * limit;
-        const { posts, count } = await window.getPosts(category, searchTerm, limit, offset);
+        const offset = (page - 1) * currentLimit;
+        const { posts, count } = await window.getPosts(category, searchTerm, currentLimit, offset);
         totalCount = count;
         container.innerHTML = '';
 
@@ -109,10 +129,37 @@
         posts.forEach(post => {
           const div = document.createElement('div');
           div.classList.add('post-preview');
-          div.innerHTML = `
-            <h2 data-id="${post.id}" class="post-link">${post.heading}</h2>
-            <p>Category: ${post.category} | Published: ${new Date(post.published_date).toLocaleDateString()}</p>
+          div.style.cssText = `
+            background: var(--card-light);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 25px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 180px;
           `;
+          
+          // Apply behavior on hover via JS to keep it simple, or user can update CSS
+          div.onmouseover = () => { div.style.borderColor = 'var(--accent)'; div.style.transform = 'translateY(-5px)'; div.style.boxShadow = '0 10px 20px rgba(0,0,0,0.05)'; };
+          div.onmouseout = () => { div.style.borderColor = 'var(--border-light)'; div.style.transform = 'translateY(0)'; div.style.boxShadow = 'none'; };
+
+          div.innerHTML = `
+            <div>
+              <h2 data-id="${post.id}" class="post-link" style="font-size: 1.3rem; margin-bottom: 12px; color: var(--text-light); line-height: 1.4;">${post.heading}</h2>
+              <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-dim-light);">
+                <span style="background: rgba(99, 102, 241, 0.1); color: var(--accent); padding: 2px 8px; border-radius: 6px; font-weight: 600;">${post.category.toUpperCase()}</span>
+                <span>•</span>
+                <span>${new Date(post.published_date).toLocaleDateString()}</span>
+              </div>
+            </div>
+            <div style="margin-top: 15px; display: flex; align-items: center; color: var(--accent); font-weight: 600; font-size: 14px;">
+              Read Post <i class="fas fa-arrow-right" style="margin-left: 8px; font-size: 12px;"></i>
+            </div>
+          `;
+          div.onclick = () => { window.location.href = `post.html?id=${post.id}&category=${category}`; };
           container.appendChild(div);
         });
 
@@ -126,50 +173,73 @@
       }
 
       function updatePagination() {
-        const totalPages = Math.ceil(totalCount / limit);
-        const start = (currentPage - 1) * limit + 1;
-        const end = Math.min(currentPage * limit, totalCount);
+        const currentLimit = parseInt(document.getElementById('post-limit').value);
+        const totalPages = Math.ceil(totalCount / currentLimit);
+        const start = (currentPage - 1) * currentLimit + 1;
+        const end = Math.min(currentPage * currentLimit, totalCount);
 
-        let paginationHtml = `<div style="text-align:center;margin:20px 0;font-size:14px;color:#555;">`;
+        let paginationHtml = `<div id="pagination" style="grid-column: 1 / -1; margin-top: 40px; padding: 20px; border-top: 1px solid var(--border-light); text-align: center;">`;
+        
         if (totalCount > 0) {
-          paginationHtml += `Showing ${start} to ${end} of ${totalCount} posts`;
+          paginationHtml += `
+            <div style="margin-bottom: 20px; font-size: 14px; color: var(--text-dim-light);">
+              Showing <strong>${start} to ${end}</strong> of <strong>${totalCount}</strong> posts
+            </div>
+          `;
         }
-        paginationHtml += `<br>`;
+
+        paginationHtml += `<div style="display: flex; justify-content: center; gap: 10px; align-items: center;">`;
+        
         if (currentPage > 1) {
-          paginationHtml += `<button id="prev-btn" style="margin:5px;padding:8px 16px;background:#3498db;color:#fff;border:none;border-radius:5px;cursor:pointer;">Previous</button>`;
+          paginationHtml += `<button id="prev-btn" style="padding: 10px 20px; background: var(--card-light); border: 1px solid var(--border-light); border-radius: 10px; cursor: pointer; font-weight: 600; color: var(--text-light); transition: var(--transition);"><i class="fas fa-chevron-left"></i> Previous</button>`;
         }
+
+        if (totalPages > 1) {
+          paginationHtml += `<span style="font-size: 14px; font-weight: 600; color: var(--text-light); margin: 0 15px;">Page ${currentPage} of ${totalPages}</span>`;
+        }
+        
         if (currentPage < totalPages) {
-          paginationHtml += `<button id="next-btn" style="margin:5px;padding:8px 16px;background:#3498db;color:#fff;border:none;border-radius:5px;cursor:pointer;">Next</button>`;
+          paginationHtml += `<button id="next-btn" style="padding: 10px 20px; background: var(--card-light); border: 1px solid var(--border-light); border-radius: 10px; cursor: pointer; font-weight: 600; color: var(--text-light); transition: var(--transition);">Next <i class="fas fa-chevron-right"></i></button>`;
         }
-        paginationHtml += `</div>`;
 
-        // Remove existing pagination
-        const existing = document.getElementById('pagination');
-        if (existing) existing.remove();
+        paginationHtml += `</div></div>`;
 
-        const paginationDiv = document.createElement('div');
-        paginationDiv.id = 'pagination';
-        paginationDiv.innerHTML = paginationHtml;
+        // Remove existing pagination if any
+        const oldPag = document.getElementById('pagination');
+        if (oldPag) oldPag.remove();
+
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(paginationHtml, 'text/html');
+        const paginationDiv = doc.getElementById('pagination');
         container.appendChild(paginationDiv);
 
         // Add event listeners
         const prevBtn = document.getElementById('prev-btn');
-        if (prevBtn) prevBtn.addEventListener('click', () => loadPosts(currentSearch, currentPage - 1));
+        if (prevBtn) prevBtn.onclick = () => loadPosts(currentSearch, currentPage - 1);
 
         const nextBtn = document.getElementById('next-btn');
-        if (nextBtn) nextBtn.addEventListener('click', () => loadPosts(currentSearch, currentPage + 1));
+        if (nextBtn) nextBtn.onclick = () => loadPosts(currentSearch, currentPage + 1);
 
         // Add back button at bottom
         const backBtn = document.createElement('a');
         backBtn.href = 'index.html';
-        backBtn.textContent = '← Back to Categories';
-        backBtn.style.cssText = 'display:block;text-align:center;margin-top:30px;padding:10px;color:#3498db;text-decoration:none;font-weight:bold;';
-        container.appendChild(backBtn);
+        backBtn.innerHTML = '<i class="fas fa-arrow-left" style="margin-right: 8px;"></i> Back to Categories';
+        backBtn.style.cssText = 'display:inline-block; margin-top:30px; padding:12px 24px; background: var(--card-light); border: 1px solid var(--border-light); border-radius: 12px; color: var(--text-light); text-decoration: none; font-weight: 600; transition: var(--transition);';
+        
+        const footerCenter = document.createElement('div');
+        footerCenter.style.textAlign = 'center';
+        footerCenter.appendChild(backBtn);
+        container.appendChild(footerCenter);
       }
 
       loadPosts();
+
       document.getElementById('search').addEventListener('input', e => {
         loadPosts(e.target.value, 1);
+      });
+
+      document.getElementById('post-limit').addEventListener('change', () => {
+        loadPosts(currentSearch, 1);
       });
     });
   </script>
