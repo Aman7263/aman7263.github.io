@@ -4,358 +4,532 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Aman Aryan - Freelance Developer specialized in React Native, Supabase, and AI-powered applications. Check out my latest mobile and web projects.">
+    <title>Aman Aryan | Freelance Developer & Mobile Specialist</title>
 
-    <title>Yano Projects Hub</title>
-
+    <!-- Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-6814079272498306">
-
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6814079272498306"
         crossorigin="anonymous"></script>
 
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
+        :root {
+            --bg: #030712;
+            --card-bg: #111827;
+            --card-border: #1f2937;
+            --accent: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.2);
+            --text-main: #f9fafb;
+            --text-dim: #9ca3af;
+            --gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --glass: rgba(17, 24, 39, 0.7);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: "Segoe UI", Arial, sans-serif;
+            font-family: 'Outfit', sans-serif;
         }
 
         body {
-            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
-            min-height: 100vh;
-            color: white;
-            padding: 20px;
+            background-color: var(--bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* HEADER */
+        /* --- Animations --- */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .header h1 {
-            font-size: 38px;
-            letter-spacing: 1px;
+        .animate-in {
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
         }
 
-        .header p {
-            opacity: 0.8;
-            margin-top: 8px;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.5;
-        }
-
-        /* DASHBOARD GRID */
-
-        .dashboard {
-            max-width: 1200px;
-            margin: auto;
-
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 25px;
-        }
-
-        /* PROJECT CARD */
-
-        .card {
-            position: relative;
-            overflow: hidden;
-
-            background: rgba(255, 255, 255, 0.08);
+        /* --- Navigation --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--glass);
             backdrop-filter: blur(12px);
-            border-radius: 15px;
-            padding: 35px 20px;
-            text-align: center;
+            z-index: 1000;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
             text-decoration: none;
-            color: white;
-
+            margin-left: 30px;
+            font-weight: 500;
+            font-size: 15px;
             transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .card:hover {
-            transform: translateY(-8px) scale(1.03);
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        .nav-links a:hover {
+            color: var(--accent);
         }
 
-        .icon {
-            font-size: 42px;
-            margin-bottom: 12px;
+        /* --- Hero Section --- */
+        .hero {
+            padding: 30px 5% 80px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+            position: relative;
         }
 
-        .title {
-            font-size: 19px;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .desc {
-            font-size: 13px;
-            opacity: 0.7;
-        }
-
-        /* HOVER DETAILS */
-
-        .details {
+        .hero::before {
+            content: '';
             position: absolute;
-            bottom: -100%;
-            left: 0;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: var(--accent-glow);
+            filter: blur(150px);
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        .hero h1 {
+            font-size: clamp(40px, 8vw, 72px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 span {
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--text-dim);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .featured-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            padding: 10px 20px;
+            border-radius: 100px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 480px) {
+            .featured-badge {
+                font-size: 12px;
+                padding: 8px 15px;
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--card-bg);
+            color: white;
+            border: 1px solid var(--card-border);
+        }
+
+        /* --- Projects Section --- */
+        .section {
+            padding: 60px 5%;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 60px;
+            text-align: center;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 24px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 450px;
+            overflow: hidden;
+            position: relative;
+            background: #000;
+        }
+
+        .project-image img {
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 20px;
-            font-size: 13px;
-            line-height: 1.4;
-            transition: 0.35s;
-            text-align: left;
-
-            overflow: auto;
-            /* allow scrolling inside */
-            pointer-events: none;
-            /* prevents blocking page scroll */
+            object-fit: cover;
+            transition: 0.5s;
         }
 
-        .card:hover .details {
-            bottom: 0;
-            pointer-events: auto;
+        .project-content {
+            padding: 30px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
         }
 
-        .details h4 {
-            margin-bottom: 6px;
-            font-size: 14px;
+        .project-tags {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
         }
 
-        /* MOBILE FRIENDLY */
-
-        @media (max-width:768px) {
-
-            .card {
-                padding: 25px 18px;
-            }
-
-            .details {
-                position: relative;
-                bottom: 0;
-                height: auto;
-                background: rgba(0, 0, 0, 0.35);
-                margin-top: 10px;
-                border-radius: 10px;
-                pointer-events: auto;
-            }
-
-            .card:hover .details {
-                bottom: 0;
-            }
-
+        .tag {
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(99, 102, 241, 0.1);
+            color: var(--accent);
+            border: 1px solid rgba(99, 102, 241, 0.2);
         }
 
-        /* ADS */
-
-        .ad {
-            margin: 40px auto;
-            max-width: 900px;
-        }
-
-        /* FIXED SIDE ADS */
-
-        .ads-left,
-        .ads-right {
-            position: fixed;
-            top: 200px;
-            width: 120px;
-            z-index: 9999;
-        }
-
-        .ads-left {
-            left: 0;
-        }
-
-        .ads-right {
-            right: 0;
-        }
-
-        /* BOTTOM AD */
-        .ads-bottom {
-            display: block;
+        .apk-btn {
+            width: 100%;
+            padding: 12px;
+            border-radius: 12px;
+            background: #22c55e;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
             text-align: center;
-            margin: 40px auto 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: 0.3s;
         }
 
-        /* Hide side ads on mobile */
-        @media (max-width: 900px) {
+        .apk-btn:hover {
+            background: #16a34a;
+        }
 
-            .ads-left,
-            .ads-right {
+        /* --- Ad Styles --- */
+        .ad-container {
+            margin: 70px auto 0;
+            max-width: 1000px;
+            min-height: 0;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .adsbygoogle[data-ad-status="unfilled"] {
+            display: none !important;
+        }
+
+        /* --- Footer --- */
+        footer {
+            padding: 60px 5%;
+            text-align: center;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                padding-top: 20px;
+            }
+
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
                 display: none;
             }
-        }
-
-        /* FOOTER */
-
-        .footer {
-            text-align: center;
-            margin-top: 60px;
-            opacity: 0.7;
-            font-size: 14px;
-        }
-
-        .footer a {
-            color: #fff;
-            text-decoration: none;
         }
     </style>
 </head>
 
 <body>
 
-    <!-- Left Fixed Ad -->
-    <div class="ads-left">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6814079272498306"
-            data-ad-slot="5829190376" data-ad-format="auto"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <!-- Right Fixed Ad -->
-    <div class="ads-right">
-        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6814079272498306"
-            data-ad-slot="5829190376" data-ad-format="auto"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-    </div>
-
-    <div class="header">
-        <h1>🚀 My Project Hub</h1>
-        <p>
-            A centralized portfolio showcasing multiple projects including web platforms, backend systems, and mobile
-            applications.
-            Projects demonstrate development using React Native, HTML/CSS/JS, Supabase, and GitHub with focus on
-            real-world application architecture, API integrations, and scalable backend systems.
-        </p>
-    </div>
+    <nav>
+        <div class="logo">Aman.Dev</div>
+        <div class="nav-links">
+            <a href="#projects">Projects</a>
+            <a href="#web">Web Tools</a>
+            <a href="mailto:amanaryan7263@gmail.com">Contact</a>
+        </div>
+    </nav>
 
     <!-- Top Ad -->
-    <div class="ad">
-
-        <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-client="ca-pub-6814079272498306"
+    <div class="ad-container">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6814079272498306"
             data-ad-slot="5829190376" data-ad-format="auto" data-full-width-responsive="true"></ins>
-
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
-    <!-- Main Sections Container -->
-    <div style="display: flex; flex-direction: row; flex-wrap: wrap; gap: 40px; max-width: 1200px; margin: auto;">
+    <header class="hero">
+        <div class="featured-badge animate-in">
+            <i class="fas fa-landmark"></i>
+            <span>Developer: <b>OBPS</b> for Municipal Corporation of Delhi</span>
+        </div>
+        <h1 class="animate-in">Crafting <span>Next-Gen</span> Mobile Experiences</h1>
+        <p class="animate-in" style="animation-delay: 0.2s;">
+            Specializing in high-performance cross-platform applications built with <b>React Native</b> and
+            <b>Supabase</b>.
+            Turning complex ideas into seamless, production-ready mobile products.
+        </p>
+        <div class="cta-group animate-in" style="animation-delay: 0.4s;">
+            <a href="#projects" class="btn btn-primary">Featured Apps</a>
+            <a href="mailto:amanaryan7263@gmail.com" class="btn btn-secondary"><i class="far fa-envelope"></i> Get In
+                Touch</a>
+            <a href="https://aman7263.github.io/Portfolio/" class="btn btn-secondary">
+                <i class="fas fa-file-invoice"></i> About Me
+            </a>
+        </div>
+    </header>
 
-        <!-- Web Apk Section -->
-        <div style="flex: 1; min-width: 300px;">
-            <h2 style="text-align: center; margin-bottom: 25px; color: #fff; font-size: 28px; font-weight: 600;">Web Apk
-            </h2>
-            <div class="dashboard" style="grid-template-columns: repeat(2, 1fr); margin: 0;">
-
-                <a href="https://aman7263.github.io/Final-Year-Projects/" class="card">
-                    <div class="icon">🎓</div>
-                    <div class="title">Final Year Projects</div>
-                    <div class="desc">College project collection</div>
-
-                    <div class="details">
-                        <h4>Tech Used</h4>
-                        HTML, CSS, JavaScript
-
-                        <h4>Purpose</h4>
-                        Collection of projects created throughout my college journey for experiments, daily tasks, and
-                        learning web development.
-
-                        <h4>How It Works</h4>
-                        Each project demonstrates different frontend logic, UI experiments, and browser-based tools
-                        built purely with client-side technologies.
-                    </div>
-
-                </a>
-
-                <a href="Investment_Analyzer/index.html" class="card">
-                    <div class="icon">📈</div>
-                    <div class="title">Investment Analyzer</div>
-                    <div class="desc">Market tracker & analytics</div>
-
-                    <div class="details">
-                        <h4>Tech Used</h4>
-                        HTML, CSS, JavaScript, Gemini API
-
-                        <h4>Purpose</h4>
-                        AI powered investment analysis tool for stocks and cryptocurrency.
-
-                        <h4>How It Works</h4>
-                        User submits a prompt describing a stock or crypto query.
-                        The system sends the request to the Gemini API and returns AI-generated market insights,
-                        analysis, and suggestions based on the user input.
-                    </div>
-
-                </a>
-
-                <a href="Blog_Posts/index.html" class="card">
-                    <div class="icon">🤖</div>
-                    <div class="title">AI Blog</div>
-                    <div class="desc">Automated blog system</div>
-
-                    <div class="details">
-                        <h4>Tech Used</h4>
-                        GitHub Actions, Gemini API, Supabase, Google Blogger API
-
-                        <h4>Purpose</h4>
-                        Fully automated AI blogging platform that generates and publishes content.
-
-                        <h4>How It Works</h4>
-                        A GitHub workflow runs on a scheduled time interval.
-                        The workflow calls an AI API to generate blog content, stores the article in Supabase, and
-                        automatically publishes it to Blogger using Google's Blogger API.
-                    </div>
-
-                </a>
-
-            </div>
+    <main class="section" id="projects">
+        <div class="section-header">
+            <h2>Mobile Flagships</h2>
+            <p>Premium Android applications ready for deployment</p>
         </div>
 
-        <!-- Apk Section -->
-        <div style="flex: 1; min-width: 300px;">
-            <h2 style="text-align: center; margin-bottom: 25px; color: #fff; font-size: 28px; font-weight: 600;">
-                Apk's</h2>
-            <div class="dashboard" style="grid-template-columns: repeat(2, 1fr); margin: 0;">
-                <p style="text-align: center; opacity: 0.7; grid-column: span 2; padding: 40px 0;">No projects currently
-                    available.</p>
-            </div>
+        <div class="project-grid">
+            <!-- Project 1: TheAmreyBlog -->
+            <article class="project-card animate-in">
+                <div class="project-image">
+                    <img src="assets/the_amrey_blog.png" alt="TheAmreyBlog">
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Supabase</span>
+                        <span class="tag">System design</span>
+                        <span class="tag">Global Auth</span>
+                    </div>
+                    <h3>TheAmreyBlog</h3>
+                    <p>Your go-to spot for daily inspiration! Explore a world of <b>Shayari, Melodious Songs, Funny
+                            Stories</b>, and engaging blogs that bring a smile to your face every single day.</p>
+                    <a href="https://expo.dev/artifacts/eas/3xJnHL71YRLL4mLKiQYYPc.apk" class="apk-btn">
+                        <i class="fab fa-android"></i> Download APK
+                    </a>
+                </div>
+            </article>
+
+            <!-- Project 2: TheAmreyWorld -->
+            <article class="project-card animate-in" style="animation-delay: 0.2s;">
+                <div class="project-image">
+                    <img src="assets/the_amrey_world.png" alt="TheAmreyWorld">
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Supabase</span>
+                        <span class="tag">System design</span>
+                        <span class="tag">Global Auth</span>
+                    </div>
+                    <h3>TheAmreyWorld</h3>
+                    <p>Stay close to the people you love. Whether they are across the city or across the globe,
+                        TheAmreyWorld helps you <b>connect with your partner and friends</b> so they never feel away
+                        from you.</p>
+                    <a href="https://expo.dev/artifacts/eas/gjfyj38oRoVrWfCVUmyqgR.apk" class="apk-btn">
+                        <i class="fab fa-android"></i> Download APK
+                    </a>
+                </div>
+            </article>
+
+            <!-- Project 3: XFeed -->
+            <article class="project-card animate-in" style="animation-delay: 0.4s;">
+                <div class="project-image">
+                    <img src="assets/xfeed.png" alt="XFeed">
+                </div>
+                <div class="project-content">
+                    <div class="project-tags">
+                        <span class="tag">React Native</span>
+                        <span class="tag">Supabase</span>
+                        <span class="tag">System design</span>
+                        <span class="tag">Global Auth</span>
+                    </div>
+                    <h3>XFeed Social</h3>
+                    <p>The smartest way to shop and socialize. Discover <b>amazing products at reasonable prices</b>
+                        while staying connected. Your all-in-one platform for sharing and smart purchasing.</p>
+                    <a href="https://expo.dev/artifacts/eas/c8zwpyJWpZWwdzX1MvK4Ju.apk" class="apk-btn">
+                        <i class="fab fa-android"></i> Download APK
+                    </a>
+                </div>
+            </article>
         </div>
-    </div>
+    </main>
 
-    <!-- JavaSwing Section -->
-    <div style="flex: 1; min-width: 300px; width: 100%;">
-        <h2 style="text-align: center; margin-bottom: 25px; color: #fff; font-size: 28px; font-weight: 600;">
-            JavaSwing</h2>
-        <div class="dashboard" style="grid-template-columns: repeat(2, 1fr); margin: 0;">
-            <p style="text-align: center; opacity: 0.7; grid-column: span 2; padding: 40px 0;">No projects currently
-                available.</p>
-        </div>
-    </div>
-
-    <!-- Bottom Ad -->
-    <div class="ads-bottom">
-
-        <ins class="adsbygoogle" style="display:block; text-align:center;" data-ad-client="ca-pub-6814079272498306"
+    <div class="ad-container">
+        <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-6814079272498306"
             data-ad-slot="5829190376" data-ad-format="auto" data-full-width-responsive="true"></ins>
-
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
-    <div class="footer">
-        <p>Built with ❤️ | Hosted on GitHub Pages</p>
+    <!-- Web Tools Section -->
+    <section class="section" id="web" style="padding-top: 0;">
+        <div class="section-header">
+            <h2>Intelligent Web Solutions</h2>
+            <p>Smart tools that think for themselves. I build web ecosystems driven by <b>Artificial Intelligence</b>
+                and <b>Automation</b> to simplify complex tasks and provide actionable insights.</p>
+        </div>
+        <div class="project-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
+            <a href="Investment_Analyzer/index.html" class="project-card"
+                style="border-radius: 20px; text-decoration: none; color: inherit;">
+                <div class="project-content">
+                    <div style="font-size: 32px; margin-bottom: 20px;">📈</div>
+                    <span class="tag">AI • Analytics</span>
+                    <h3>Investment Analyzer</h3>
+                    <p>AI-powered market insights and portfolio analysis using Gemini API integration.</p>
+                </div>
+            </a>
+            <a href="Blog_Posts/index.html" class="project-card"
+                style="border-radius: 20px; text-decoration: none; color: inherit;">
+                <div class="project-content">
+                    <div style="font-size: 32px; margin-bottom: 20px;">🤖</div>
+                    <span class="tag">Automation • GitHub Actions</span>
+                    <h3>Automated AI Blog</h3>
+                    <p>A self-operating content platform that generates and publishes automated articles.</p>
+                </div>
+            </a>
+            <a href="https://aman7263.github.io/Final-Year-Projects/" class="project-card"
+                style="border-radius: 20px; text-decoration: none; color: inherit;">
+                <div class="project-content">
+                    <div style="font-size: 32px; margin-bottom: 20px;">🎓</div>
+                    <span class="tag">HTML5 • CSS3 • JS</span>
+                    <h3>Project Archive</h3>
+                    <p>A historical collection of experimental web tools and college projects.</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+
+    <section class="section" id="web" style="padding-top: 0;">
+        <!-- Projects: OBPS MCD -->
+        <article class="project-card animate-in" style="animation-delay: 0.6s;">
+            <div class="project-content">
+                <div class="project-tags">
+                    <span class="tag">Government Tech</span>
+                    <span class="tag">Angular</span>
+                    <span class="tag">React</span>
+                    <span class="tag">Spring Boot</span>
+                    <span class="tag">PostgreSQL</span>
+                    <span class="tag">MariaDB</span>
+                    <span class="tag">AWS</span>
+                </div>
+                <h3>OBPS • MCD Delhi</h3>
+                <p>Contributed to the Online Building Plan System for the Municipal Corporation of Delhi. Focused on
+                    streamlining approval workflows and digital transformation of urban planning.</p>
+                <div
+                    style="margin-top: auto; padding-top: 15px; font-size: 13px; color: var(--accent); font-weight: 600;">
+                    <i class="fas fa-shield-alt"></i> Enterprise Internal system
+                </div>
+            </div>
+        </article>
+    </section>
+
+    <footer>
+        <div class="social-links"
+            style="display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; font-size: 20px;">
+            <a href="https://github.com/aman7263" style="color: white;" target="_blank"><i
+                    class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/aman7263/" style="color: white;" target="_blank"><i
+                    class="fab fa-linkedin"></i></a>
+            <a href="mailto:amanaryan7263@gmail.com" style="color: white;"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p>&copy; 2026 Aman Aryan. All rights reserved.</p>
+        <p style="margin-top: 10px; font-size: 14px; opacity: 0.6;">Specialized in React Native & Supabase Architecture
+        </p>
+    </footer>
+
+    <!-- Bottom Fixed Ad -->
+    <div
+        style="position: fixed; bottom: 0; left: 0; width: 100%; z-index: 100; background: var(--bg); border-top: 1px solid var(--card-border); padding: 5px 0;">
+        <ins class="adsbygoogle" style="display:inline-block;width:100%;height:50px"
+            data-ad-client="ca-pub-6814079272498306" data-ad-slot="5829190376"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
 
 </body>
