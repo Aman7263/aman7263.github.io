@@ -41,41 +41,44 @@
     <!-- Main Content -->
     <main>
 
-      <!-- Section 1 : Our Website Content -->
-      <section class="site-content">
-        <h2>🌐 Our Website Content</h2>
+      <!-- Toggle Switch -->
+      <div class="content-toggle-wrapper" style="display: flex; justify-content: center; margin-bottom: 40px;">
+        <div style="background: var(--card-dark); border: 1px solid var(--border-light); border-radius: 100px; padding: 5px; display: flex; gap: 5px;">
+          <button id="toggle-internal" class="toggle-btn active" style="padding: 10px 25px; border-radius: 100px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; background: var(--accent); color: white;">Website Topics</button>
+          <button id="toggle-blogger" class="toggle-btn" style="padding: 10px 25px; border-radius: 100px; border: none; font-weight: 600; cursor: pointer; transition: 0.3s; background: transparent; color: var(--text-dim-light);">Blogger Stories</button>
+        </div>
+      </div>
 
-        <p style="margin-bottom: 20px;">
-          With limited resources, we make a sincere effort to provide you with authentic and engaging content across
-          various categories.
-        </p>
+      <!-- Section 1 : Our Website Content -->
+      <section id="section-internal" class="site-content">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h2 style="margin-bottom: 10px;">💎 Official Website Content</h2>
+          <p style="color: var(--text-dim-light); max-width: 600px; margin: 0 auto;">
+            Premium, high-quality articles hosted directly on our native platform for the best reading experience.
+          </p>
+        </div>
 
         <div class="category-grid">
           <div class="category-box" data-category="kids">
             <img src="assets/Kids.png" alt="Kids">
             <h2>Kids</h2>
           </div>
-
           <div class="category-box" data-category="youth">
             <img src="assets/Youth.png" alt="Youth">
             <h2>Youth</h2>
           </div>
-
           <div class="category-box" data-category="golden">
             <img src="assets/Elders.png" alt="Golden">
             <h2>Elders</h2>
           </div>
-
           <div class="category-box" data-category="news">
             <img src="assets/News.png" alt="News">
             <h2>News</h2>
           </div>
-
           <div class="category-box" data-category="shayari">
             <img src="assets/Shayari.png" alt="Shayari">
             <h2>Shayari</h2>
           </div>
-
           <div class="category-box" data-category="songs">
             <img src="assets/Songs.png" alt="Songs">
             <h2>Songs</h2>
@@ -83,66 +86,46 @@
         </div>
       </section>
 
-
       <!-- Section 2 : Blogger Content -->
-      <section class="blogger-content">
-        <h2>🌍 Blogger Blog (Translation Available)</h2>
-
-        <div class="blogger-box">
-          <p>
-            We also publish articles on our Blogger site where you can use the
-            automatic translation feature to read posts in your language.
+      <section id="section-blogger" class="blogger-content" style="display: none;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <h2 style="margin-bottom: 10px;">🌍 External Blogger Archives</h2>
+          <p style="color: var(--text-dim-light); max-width: 600px; margin: 0 auto;">
+            Access our legacy collection on Google Blogger. These external sites feature <b>automatic translation</b> to support readers in any language.
           </p>
+        </div>
 
-          <div class="category-grid">
-
-            <a href="https://amreykidsstories.blogspot.com/" target="_blank">
-              <div class="category-box1">
-                <img src="assets/Kids.png" alt="Kids">
-                <h2>Kids</h2>
-              </div>
-            </a>
-
-            <a href="https://amreyyouthsstories.blogspot.com/" target="_blank">
-              <div class="category-box1">
-                <img src="assets/Youth.png" alt="Youth">
-                <h2>Youth</h2>
-              </div>
-            </a>
-
-            <a href="https://amreygoldenstories.blogspot.com/" target="_blank">
-              <div class="category-box1">
-                <img src="assets/Elders.png" alt="Golden">
-                <h2>Elders</h2>
-              </div>
-            </a>
-
-            <a href="https://amreynews.blogspot.com/" target="_blank">
-              <div class="category-box1">
-                <img src="assets/News.png" alt="News">
-                <h2>News</h2>
-              </div>
-            </a>
-
-            <a href="https://amreyshayari.blogspot.com/" target="_blank">
-              <div class="category-box1">
-                <img src="assets/Shayari.png" alt="Shayari">
-                <h2>Shayari</h2>
-              </div>
-            </a>
-
-            <a href="https://amreysongs.blogspot.com/" target="_blank">
-              <div class="category-box1">
-                <img src="assets/Songs.png" alt="Songs">
-                <h2>Songs</h2>
-              </div>
-            </a>
-
-          </div>
+        <div class="category-grid">
+          <a href="https://amreykidsstories.blogspot.com/" target="_blank" class="category-box1">
+            <img src="assets/Kids.png" alt="Kids">
+            <h2>Kids</h2>
+          </a>
+          <a href="https://amreyyouthsstories.blogspot.com/" target="_blank" class="category-box1">
+            <img src="assets/Youth.png" alt="Youth">
+            <h2>Youth</h2>
+          </a>
+          <a href="https://amreygoldenstories.blogspot.com/" target="_blank" class="category-box1">
+            <img src="assets/Elders.png" alt="Golden">
+            <h2>Elders</h2>
+          </a>
+          <a href="https://amreynews.blogspot.com/" target="_blank" class="category-box1">
+            <img src="assets/News.png" alt="News">
+            <h2>News</h2>
+          </a>
+          <a href="https://amreyshayari.blogspot.com/" target="_blank" class="category-box1">
+            <img src="assets/Shayari.png" alt="Shayari">
+            <h2>Shayari</h2>
+          </a>
+          <a href="https://amreysongs.blogspot.com/" target="_blank" class="category-box1">
+            <img src="assets/Songs.png" alt="Songs">
+            <h2>Songs</h2>
+          </a>
         </div>
       </section>
 
-      <a href="../index.html" class="home-btn">⬅ Back to Project Hub</a>
+      <div style="text-align: center; margin-top: 40px; border-top: 1px solid var(--border-light); padding-top: 30px;">
+        <a href="../index.html" class="home-btn">⬅ Back to Project Hub</a>
+      </div>
 
     </main>
 
@@ -178,6 +161,33 @@
       document.getElementById('lightBtn').onclick = () => setTheme('light');
       document.getElementById('darkBtn').onclick = () => setTheme('dark');
       document.getElementById('readingBtn').onclick = () => setTheme('reading');
+
+      // --- Toggle Sections ---
+      const internalBtn = document.getElementById('toggle-internal');
+      const bloggerBtn = document.getElementById('toggle-blogger');
+      const internalSec = document.getElementById('section-internal');
+      const bloggerSec = document.getElementById('section-blogger');
+
+      const showSection = (isInternal) => {
+        if (isInternal) {
+          internalSec.style.display = 'block';
+          bloggerSec.style.display = 'none';
+          internalBtn.style.background = 'var(--accent)';
+          internalBtn.style.color = 'white';
+          bloggerBtn.style.background = 'transparent';
+          bloggerBtn.style.color = 'var(--text-dim-light)';
+        } else {
+          internalSec.style.display = 'none';
+          bloggerSec.style.display = 'block';
+          bloggerBtn.style.background = 'var(--accent)';
+          bloggerBtn.style.color = 'white';
+          internalBtn.style.background = 'transparent';
+          internalBtn.style.color = 'var(--text-dim-light)';
+        }
+      };
+
+      internalBtn.onclick = () => showSection(true);
+      bloggerBtn.onclick = () => showSection(false);
 
       // --- Navigate to category page ---
       document.querySelectorAll('.category-box').forEach(box => {
