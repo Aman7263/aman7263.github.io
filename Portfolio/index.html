@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aman Aryan Portfolio</title>
+
+  <link rel="shortcut icon" sizes="256×256" href="./assets/images/my-avatar.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+  <main>
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/Aman-pic.jpeg" alt="Aman Aryan" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name">Aman Aryan</h1>
+          <p class="title">
+            Full Stack Developer <br>
+            AWS Certified Cloud Practitioner
+          </p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:amanaryan7263@gmail.com" class="contact-link">amanaryan7263@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+              <a href="tel:+916204304842" class="contact-link">+91 6204304842</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Noida, Uttar Pradesh, India</address>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://linkedin.com/in/aman-aryan-935812220" class="social-link" target="_blank">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/Aman7263" class="social-link" target="_blank">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://aman7263.github.io/" class="social-link" target="_blank">
+              <ion-icon name="globe-outline"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+
+    <div class="main-content">
+
+      <nav class="navbar">
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <button class="navbar-link active" data-nav-link="about">About</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link="experience">Experience</button>
+          </li>
+
+          <li class="navbar-item">
+            <button class="navbar-link" data-nav-link="resume">Resume</button>
+          </li>
+
+          <li class="navbar-item">
+            <a class="navbar-link" href="contact.html">Contact</a>
+          </li>
+
+        </ul>
+      </nav>
+
+
+      <article class="about active" data-page="about">
+
+        <header>
+          <h2 class="h2 article-title">About me</h2>
+        </header>
+
+        <section class="about-text">
+
+          <p>
+            Full Stack Developer experienced in building scalable web and API-based applications using Java, Spring
+            Boot, Angular, and React Native.
+          </p>
+
+          <p>
+            AWS Certified Cloud Practitioner with experience deploying applications on cloud and on-premise
+            environments.
+            Currently contributing to the OBPS Next Gen project for the Municipal Corporation of Delhi (MCD).
+          </p>
+
+        </section>
+
+
+        <section class="service">
+
+          <h3 class="h3 service-title">What I'm doing</h3>
+
+          <ul class="service-list">
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-design.svg" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Enterprise API Design</h4>
+                <p class="service-item-text">
+                  Design and development of robust RESTful APIs using Spring Boot and Java with microservices
+                  architecture.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-dev.svg" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Frontend Architecture</h4>
+                <p class="service-item-text">
+                  Professional web development using Angular with seamless backend integration.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-app.svg" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Mobile Applications</h4>
+                <p class="service-item-text">
+                  Cross-platform mobile applications using React Native integrated with Spring Boot APIs.
+                </p>
+              </div>
+            </li>
+
+            <li class="service-item">
+              <div class="service-icon-box">
+                <img src="./assets/images/icon-photo.svg" width="40">
+              </div>
+
+              <div class="service-content-box">
+                <h4 class="h4 service-item-title">Cloud & DevOps</h4>
+                <p class="service-item-text">
+                  Deploying scalable applications using AWS cloud services and Docker containers.
+                </p>
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <section class="education">
+
+          <h3 class="h3 education-title">Education</h3>
+
+          <ul class="education-list has-scrollbar">
+
+            <li class="education-item">
+              <div class="content-card">
+                <figure class="education-avatar-box">
+                  <img src="./assets/images/education_icons/b-tech_icon.png" width="60">
+                </figure>
+
+                <h4 class="h4 education-item-title">B.Tech – Computer Science and Engineering</h4>
+
+                <div class="education-text">
+                  <p>2019 – 2023</p>
+                  <p>Institute of Technology & Management, Gwalior, MP, India</p>
+                </div>
+
+              </div>
+            </li>
+
+            <li class="education-item">
+              <div class="content-card">
+                <figure class="education-avatar-box">
+                  <img src="./assets/images/education_icons/12th_icon.png" width="60">
+                </figure>
+
+                <h4 class="h4 education-item-title">XII – CBSE</h4>
+
+                <div class="education-text">
+                  <p>2017 – 2018</p>
+                  <p>Shivam Convent School, Patna, Bihar, India</p>
+                </div>
+              </div>
+            </li>
+
+            <li class="education-item">
+              <div class="content-card">
+                <figure class="education-avatar-box">
+                  <img src="./assets/images/education_icons/10th_icon.png">
+                </figure>
+
+                <h4 class="h4 education-item-title">X – CBSE</h4>
+
+                <div class="education-text">
+                  <p>2015 – 2016</p>
+                  <p>Kendriya Vidyalaya, Sonepur, Bihar, India</p>
+                </div>
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+
+        <section class="skills">
+          <h3 class="h3 skills-title">Skills</h3>
+
+          <ul class="skills-list has-scrollbar">
+
+            <li class="skills-item"><img src="./assets/images/skills_icons/java_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/spring-boot_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/microservices_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/java-swing_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/angular_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/type-script_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/react-native_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/postgreSQL_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/mariadb_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/aws_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/docker_icon.png"></li>
+            <li class="skills-item"><img src="./assets/images/skills_icons/git_github_icon.png"></li>
+
+          </ul>
+
+        </section>
+
+      </article>
+
+
+      <!-- EXPERIENCE PAGE -->
+      <article class="experience-posts" data-page="experience">
+
+        <header>
+          <h2 class="h2 article-title">Experience</h2>
+        </header>
+
+        <!-- Premium Certifications Highlight -->
+        <section class="service" style="margin-bottom: 40px;">
+          <h3 class="h3 service-title">Professional Certifications</h3>
+          <ul class="service-list" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+            <li class="service-item" style="padding: 15px;">
+              <div class="service-icon-box" style="margin-bottom: 5px;">
+                <ion-icon name="cloud-done-outline"
+                  style="color: var(--orange-yellow-crayola); font-size: 24px;"></ion-icon>
+              </div>
+              <div class="service-content-box" style="text-align: left;">
+                <h4 class="h4 service-item-title" style="font-size: 14px;">AWS Certified</h4>
+                <p class="service-item-text" style="font-size: 12px;">Cloud Practitioner (May 2022)</p>
+              </div>
+            </li>
+            <li class="service-item" style="padding: 15px;">
+              <div class="service-icon-box" style="margin-bottom: 5px;">
+                <ion-icon name="code-working-outline"
+                  style="color: var(--orange-yellow-crayola); font-size: 24px;"></ion-icon>
+              </div>
+              <div class="service-content-box" style="text-align: left;">
+                <h4 class="h4 service-item-title" style="font-size: 14px;">Java Programming</h4>
+                <p class="service-item-text" style="font-size: 12px;">RGPV Bhopal (Sep 2020)</p>
+              </div>
+            </li>
+            <li class="service-item" style="padding: 15px;">
+              <div class="service-icon-box" style="margin-bottom: 5px;">
+                <ion-icon name="language-outline"
+                  style="color: var(--orange-yellow-crayola); font-size: 24px;"></ion-icon>
+              </div>
+              <div class="service-content-box" style="text-align: left;">
+                <h4 class="h4 service-item-title" style="font-size: 14px;">Cambridge BEC</h4>
+                <p class="service-item-text" style="font-size: 12px;">English Proficiency Preliminary</p>
+              </div>
+            </li>
+          </ul>
+        </section>
+
+        <section class="experience">
+          <ul class="experience-list">
+
+            <li class="experience-item">
+              <div class="experience-content-box">
+
+                <h4 class="h4 experience-item-title">
+                  Software Engineer – Dev IT Ltd.
+                </h4>
+
+                <p class="experience-item-text">
+                  <strong style="color:var(--orange-yellow-crayola)">Duration:</strong> Oct 2024 – Present -
+                  <small><b>(Project:
+                      OBPS
+                      Next Gen Project, MCD Delhi)</b></small><br><br>
+
+                  • Worked as a Full Stack Developer on the OBPS Next Gen platform.<br>
+                  • Developed multiple modules and implemented end-to-end business flows.<br>
+                  • Integrated backend APIs and system workflows.<br>
+                  • Built Android APK using React Native.<br>
+                  • Implemented Email/SMS trigger services and logging mechanisms.
+                </p>
+
+              </div>
+            </li>
+
+
+            <li class="experience-item">
+              <div class="experience-content-box">
+
+                <h4 class="h4 experience-item-title">
+                  Software Engineer – Act Global India Pvt. Ltd.
+                </h4>
+
+                <p class="experience-item-text">
+                  <strong style="color:var(--orange-yellow-crayola)">Duration:</strong> April 2024 – Sep 2024<br><br>
+
+                  • Worked as a Full Stack Developer using Angular, React Native and Spring Boot.<br>
+                  • Developed business flow APIs and integrated web modules.<br>
+                  • Built and deployed production builds for web and mobile applications.<br>
+                  • Mentored junior developers and coordinated with cross-functional teams.
+                </p>
+
+              </div>
+            </li>
+
+
+            <li class="experience-item">
+              <div class="experience-content-box">
+
+                <h4 class="h4 experience-item-title">
+                  Software Developer – PS QuickIT Pvt. Ltd.
+                </h4>
+
+                <p class="experience-item-text">
+                  <strong style="color:var(--orange-yellow-crayola)">Duration:</strong> July 2023 – March 2024 -
+                  <small><b>(Project:
+                      OBPS
+                      Next Gen Project, MCD Delhi)</b></small><br><br>
+
+                  • Worked as a Full Stack Developer for OBPS Next Gen platform.<br>
+                  • Developed Registration module and Details View module.<br>
+                  • Integrated backend APIs and notification services.<br>
+                  • Implemented Email and SMS trigger systems.
+                </p>
+
+              </div>
+            </li>
+
+
+            <li class="experience-item">
+              <div class="experience-content-box">
+
+                <h4 class="h4 experience-item-title">
+                  Trainee Java Developer – MCD Delhi
+                </h4>
+
+                <p class="experience-item-text">
+                  <strong style="color:rgb(255,145,0)">Duration:</strong> Jan 2023 – June 2023 - <small><b>(Project:
+                      OBPS
+                      Next Gen Project, MCD Delhi)</b></small><br><br>
+
+                  • Contributed to backend development using Java.<br>
+                  • Implemented logging mechanisms and backend services.<br>
+                  • Developed Email trigger services and NOC related modules.
+                </p>
+
+              </div>
+            </li>
+
+          </ul>
+
+        </section>
+
+
+      </article>
+
+
+      <article class="resume" data-page="resume">
+
+        <header>
+          <h2 class="h2 article-title">Resume</h2>
+        </header>
+
+        <section class="resume-viewer">
+          <embed src="assets/Aman Aryan.pdf" type="application/pdf" width="100%" height="600px" />
+        </section>
+
+      </article>
+
+    </div>
+  </main>
+
+  <script src="./assets/js/script.js"></script>
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

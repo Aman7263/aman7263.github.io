@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Aman Aryan</title>
+
+  <!-- custom css link -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+
+  <!-- google font link -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <main>
+
+    <aside class="sidebar" data-sidebar>
+
+      <div class="sidebar-info">
+
+        <figure class="avatar-box">
+          <img src="./assets/images/Aman-pic.jpeg" alt="Aman Aryan" width="80">
+        </figure>
+
+        <div class="info-content">
+          <h1 class="name">Aman Aryan</h1>
+          <p class="title">
+            Full Stack Developer <br>
+            AWS Certified Cloud Practitioner
+          </p>
+        </div>
+
+        <button class="info_more-btn" data-sidebar-btn>
+          <span>Show Contacts</span>
+          <ion-icon name="chevron-down"></ion-icon>
+        </button>
+
+      </div>
+
+      <div class="sidebar-info_more">
+
+        <div class="separator"></div>
+
+        <ul class="contacts-list">
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="mail-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Email</p>
+              <a href="mailto:amanaryan7263@gmail.com" class="contact-link">amanaryan7263@gmail.com</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="phone-portrait-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Phone</p>
+              <a href="tel:+916204304842" class="contact-link">+91 6204304842</a>
+            </div>
+          </li>
+
+          <li class="contact-item">
+            <div class="icon-box">
+              <ion-icon name="location-outline"></ion-icon>
+            </div>
+
+            <div class="contact-info">
+              <p class="contact-title">Location</p>
+              <address>Noida, Uttar Pradesh, India</address>
+            </div>
+          </li>
+
+        </ul>
+
+        <div class="separator"></div>
+
+        <ul class="social-list">
+
+          <li class="social-item">
+            <a href="https://linkedin.com/in/aman-aryan-935812220" class="social-link" target="_blank">
+              <ion-icon name="logo-linkedin"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://github.com/Aman7263" class="social-link" target="_blank">
+              <ion-icon name="logo-github"></ion-icon>
+            </a>
+          </li>
+
+          <li class="social-item">
+            <a href="https://aman7263.github.io/" class="social-link" target="_blank">
+              <ion-icon name="globe-outline"></ion-icon>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+
+    </aside>
+
+    <div class="main-content">
+
+      <nav class="navbar">
+        <ul class="navbar-list">
+
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link">About</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link">Experience</a>
+          </li>
+
+          <li class="navbar-item">
+            <a class="navbar-link" href="https://aman7263.github.io/" target="_blank">My Project Hub</a>
+          </li>
+
+          <li class="navbar-item">
+            <a href="index.html" class="navbar-link">Resume</a>
+          </li>
+
+          <li class="navbar-item">
+            <a class="navbar-link active" href="contact.html">Contact</a>
+          </li>
+
+        </ul>
+      </nav>
+
+      <article class="contact active">
+
+        <header>
+          <h2 class="h2 article-title">Contact</h2>
+        </header>
+
+        <section class="mapbox">
+          <figure>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d319040.43599128944!2d77.25056!3d28.5868032!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d28c2e8ee7c9d%3A0x4c4c99b409dbb5f!2sNew%20Delhi%2C%20Delhi%2C%20India!5e0!3m2!1sen!2sbd!4v1647608789441!5m2!1sen!2sbd"
+              width="400" height="300" loading="lazy" style="border:0;"></iframe>
+          </figure>
+        </section>
+
+        <section class="contact-form">
+
+          <h3 class="h3 form-title">Contact Form</h3>
+
+          <form id="contact-form" class="form">
+            <div class="input-wrapper">
+              <input type="text" name="fullname" class="form-input" placeholder="Full name" required>
+              <input type="email" name="email" class="form-input" placeholder="Email address" required>
+            </div>
+            <textarea name="message" class="form-input" placeholder="Your Message" required></textarea>
+
+            <button class="form-btn" type="submit">
+              <ion-icon name="paper-plane"></ion-icon>
+              <span>Send Message</span>
+            </button>
+          </form>
+        </section>
+
+      </article>
+
+    </div>
+
+  </main>
+
+  <!-- Ionicons -->
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <script>
+    (function () {
+      emailjs.init({
+        publicKey: "FhYEqstyGvtwNTCP6",
+      });
+    })();
+
+    const form = document.getElementById('contact-form');
+    const submitBtn = form.querySelector('.form-btn');
+
+    let userLocation = '';
+
+    window.addEventListener('load', () => {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const lat = position.coords.latitude.toFixed(6);
+            const lon = position.coords.longitude.toFixed(6);
+            userLocation = `\n\nMap_Location: https://www.google.com/maps?q=${lat},${lon}`;
+          },
+          () => {
+            userLocation = '\n\nMap_Location: Not available';
+          }
+        );
+      }
+    });
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+
+
+      const formData = new FormData(form);
+      // Ensure location is always mentioned
+      let locationInfo = userLocation;
+      if (!locationInfo || locationInfo.trim() === "") {
+        locationInfo = "\n\nMap_Location: Not available (permission denied or loading)";
+      }
+
+      const messageWithLocation = formData.get("message") + locationInfo;
+
+      const templateParams = {
+        fullname: formData.get("fullname"),
+        email: formData.get("email"),
+        message: messageWithLocation,
+        page: "Portfolio -- Contact Page",
+        time: new Date().toLocaleString()
+      };
+
+      submitBtn.disabled = true;
+      const originalText = submitBtn.querySelector('span').textContent;
+      submitBtn.querySelector('span').textContent = "Sending...";
+
+      emailjs.send('service_9paxf5j', 'template_wg79k5d', templateParams)
+        .then(() => {
+          alert('✅ Message sent successfully!');
+          form.reset();
+        })
+        .catch((error) => {
+          console.error('FAILED...', error);
+          alert('❌ Failed to send message.');
+        })
+        .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.querySelector('span').textContent = originalText;
+        });
+    });
+  </script>
+</body>
+
+</html>
