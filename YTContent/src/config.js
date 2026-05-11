@@ -218,4 +218,47 @@ const CONFIG = {
     }
 };
 
+// ==================== LOW CREDIT GENERATION ====================
+
+async function generateMediaLowCredit(type, topic, tone) {
+    const base = "https://gen.pollinations.ai";
+
+    try {
+        let url = "";
+
+        if (type === 'audio' || type === 'song') {
+            // Cheapest audio option
+            const prompt = encodeURIComponent(`${topic}, ${tone} mood, short clip`);
+            url = `${base}/audio/${prompt}?model=simple&duration=15`; // short + simple model
+        }
+        else {
+            // Video - cheapest possible
+            const prompt = encodeURIComponent(`short ${type} scene: ${topic}, ${tone} style, simple animation`);
+            url = `${base}/video/${prompt}?model=ltx-small&width=512&height=288&duration=5&seed=${Math.floor(Math.random() * 99999)}`;
+            // Alternatives to try: model=seedance-lite, ltx, or even image-to-video if you have image
+        }
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            // Fallback to even lighter
+            console.warn("Primary model failed, trying ultra-light fallback");
+            const fallbackPrompt = encodeURIComponent(`simple ${topic}`);
+            const fallbackUrl = `${base}/video/${fallbackPrompt}?model=basic&duration=4`;
+            const fbResponse = await fetch(fallbackUrl);
+            if (!fbResponse.ok) throw new Error("All models failed");
+            return await fbResponse.blob();
+        }
+
+        return await response.blob();
+
+    } catch (e) {
+        console.error("Low credit media error:", e);
+        throw e;
+    }
+}
+
+// Expose it
+CONFIG.generateMediaLowCredit = generateMediaLowCredit;
+
 export default CONFIG;
