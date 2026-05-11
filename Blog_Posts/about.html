@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="google-adsense-account" content="ca-pub-6814079272498306">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6814079272498306" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>About Us</h1>
+    <div class="header-row">
+      <a href="index.html">
+        <img src="assets/logo.png" class="logo" alt="Logo">
+      </a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn" type="button">Pages <i class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-menu">
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+      <a href="join.html" class="join-btn">💰 Join Us</a>
+    </div>
+    <div class="theme-toggle">
+      <button id="lightBtn">Light</button>
+      <button id="darkBtn">Dark</button>
+      <button id="readingBtn">Reading</button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section style="text-align: center; margin-bottom: 40px;">
+      <h2>Welcome to Our Blog</h2>
+      <p style="max-width: 760px; margin: 0 auto; color: #555; line-height: 1.8; font-size: 1rem;">Our blog brings you inspiring stories, thoughtful articles, and useful resources designed to delight readers of every age. We aim to deliver a consistent website experience across every page, with clear navigation and friendly design.</p>
+    </section>
+
+    <section style="display: grid; gap: 24px;">
+      <div class="card">
+        <h3>Our Mission</h3>
+        <p>We create stories and articles that entertain, educate, and support readers on their daily journeys. Every post is built to feel like part of the same website family.</p>
+      </div>
+      <div class="card">
+        <h3>What You Can Expect</h3>
+        <p>Easy navigation, friendly design, and a consistent layout. Explore our categories, read featured posts, and use the Pages dropdown to jump to contact, privacy, and disclaimer details.</p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const body = document.body;
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      body.className = savedTheme;
+      const setTheme = (theme) => { body.className = theme; localStorage.setItem('theme', theme); };
+      document.getElementById('lightBtn').onclick = () => setTheme('light');
+      document.getElementById('darkBtn').onclick = () => setTheme('dark');
+      document.getElementById('readingBtn').onclick = () => setTheme('reading');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="google-adsense-account" content="ca-pub-6814079272498306">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6814079272498306" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <h1>Contact Us</h1>
+    <div class="header-row">
+      <a href="index.html">
+        <img src="assets/logo.png" class="logo" alt="Logo">
+      </a>
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-btn" type="button">Pages <i class="fas fa-chevron-down"></i></button>
+        <div class="dropdown-menu">
+          <a href="about.html">About Us</a>
+          <a href="contact.html">Contact Us</a>
+          <a href="privacy.html">Privacy Policy</a>
+          <a href="disclaimer.html">Disclaimer</a>
+        </div>
+      </div>
+      <a href="join.html" class="join-btn">💰 Join Us</a>
+    </div>
+    <div class="theme-toggle">
+      <button id="lightBtn">Light</button>
+      <button id="darkBtn">Dark</button>
+      <button id="readingBtn">Reading</button>
+    </div>
+  </header>
+
+  <main class="page-shell">
+    <section style="text-align: center; margin-bottom: 35px;">
+      <h2>Get in Touch</h2>
+      <p style="color: #555; line-height: 1.8; max-width: 720px; margin: 0 auto;">Reach out with questions, feedback, or suggestions. We're here to help and always welcome your messages.</p>
+    </section>
+
+    <section class="card" style="text-align: center;">
+      <h3>Online Support</h3>
+      <p>If you have questions or feedback, please use the contact form below. We will respond as soon as possible.</p>
+    </section>
+
+    <section class="card">
+      <h3 style="margin-bottom: 18px;">Send a Message</h3>
+      <form id="contact-form" style="display: grid; gap: 18px;">
+        <input type="text" name="fullname" placeholder="Full name" style="width:100%;padding:14px;border-radius:12px;border:1px solid var(--border-light);background:inherit;outline:none;" required>
+        <input type="email" name="email" placeholder="Email address" style="width:100%;padding:14px;border-radius:12px;border:1px solid var(--border-light);background:inherit;outline:none;" required>
+        <textarea name="message" rows="6" placeholder="Your message" style="width:100%;padding:14px;border-radius:12px;border:1px solid var(--border-light);background:inherit;outline:none;resize:vertical;" required></textarea>
+        <button type="submit" class="join-btn" style="width: fit-content;">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    emailjs.init('FhYEqstyGvtwNTCP6');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const body = document.body;
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      body.className = savedTheme;
+      const setTheme = (theme) => { body.className = theme; localStorage.setItem('theme', theme); };
+      document.getElementById('lightBtn').onclick = () => setTheme('light');
+      document.getElementById('darkBtn').onclick = () => setTheme('dark');
+      document.getElementById('readingBtn').onclick = () => setTheme('reading');
+
+      const form = document.getElementById('contact-form');
+      const submitBtn = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const messageWithLocation = formData.get('message');
+        const templateParams = {
+          fullname: formData.get('fullname'),
+          email: formData.get('email'),
+          message: messageWithLocation,
+          page: 'Blog Posts Contact Page',
+          time: new Date().toLocaleString()
+        };
+
+        submitBtn.disabled = true;
+        const originalText = submitBtn.textContent;
+        submitBtn.textContent = 'Sending...';
+
+        emailjs.send('service_9paxf5j', 'template_wg79k5d', templateParams)
+          .then(() => {
+            alert('✅ Message sent successfully!');
+            form.reset();
+          })
+          .catch((error) => {
+            console.error('EmailJS error:', error);
+            alert('❌ Failed to send message. Please try again.');
+          })
+          .finally(() => {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          });
+      });
+    });
+  </script>
+</body>
+</html>

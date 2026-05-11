@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Reset form
       form.reset();
       displayAmount.textContent = '₹0';
-      alert(`Thank you for your support! Payment initiated.\n\nPayment ID: ${paymentData[0].id}\n\nPlease scan the QR code to complete payment.`);
+      alert(`Thank you for your support! Your payment has been recorded successfully.\n\nPayment ID: ${paymentData[0].id}`);
     } catch (error) {
       alert('Error saving payment: ' + (error.message || 'Unknown error'));
     }
