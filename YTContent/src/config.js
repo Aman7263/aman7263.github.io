@@ -4,31 +4,29 @@ const g_part2 = "-";
 const g_part3 = "9kQZB6uniax56vS0";
 const GEMINI_API_KEY = g_part1 + g_part2 + g_part3;
 
-// Pollinations API Key (Get yours at enter.pollinations.ai)
-const p_part1 = "sk_FBYlOiTi31";
-const p_part2 = "MfyJdRoP3CBsHz";
-const p_part3 = "Dr1XMb4Z";
-const POLLINATIONS_API_KEY = p_part1 + p_part2 + p_part3;
+// Pollinations removed - using Hugging Face by default when configured
 
 const CONFIG = {
     // API Keys
     GEMINI_API_KEY: GEMINI_API_KEY,
-    POLLINATIONS_API_KEY: POLLINATIONS_API_KEY,
     SUPABASE_URL: 'https://pcjunoldozpddssszoke.supabase.co',
     SUPABASE_ANON_KEY: 'sb_publishable_9mLZyK-_kNxvfOopEnHbEg_b_1oPBNg',
 
-    // API Endpoints
-    ENDPOINTS: {
-        IMAGE: 'https://image.pollinations.ai/prompt/',
-        AUDIO: 'https://gen.pollinations.ai/audio/',
-        VIDEO: 'https://gen.pollinations.ai/video/'
-    },
+    // API Endpoints (Pollinations removed)
+    ENDPOINTS: {},
 
     // Default Models
     MODELS: {
         AUDIO: 'acestep',
         VIDEO: 'veo'
     },
+
+    // Optional external providers (set your keys/models here to enable)
+    // To avoid automatic calls to the Hugging Face endpoints when the host is unreachable,
+    // leave this blank unless you have a working HF key and confirmed network access.
+    HUGGINGFACE_API_KEY: '', // e.g. 'hf_xxx' — set at runtime or here to enable HF
+    HUGGINGFACE_TTS_MODEL: 'espnet/kan-bayashi_ljspeech_vits', // e.g. 'espnet/kan-bayashi_ljspeech_vits'
+    HUGGINGFACE_IMAGE_MODEL: 'runwayml/stable-diffusion-v1-5', // e.g. 'stabilityai/stable-diffusion-2'
 
     // --- API Methods ---
 
@@ -57,208 +55,90 @@ const CONFIG = {
      * Generates Media (Audio/Video) with a robust waterfall/retry logic.
      * Fully optimized based on latest Pollinations.ai documentation.
      */
+    // generateMedia - prefer Hugging Face if configured; otherwise throw so callers use client fallback
     async generateMedia(mode, topic, tone, videoPrompt = "") {
-        let blob = null;
-        const fetchWithTimeout = async (url, options = {}, timeout = 35000) => {
-            const controller = new AbortController();
-            const id = setTimeout(() => controller.abort(), timeout);
-
-            // Add Authorization header if API Key is present
-            const headers = { ...options.headers };
-            if (this.POLLINATIONS_API_KEY) {
-                headers['Authorization'] = `Bearer ${this.POLLINATIONS_API_KEY}`;
-            }
-
-            try {
-                const response = await fetch(url, { ...options, headers, signal: controller.signal });
-                clearTimeout(id);
-                return response;
-            } catch (e) {
-                clearTimeout(id);
-                throw e;
-            }
-        };
-
         if (mode === 'song') {
-            const musicPrompt = `${tone} instrumental music, ${topic}, cinematic background score`.trim();
-            // Models: [modelName, duration]
-            const audioWaterfall = [
-                ['elevenmusic', 30],
-                ['acestep', 15],
-                ['universal-2', 10],
-                ['', 10]
-            ];
-
-            for (const [model, dur] of audioWaterfall) {
-                try {
-                    const params = new URLSearchParams({
-                        duration: dur,
-                        instrumental: 'true',
-                        enhance: 'true'
-                    });
-                    if (model) params.append('model', model);
-
-                    const baseUrl = `${this.ENDPOINTS.AUDIO}${encodeURIComponent(musicPrompt)}?${params.toString()}`;
-                    const url = baseUrl;
-
-                    updateStatus(`🎼 Composing with ${model || 'Turbo'} Audio (${dur}s)...`, 'pulse');
-                    const res = await fetchWithTimeout(url);
-
-                    if (res.status === 402) {
-                        throw new Error("Pollinations API balance exhausted. Please add funds.");
-                    }
-
-                    if (res.ok) {
-                        const b = await res.blob();
-                        if (b.size > 5000 && b.type.includes('audio')) {
-                            blob = b;
-                            break;
-                        }
-                    }
-                } catch (e) {
-                    if (e.message.includes("exhausted")) throw e;
-                    console.warn(`Audio ${model || 'Turbo'} failed/timeout`, e);
-                }
+            if (this.HUGGINGFACE_API_KEY && this.HUGGINGFACE_TTS_MODEL) {
+                return await this.generateAudioHuggingFace(topic || '');
             }
-
-            // Backup: SoundHelix
-            if (!blob) {
-                const helixUrl = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
-                try {
-                    const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(helixUrl)}`);
-                    if (res.ok) blob = await res.blob();
-                    else throw new Error("Proxy failed");
-                } catch (e) {
-                    try {
-                        const res = await fetch(helixUrl);
-                        if (res.ok) blob = await res.blob();
-                    } catch (e2) { console.warn("Failsafe audio failed completely", e2); }
-                }
-            }
-
+            throw new Error('No configured server-side provider for audio');
         } else {
-            const finalPrompt = (videoPrompt && videoPrompt.length > 5) ? videoPrompt : `Cinematic high quality 4k scene about ${topic}`;
-
-            // Video Waterfall: [model, duration, aspectRatio]
-            const videoWaterfall = [
-                ['wan-fast', 5, '16:9'],    // Ultra Fast
-                ['veo', 8, '16:9'],         // High Quality
-                ['wan', 15, '16:9'],        // Long & Reliable
-                ['nova-reel', 12, '16:9'],  // Cinematic Pan
-                ['seedance-2.0', 10, '16:9'],
-                ['grok-video-pro', 5, '16:9'],
-                ['', 5, '16:9']             // Turbo
-            ];
-
-            for (const [model, dur, ratio] of videoWaterfall) {
-                try {
-                    const params = new URLSearchParams({
-                        duration: dur,
-                        aspectRatio: ratio,
-                        audio: 'true',
-                        enhance: 'true'
-                    });
-                    if (model) params.append('model', model);
-
-                    const baseUrl = `${this.ENDPOINTS.VIDEO}${encodeURIComponent(finalPrompt)}?${params.toString()}`;
-                    const url = baseUrl;
-
-                    updateStatus(`🎬 Rendering ${model || 'Turbo'} Video (${dur}s)...`, 'pulse');
-                    const res = await fetchWithTimeout(url);
-
-                    if (res.status === 402) {
-                        throw new Error("Pollinations API balance exhausted. Please add funds.");
-                    }
-
-                    if (res.ok) {
-                        const b = await res.blob();
-                        if (b.size > 10000 && b.type.includes('video')) {
-                            blob = b;
-                            break;
-                        }
-                    }
-                } catch (e) {
-                    if (e.message.includes("exhausted")) throw e;
-                    console.warn(`Video ${model || 'Turbo'} failed/timeout`, e);
-                }
-            }
-
-            // Backup: Sample Video
-            if (!blob) {
-                const sampleVid = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-                try {
-                    const res = await fetch(`https://corsproxy.io/?${encodeURIComponent(sampleVid)}`);
-                    if (res.ok) blob = await res.blob();
-                    else throw new Error("Proxy failed");
-                } catch (e) {
-                    try {
-                        const res = await fetch(sampleVid);
-                        if (res.ok) blob = await res.blob();
-                    } catch (e2) { console.warn("Failsafe video failed completely", e2); }
-                }
-            }
+            throw new Error('Server-side video generation removed. Use client fallback or configure Hugging Face in the UI.');
         }
-
-        if (!blob || blob.size < 5000) throw new Error("Media generation failed. Try a simpler topic or check your internet.");
-        return blob;
     },
 
     /**
      * Generates Image with fallback logic.
      */
     async generateImage(prompt, seed) {
-        const params = new URLSearchParams({
-            seed: seed,
-            width: 1024,
-            height: 1024,
-            nologo: 'true',
-            enhance: 'true'
+        // Prefer Hugging Face image model when configured
+        if (this.HUGGINGFACE_API_KEY && this.HUGGINGFACE_IMAGE_MODEL) {
+            const blob = await this.generateImageHuggingFace(prompt);
+            return URL.createObjectURL(blob);
+        }
+        // Fallback to a placeholder service (picsum) when HF not configured
+        const safeSeed = seed || Math.floor(Math.random() * 999999);
+        return `https://picsum.photos/seed/${safeSeed}/1024/1024`;
+    }
+    ,
+    // --- Optional: Hugging Face helpers ---
+    async generateAudioHuggingFace(text) {
+        if (!this.HUGGINGFACE_API_KEY || !this.HUGGINGFACE_TTS_MODEL) throw new Error('Hugging Face TTS not configured');
+        const url = `https://api-inference.huggingface.co/models/${this.HUGGINGFACE_TTS_MODEL}`;
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${this.HUGGINGFACE_API_KEY}`,
+                'Accept': 'audio/wav',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ inputs: text })
         });
-        return `${this.ENDPOINTS.IMAGE}${encodeURIComponent(prompt + ', 4k')}?${params.toString()}`;
+        if (!res.ok) {
+            const t = await res.text();
+            throw new Error(`Hugging Face TTS failed: ${res.status} ${t}`);
+        }
+        const b = await res.blob();
+        return b;
+    },
+    async generateImageHuggingFace(prompt) {
+        if (!this.HUGGINGFACE_API_KEY || !this.HUGGINGFACE_IMAGE_MODEL) throw new Error('Hugging Face Image model not configured');
+        const url = `https://api-inference.huggingface.co/models/${this.HUGGINGFACE_IMAGE_MODEL}`;
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${this.HUGGINGFACE_API_KEY}`,
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ inputs: prompt })
+        });
+        if (!res.ok) {
+            const t = await res.text();
+            throw new Error(`Hugging Face Image failed: ${res.status} ${t}`);
+        }
+        // Many HF image models return base64-encoded image bytes in JSON or return binary directly.
+        // Try to parse json and detect base64, otherwise treat as blob.
+        const ct = res.headers.get('content-type') || '';
+        if (ct.includes('application/json')) {
+            const data = await res.json();
+            // Look for base64 image in common fields
+            const base64 = data.image || data.data || (data[0] && data[0].generated_image_base64) || null;
+            if (base64 && typeof base64 === 'string') {
+                const bin = atob(base64.split(',').pop());
+                const len = bin.length;
+                const u8 = new Uint8Array(len);
+                for (let i = 0; i < len; i++) u8[i] = bin.charCodeAt(i);
+                return new Blob([u8], { type: 'image/png' });
+            }
+            throw new Error('Hugging Face image response did not contain base64 image');
+        } else {
+            const blob = await res.blob();
+            return blob;
+        }
     }
 };
 
-// ==================== LOW CREDIT GENERATION ====================
-
-async function generateMediaLowCredit(type, topic, tone) {
-    const base = "https://gen.pollinations.ai";
-
-    try {
-        let url = "";
-
-        if (type === 'audio' || type === 'song') {
-            // Cheapest audio option
-            const prompt = encodeURIComponent(`${topic}, ${tone} mood, short clip`);
-            url = `${base}/audio/${prompt}?model=simple&duration=15`; // short + simple model
-        }
-        else {
-            // Video - cheapest possible
-            const prompt = encodeURIComponent(`short ${type} scene: ${topic}, ${tone} style, simple animation`);
-            url = `${base}/video/${prompt}?model=ltx-small&width=512&height=288&duration=5&seed=${Math.floor(Math.random() * 99999)}`;
-            // Alternatives to try: model=seedance-lite, ltx, or even image-to-video if you have image
-        }
-
-        const response = await fetch(url);
-
-        if (!response.ok) {
-            // Fallback to even lighter
-            console.warn("Primary model failed, trying ultra-light fallback");
-            const fallbackPrompt = encodeURIComponent(`simple ${topic}`);
-            const fallbackUrl = `${base}/video/${fallbackPrompt}?model=basic&duration=4`;
-            const fbResponse = await fetch(fallbackUrl);
-            if (!fbResponse.ok) throw new Error("All models failed");
-            return await fbResponse.blob();
-        }
-
-        return await response.blob();
-
-    } catch (e) {
-        console.error("Low credit media error:", e);
-        throw e;
-    }
-}
-
-// Expose it
-CONFIG.generateMediaLowCredit = generateMediaLowCredit;
+// Pollinations low-credit helper removed. Use Hugging Face or client-side fallback instead.
 
 export default CONFIG;
