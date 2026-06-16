@@ -7,54 +7,6 @@
     <priority>1.00</priority>
   </url>
   <url>
-    <loc>https://aman7263.github.io/Blog_Posts/index.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.90</priority>
-  </url>
-  <url>
-    <loc>https://aman7263.github.io/Blog_Posts/about.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://aman7263.github.io/Blog_Posts/contact.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://aman7263.github.io/Blog_Posts/privacy.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.50</priority>
-  </url>
-  <url>
-    <loc>https://aman7263.github.io/Blog_Posts/disclaimer.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.50</priority>
-  </url>
-  <url>
-    <loc>https://aman7263.github.io/Blog_Posts/category.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.80</priority>
-  </url>
-  <url>
-    <loc>https://aman7263.github.io/Blog_Posts/join.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
-  </url>
-  <url>
-    <loc>https://aman7263.github.io/Blog_Posts/post.html</loc>
-    <lastmod>2026-05-11</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.85</priority>
-  </url>
-  <url>
     <loc>https://aman7263.github.io/Investment_Analyzer/index.html</loc>
     <lastmod>2026-05-11</lastmod>
     <changefreq>weekly</changefreq>
