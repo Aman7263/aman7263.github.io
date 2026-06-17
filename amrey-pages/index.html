@@ -243,12 +243,12 @@
       </a>
 
       <!-- Invista — plain HTML page -->
-      <a href="/amrey-pages/theamreylnvista/" class="card">
+      <a href="/amrey-pages/theamreyInvista/" class="card">
         <span class="card-type">html · gemini ai</span>
         <span class="card-name">Invista</span>
         <span class="card-desc">AI-powered investment analyzer with portfolio insights via Gemini API.</span>
         <div class="card-footer">
-          <span class="card-path">/theamreylnvista/</span>
+          <span class="card-path">/theamreyInvista/</span>
           <span class="card-arrow">↗</span>
         </div>
       </a>
@@ -271,19 +271,6 @@
     <a href="https://aman7263.github.io">aman7263.github.io</a>
     &nbsp;·&nbsp; theamrey projects 2026
   </footer>
-
-  <script>
-    // Redirect root visits to theamreyblog (the default project)
-    (function () {
-      const segments = location.pathname.replace(/\/$/, '').split('/').filter(Boolean);
-      // We're inside amrey-pages/ — if there's nothing after it, redirect
-      const idx = segments.indexOf('amrey-pages');
-      const afterBase = segments.slice(idx + 1);
-      if (afterBase.length === 0) {
-        location.replace('/amrey-pages/theamreyblog/');
-      }
-    })();
-  </script>
 
 </body>
 
