@@ -4,7 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { WebView } from 'react-native-webview';
 import * as Location from 'expo-location';
 
-const DEFAULT_URL = 'https://aman7263.github.io/Bugs/';
+const DEFAULT_URL = 'https://aman7263.github.io/amrey-pages/bugs/';
 
 const normalizeUrl = (input) => {
   const trimmed = input.trim();
