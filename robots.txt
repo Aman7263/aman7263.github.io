@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://aman7263.github.io/sitemap.xml
