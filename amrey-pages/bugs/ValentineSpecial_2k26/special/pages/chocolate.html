@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Chocolate Day 🍫</title>
+  <link rel="stylesheet" href="../style.css">
+  <!-- ✅ Added ONLY surprise & heart styles -->
+  <style>
+    .surprise-container {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .surprise-btn {
+      position: relative;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .surprise-btn img {
+      width: 220px;
+      max-width: 85vw;
+      border-radius: 20px;
+      filter: blur(6px);
+      transition: 0.6s ease;
+      box-shadow: 0 0 18px rgba(255, 77, 109, 0.5);
+    }
+
+    .surprise-btn:hover img,
+    .surprise-btn:active img {
+      filter: blur(2px);
+      transform: scale(1.05);
+    }
+
+    .surprise-text {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 77, 109, 0.9);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -10px;
+      animation-name: floatUp;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body class="page">
+
+<h1>🍫 Chocolate Day -- Sweet Like You 🍫</h1>
+
+<div class="day-container">
+
+  <div class="day-left">🍫</div>
+
+  <div class="day-right">
+    
+    <div class="letter">
+
+      Chocolate Day is a reminder that sweetness doesn’t have to be loud to be
+      felt. Sometimes it’s subtle, comforting, and exactly what you need at
+      the right moment.  
+      <br><br>
+      You have that same kind of sweetness — the kind that makes difficult
+      days lighter and quiet moments warmer. You don’t try to change things,
+      yet everything feels better when you’re around.  
+      <br><br>
+      Just like chocolate, you turn ordinary moments into something special,
+      something worth remembering. And honestly, life tastes better with you
+      in it ❤️
+
+      <!-- ✅ Surprise section (unchanged HTML) -->
+  <div class="surprise-container">
+    <button class="surprise-btn" onclick="openSurprise()">
+      <img src="images/surprise-box.jpg" alt="Surprise" />
+      <span class="surprise-text">Tap for a Surprise 💝</span>
+    </button>
+  </div>
+
+    </div>
+  </div>
+
+
+<div class="love-message-box">
+  <p class="message-title">💌 Want to say something?</p>
+
+  <textarea
+    class="love-input"
+    placeholder="Write anything from your heart…"></textarea>
+
+  <button class="send-love-btn"
+          onclick="sendLoveMessage('Chocolate Day 🍫', this)">
+    💖 Send this to me
+  </button>
+</div>
+
+</div>
+
+<button onclick="history.back()">⬅ Back</button>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
+</body>
+</html>
+
+<script>
+   function openSurprise() {
+  const overlay = document.createElement("div");
+
+  // Overlay styling (theme-friendly)
+  overlay.style.position = "fixed";
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.background = "rgba(255, 240, 245, 0.96)";
+  overlay.style.zIndex = 9999;
+  overlay.style.display = "flex";
+  overlay.style.flexDirection = "column";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.fontSize = "18px";
+  overlay.style.color = "#ff4d6d";
+  overlay.style.textAlign = "center";
+
+  overlay.innerHTML = `
+    <div style="font-size:46px; animation: heartBeat 1.2s infinite;">❤️</div>
+    <p style="margin:12px 0 4px;">Finding your chocolate 🍫</p>
+    <p style="margin:4px 0;">Adding to cart 🛒</p>
+    <p style="margin:4px 0;">Almost there, my love 💕</p>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // Inject heartbeat animation (inline, safe)
+  const style = document.createElement("style");
+  style.innerHTML = `
+    @keyframes heartBeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      40% { transform: scale(1); }
+      60% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  setTimeout(() => {
+    overlay.remove();
+    style.remove();
+    window.open(
+      "https://www.swiggy.com/instamart/item/Y1JN1GT8WQ",
+      "_blank"
+    );
+  }, 3000);
+}
+</script>

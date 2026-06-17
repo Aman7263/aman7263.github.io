@@ -1,0 +1,265 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600&family=Poppins:wght@300;400;500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #fff1f5, #ffe4ec);
+  color: #5a2a3c;
+  min-height: 100vh;
+}
+
+/* Navigation */
+nav {
+  position: sticky;
+  top: 0;
+  background: rgba(255, 240, 246, 0.9);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+}
+
+nav a {
+  text-decoration: none;
+  margin-left: 15px;
+  color: #b23a64;
+  font-weight: 500;
+}
+
+/* Container */
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.hero p {
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+/* Cards */
+.card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+  margin: 20px 0;
+  box-shadow: 0 10px 25px rgba(178, 58, 100, 0.15);
+  animation: fadeUp 0.8s ease;
+}
+
+/* Image inside card */
+.card img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 16px;
+  flex-shrink: 0;
+}
+
+/* Text wrapper */
+.card .card-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.card h3 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 10px;
+}
+
+/* Mobile responsive */
+@media (max-width: 600px) {
+  .card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .card img {
+    margin-bottom: 10px;
+  }
+}
+
+/* Gallery */
+.gallery {
+  margin: 2%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 15px;
+  object-fit: cover;
+  height: 200px;
+}
+
+/* Gallery item with captions */
+.gallery-item {
+  text-align: center;
+}
+
+.gallery-item .time {
+  display: block;
+  font-size: 13px;
+  color: #b23a64;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.gallery-item .place {
+  display: block;
+  font-size: 14px;
+  margin-top: 6px;
+  color: #5a2a3c;
+  opacity: 0.85;
+}
+
+
+/* Shayari */
+.shayari {
+  font-style: italic;
+  line-height: 1.8;
+  text-align: center;
+  font-size: 16px;
+}
+
+/* Button */
+.btn {
+  display: inline-block;
+  margin-top: 15px;
+  padding: 12px 25px;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff6a95, #ff8fb3);
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* Floating Hearts - Global */
+.floating-heart {
+  position: fixed; /* stays in viewport */
+  font-size: 20px;
+  color: #ff5a91;
+  pointer-events: none; /* hearts don’t block clicks */
+  animation: floatHeart linear infinite;
+  opacity: 0.8;
+  z-index: 999;
+}
+
+/* 💌 LOVE MESSAGE SECTION FIX */
+.love-message-box {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(255, 235, 240, 0.55);
+  box-shadow: 0 10px 25px rgba(255, 77, 109, 0.18);
+  text-align: center;
+}
+
+.message-title {
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #ff4d6d;
+}
+
+.love-input {
+  width: 100%;
+  min-height: 90px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #ffb3c1;
+  outline: none;
+  font-size: 14px;
+  resize: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.love-input:focus {
+  border-color: #ff4d6d;
+}
+
+.send-love-btn {
+  margin-top: 14px;
+  padding: 11px 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.send-love-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 24px rgba(255, 77, 109, 0.4);
+}
+
+/* Float up animation */
+@keyframes floatHeart {
+  0% {
+    transform: translateY(100vh) scale(0.5) rotate(0deg);
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20vh) scale(1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+
+/* Animation */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  nav h1 {
+    font-size: 16px;
+  }
+
+  .hero h2 {
+    font-size: 26px;
+  }
+}

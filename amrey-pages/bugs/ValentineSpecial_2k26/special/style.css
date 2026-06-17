@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;700&family=Poppins:wght@300;400;500&display=swap');
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #3a0f2e, #120012);
+  color: #ffe6f2;
+  text-align: center;
+}
+
+/* Headings */
+h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 48px;
+  margin-top: 30px;
+}
+
+p {
+  opacity: 0.8;
+  margin-bottom: 30px;
+}
+
+/* Grid (Home page) */
+.grid {
+  max-width: 900px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.box {
+  background: linear-gradient(145deg, #ff4f81, #c9184a);
+  padding: 30px 10px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+.box:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+.locked {
+  opacity: 0.3;
+  filter: grayscale(1);
+  pointer-events: none;
+}
+
+/* Pages */
+.page {
+  padding: 40px 20px;
+}
+
+/* Cute floating emoji animation */
+.emoji {
+  font-size: 90px;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+  100% { transform: translateY(0); }
+}
+
+/* Letter Card */
+.letter {
+  background: rgba(255,255,255,0.95);
+  color: #6a0032;
+  max-width: 650px;
+  margin: 30px auto;
+  padding: 30px;
+  border-radius: 18px;
+  font-size: 18px;
+  line-height: 1.7;
+  font-family: 'Dancing Script', cursive;
+}
+
+/* Button */
+button {
+  margin-top: 25px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  background: #ff4f81;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.day-container {
+  max-width: 1000px;
+  margin: auto;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Left animation section */
+.day-left {
+  flex: 1;
+  min-width: 280px;
+  font-size: 120px;
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Right letter section */
+.day-right {
+  flex: 1;
+  min-width: 300px;
+  text-align: left;
+}
+
+.day-right h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 36px;
+  margin-bottom: 15px;
+}
+
+.day-right .letter {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+/* 💌 LOVE MESSAGE SECTION FIX */
+.love-message-box {
+  max-width: 520px;
+  margin: 40px auto;
+  padding: 22px;
+  border-radius: 18px;
+  background: rgba(255, 235, 240, 0.55);
+  box-shadow: 0 10px 25px rgba(255, 77, 109, 0.18);
+  text-align: center;
+}
+
+.message-title {
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #000000;
+}
+
+.love-input {
+  width: 100%;
+  min-height: 90px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #ffb3c1;
+  outline: none;
+  font-size: 14px;
+  resize: none;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.love-input:focus {
+  border-color: #ff4d6d;
+}
+
+.send-love-btn {
+  margin-top: 14px;
+  padding: 11px 30px;
+  border-radius: 30px;
+  border: none;
+  cursor: pointer;
+  font-size: 15px;
+  background: linear-gradient(135deg, #ff4d6d, #ff8fa3);
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.send-love-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 10px 24px rgba(255, 77, 109, 0.4);
+}
+/* Mobile friendly */
+@media (max-width: 768px) {
+  .day-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .day-right {
+    text-align: center;
+  }
+}
+

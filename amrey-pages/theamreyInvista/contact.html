@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Gemini AI</title>
+  <!-- SEO metadata -->
+  <meta name="description" content="Aman Aryan's personal project site with blog posts, investment tools, and analytics-driven resources.">
+  <meta name="keywords" content="Aman Aryan, blog, investment analyzer, AI dashboard, portfolio, contact, privacy, disclaimer">
+  <meta name="author" content="Aman Aryan">
+  <meta name="robots" content="index, follow">
+  <meta name="google-site-verification" content="YOUR_GOOGLE_SEARCH_CONSOLE_CODE">
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SVF6G890F8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-SVF6G890F8');
+  </script>
+
+<style>
+:root { 
+  --bg: #0d1117; 
+  --card: #161b22; 
+  --text: #c9d1d9; 
+  --blue: #58a6ff; 
+  --border: #30363d;
+  --panel: #0f172a;
+}
+* { box-sizing: border-box; }
+body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg); color: var(--text); padding: 15px; margin: 0; line-height: 1.6; }
+.container { max-width: 980px; margin: 0 auto; }
+.header-box { margin-bottom: 25px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+.section { background: var(--card); padding: 24px; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 20px; }
+h1, h2 { margin: 0 0 16px; }
+.btn, .home-btn { display: inline-block; background: var(--blue); color: white; border: none; padding: 12px 22px; border-radius: 8px; cursor: pointer; text-decoration: none; font-weight: 700; transition: background 0.3s ease; }
+.btn:hover, .home-btn:hover { background: #4b94e6; }
+.form-field { width: 100%; padding: 14px; margin-bottom: 16px; border-radius: 10px; border: 1px solid var(--border); background: var(--panel); color: var(--text); outline: none; }
+.form-field:focus { border-color: var(--blue); }
+textarea.form-field { min-height: 160px; resize: vertical; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header-box">
+    <h1>Contact Gemini AI</h1>
+    <a href="index.html" class="home-btn">⬅ Back to Analyzer</a>
+  </div>
+
+  <div class="section">
+    <h2>Send a message</h2>
+    <p>Use this form to contact the Gemini AI team about the dashboard, signals, or any feature requests. Your message will be sent through the same form logic used on the blog contact page.</p>
+    <form id="contact-form">
+      <input class="form-field" type="text" name="fullname" placeholder="Full name" required>
+      <input class="form-field" type="email" name="email" placeholder="Email address" required>
+      <textarea class="form-field" name="message" placeholder="Your message" required></textarea>
+      <button type="submit" class="btn">Send Message</button>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  emailjs.init('FhYEqstyGvtwNTCP6');
+
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const formData = new FormData(form);
+
+    const templateParams = {
+      fullname: formData.get('fullname'),
+      email: formData.get('email'),
+      message: formData.get('message'),
+      page: 'Investment Analyzer Contact Page',
+      time: new Date().toLocaleString()
+    };
+
+    submitBtn.disabled = true;
+    const originalText = submitBtn.textContent;
+    submitBtn.textContent = 'Sending...';
+
+    emailjs.send('service_9paxf5j', 'template_wg79k5d', templateParams)
+      .then(() => {
+        alert('✅ Message sent successfully!');
+        form.reset();
+      })
+      .catch((error) => {
+        console.error('EmailJS error:', error);
+        alert('❌ Failed to send message. Please try again.');
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      });
+  });
+</script>
+</body>
+</html>

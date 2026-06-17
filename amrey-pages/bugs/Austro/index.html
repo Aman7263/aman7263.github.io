@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spiritual Dashboard</title>
+
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1b1b2f, #0f0f1a);
+  color:#f5f5f5;
+  line-height:1.6;
+}
+
+h1 {
+  font-size:2.2rem;
+  text-align:center;
+  margin-bottom:8px;
+}
+
+h2 { font-size:1.25rem; margin-bottom:8px }
+p { font-size:0.95rem; opacity:.9 }
+
+.container {
+  max-width: 900px;
+  margin:auto;
+  padding:16px;
+}
+
+.subtitle {
+  text-align:center;
+  opacity:.85;
+}
+
+.grid {
+  display:grid;
+  gap:16px;
+  margin-top:24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+}
+
+.card {
+  background: linear-gradient(145deg,#1f1f36,#141426);
+  border-radius:16px;
+  padding:18px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  box-shadow:0 10px 30px rgba(0,0,0,.4),
+             inset 0 0 0 1px rgba(255,255,255,.05);
+  transition:.2s;
+}
+
+.card:hover {
+  transform:translateY(-4px);
+  box-shadow:0 18px 40px rgba(0,0,0,.5),
+             inset 0 0 0 1px rgba(255,255,255,.08);
+}
+
+.btn {
+  margin-top:14px;
+  padding:10px 14px;
+  border-radius:10px;
+  background: linear-gradient(135deg,#ffcc70,#ff9f43);
+  color:#1a1a1a;
+  text-decoration:none;
+  font-weight:600;
+  text-align:center;
+}
+.exit-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 28px;            /* space between buttons */
+  margin: 40px 0;
+}
+
+.exit-btn {
+  padding: 18px 42px;
+  font-size: 1.1rem;
+  border-radius: 999px;           /* 👈 fully rounded (pill/circle feel) */
+  border: 2px solid #ffcc70;      /* 👈 visible circular border */
+  background: transparent;
+  color: #ffcc70;
+  cursor: pointer;
+  font-weight: 600;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+.exit-btn:hover {
+  transform: translateY(-3px);
+  background: #ffcc70;
+  color: #1a1a1a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+}
+
+.exit-btn:active {
+  transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>🕉 Spiritual Dashboard</h1>
+<p class="subtitle">Explore your inner patterns in a calm and simple way</p>
+
+<div class="grid">
+
+<!-- Emotional Profile -->
+<div class="card">
+<h2>🌍 Emotional Profile</h2>
+<p>A gentle map of how you emotionally react, feel safe, and regain balance.</p>
+<a href="pages/emotionalProfile.html" class="btn">Explore</a>
+</div>
+
+<!-- Kundali Viewer -->
+<div class="card">
+<h2>🌍 Kundali Viewer</h2>
+<p>Visual zodiac ring to understand your Moon-based emotional sign (Rāshi).</p>
+<a href="pages/kundali.html" class="btn">Open</a>
+</div>
+
+<!-- FLAMES -->
+<div class="card">
+<h2>🔥 Name Compatibility (FLAMES)</h2>
+<p>A fun method to understand emotional bonding using two names.</p>
+<a href="pages/flames.html" class="btn">Check Compatibility</a>
+</div>
+
+<!-- Marriage Guna -->
+<div class="card">
+<h2>💍 Marriage Compatibility (Guna)</h2>
+<p>See harmony between two people based on birth dates.</p>
+<a href="pages/marriageGuna.html" class="btn">Check Match</a>
+</div>
+
+<!-- Friendship -->
+<div class="card">
+<h2>👫 Friendship Energy</h2>
+<p>Natural friendship bonding and communication energy.</p>
+<a href="pages/InnerProfile.html" class="btn">Explore</a>
+</div>
+
+<!-- Moon -->
+<div class="card">
+<h2>🌙 Moon on Your Birth Day</h2>
+<p>See the Moon phase on the day you were born and its emotional tone.</p>
+<a href="pages/moon.html" class="btn">View Moon</a>
+</div>
+</div>
+</div>
+
+<div class="exit-wrapper">
+  <button class="exit-btn" onclick="window.location.href='pages/howItWorks.html'">
+    ✨ ℹ️ How This Works ✨
+  </button>
+
+  <button class="exit-btn" onclick="window.location.href='../index.html'">
+    ✨ ⬅️ Exit ✨
+  </button>
+</div>
+
+</body>
+</html>

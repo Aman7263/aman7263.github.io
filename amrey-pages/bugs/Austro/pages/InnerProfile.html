@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Personality Explorer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+
+body{
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1b1f3b, #050814);
+  color:#e5e7eb;
+}
+
+.page{
+  max-width:1100px;
+  margin:auto;
+  padding:24px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:6px;
+}
+.subtitle{
+  text-align:center;
+  opacity:.8;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1.3fr;
+  gap:32px;
+  margin-top:28px;
+}
+@media(max-width:900px){
+  .grid{ grid-template-columns:1fr }
+}
+
+.card{
+  background:linear-gradient(160deg,#1e293b,#020617);
+  border-radius:22px;
+  padding:26px;
+  box-shadow:0 30px 60px rgba(0,0,0,.65);
+}
+
+label{
+  font-size:13px;
+  opacity:.7;
+  margin-top:14px;
+  display:block;
+}
+input{
+  width:100%;
+  margin-top:6px;
+  padding:12px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.15);
+  background:#020617;
+  color:white;
+}
+
+button{
+  width:100%;
+  margin-top:20px;
+  padding:14px;
+  border-radius:16px;
+  border:none;
+  font-weight:600;
+  background:linear-gradient(135deg,#facc15,#fb7185);
+  cursor:pointer;
+}
+
+.results{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:18px;
+  margin-top:10px;
+}
+
+.box{
+  padding:18px;
+  border-radius:18px;
+  background:rgba(255,255,255,.07);
+  line-height:1.6;
+  opacity:0;
+  transform:translateY(20px);
+  animation:fadeUp .6s forwards;
+}
+.box h3{ margin-bottom:6px }
+
+@keyframes fadeUp{
+  to{ opacity:1; transform:none }
+}
+
+.nav{
+  margin-top:24px;
+  display:flex;
+  gap:14px;
+}
+.nav button{
+  flex:1;
+  background:rgba(255,255,255,.1);
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+
+<h1>✨ Personality Explorer</h1>
+<p class="subtitle">Understand emotional, mental & elemental patterns</p>
+
+<div class="grid">
+
+<div class="card">
+<h2>📝 Enter Your Details</h2>
+
+<p style="opacity:.8; line-height:1.6; margin-top:10px">
+This tool gives gentle insights into your personality
+using simple patterns — no astrology knowledge needed.
+</p>
+
+<label>Your Name</label>
+<input id="name" type="text" placeholder="Enter your name">
+
+<label>Date of Birth</label>
+<input id="dob" type="date">
+
+<button onclick="calculate()">✨ Explore Personality</button>
+
+<div class="box" style="margin-top:20px">
+<b>Note</b><br>
+This is for reflection & self-understanding — not prediction.
+</div>
+</div>
+
+<div class="card">
+<h2>🔮 Your Profile</h2>
+
+<div id="results" class="results"></div>
+
+<p style="font-size:13px; opacity:.7; margin-top:16px">
+Personality shifts with experience — this shows your natural tendencies.
+</p>
+</div>
+
+</div>
+
+<div class="nav">
+<button onclick="history.back()">← Back</button>
+</div>
+
+</div>
+
+<!-- ✅ MAIL SCRIPT --><!-- ✅ REQUIRED ORDER -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
+
+<script>
+function calculate(){
+  const name = document.getElementById("name").value.trim();
+  const dob = document.getElementById("dob").value;
+
+  if(!name || !dob){
+    alert("Please enter name and date of birth");
+    return;
+  }
+
+  const date = new Date(dob);
+  const day = date.getDate();
+  const month = date.getMonth()+1;
+
+  const sun = month<=4 ? "Leader • Confident • Radiant" :
+              month<=8 ? "Balanced • Warm • Stable" :
+              "Intuitive • Thoughtful • Reflective";
+
+  const emotion = day<=10 ? "Sensitive & observant" :
+                  day<=20 ? "Emotionally balanced" :
+                  "Deep-feeling & intense";
+
+  const thinking = name.length%2===0 ?
+    "Logical • Structured • Analytical" :
+    "Creative • Intuitive • Abstract";
+
+  const love = name.length%3===0 ?
+    "Expressive & romantic" :
+    "Slow, loyal & deep";
+
+  const friend = (day + name.length)%2===0 ?
+    "Supportive & dependable" :
+    "Fun-loving & energetic";
+
+  const element =
+    (month===3||month===4||month===8||month===11) ? "🔥 Fire — passion & drive" :
+    (month===5||month===6||month===9) ? "🌍 Earth — stability & realism" :
+    (month===1||month===2||month===7) ? "💨 Air — ideas & communication" :
+    "💧 Water — emotions & intuition";
+
+  document.getElementById("results").innerHTML = `
+    <div class="box"><h3>🌞 Sun Personality</h3>${sun}</div>
+    <div class="box"><h3>🌙 Emotional Traits</h3>${emotion}</div>
+    <div class="box"><h3>🧠 Thinking Style</h3>${thinking}</div>
+    <div class="box"><h3>💖 Love Style</h3>${love}</div>
+    <div class="box"><h3>👫 Friendship</h3>${friend}</div>
+    <div class="box"><h3>🔥 Element Profile</h3>${element}</div>
+  `;
+
+  /* 📧 SEND MAIL */
+  sendActivityMail({
+    page: "✨ Personality Explorer",
+    name: name,
+    dob: dob,
+    result:
+`Sun: ${sun}
+Emotion: ${emotion}
+Thinking: ${thinking}
+Love: ${love}
+Friendship: ${friend}
+Element: ${element}`
+  });
+}
+</script>
+
+</body>
+</html>

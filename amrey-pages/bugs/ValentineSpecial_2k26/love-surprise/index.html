@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For My Love ❤️</title>
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- ✅ Added ONLY surprise & heart styles -->
+  <style>
+    .surprise-container {
+      text-align: center;
+      margin: 30px 0;
+    }
+
+    .surprise-btn {
+      position: relative;
+      border: none;
+      background: none;
+      cursor: pointer;
+    }
+
+    .surprise-btn img {
+      width: 220px;
+      max-width: 85vw;
+      border-radius: 20px;
+      filter: blur(6px);
+      transition: 0.6s ease;
+      box-shadow: 0 0 18px rgba(255, 77, 109, 0.5);
+    }
+
+    .surprise-btn:hover img,
+    .surprise-btn:active img {
+      filter: blur(2px);
+      transform: scale(1.05);
+    }
+
+    .surprise-text {
+      position: absolute;
+      bottom: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 77, 109, 0.9);
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .floating-heart {
+      position: fixed;
+      bottom: -10px;
+      animation-name: floatUp;
+      animation-timing-function: linear;
+      animation-fill-mode: forwards;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .visit-check {
+  font-size: 14px;
+  color: #ff4d6d;
+  cursor: pointer;
+}
+
+.visit-check input {
+  margin-right: 6px;
+  transform: scale(1.1);
+}
+
+.surprise-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.surprise-btn:disabled img {
+  filter: blur(8px);
+}
+
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+      }
+
+      to {
+        transform: translateY(-110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav>
+    <h1>My Love</h1>
+    <div>
+      <a href="memories.html">Memories</a>
+      <a href="shayari.html">Shayari</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="letter.html">Letter</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h2>To the Girl Who Owns My Heart ❤️</h2>
+    <p>This little world is made just for you.</p>
+    <a href="journey.html" class="btn">Visit Our Journey</a>
+    <a href="../special/index.html" class="btn">Home Page</a>
+  </section>
+
+ <div class="love-message-box">
+  <p class="message-title">💌 Want to say something?</p>
+
+  <textarea
+    class="love-input"
+    placeholder="Write anything from your heart…"></textarea>
+
+  <button class="send-love-btn"
+          onclick="sendLoveMessage('Our Love Journey 💙', this)">
+    💖 Send this to me
+  </button>
+</div>
+
+
+<!-- ✅ Surprise section (checkbox gated) -->
+<div class="surprise-container">
+
+  <label class="visit-check">
+    <input type="checkbox" id="visitedAllTabs" />
+    Have you visited all the tabs of this website? 💖
+  </label>
+
+  <br><br>
+
+  <button class="surprise-btn" onclick="openSurprise()" disabled>
+    <img src="images/surprise-box.jpg" alt="Surprise" />
+    <span class="surprise-text">Tap for a Surprise 💝</span>
+  </button>
+</div>
+
+</div>
+
+  <div class="floating-heart" style="left:10%; animation-duration:6s;">❤️</div>
+  <div class="floating-heart" style="left:30%; animation-duration:8s;">❤️</div>
+  <div class="floating-heart" style="left:50%; animation-duration:7s;">❤️</div>
+  <div class="floating-heart" style="left:70%; animation-duration:9s;">❤️</div>
+  <div class="floating-heart" style="left:85%; animation-duration:5s;">❤️</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
+
+  <script>
+    function openSurprise() {
+  const overlay = document.createElement("div");
+
+  // Overlay styling (theme-friendly)
+  overlay.style.position = "fixed";
+  overlay.style.top = 0;
+  overlay.style.left = 0;
+  overlay.style.width = "100%";
+  overlay.style.height = "100%";
+  overlay.style.background = "rgba(255, 240, 245, 0.96)";
+  overlay.style.zIndex = 9999;
+  overlay.style.display = "flex";
+  overlay.style.flexDirection = "column";
+  overlay.style.justifyContent = "center";
+  overlay.style.alignItems = "center";
+  overlay.style.fontSize = "18px";
+  overlay.style.color = "#ff4d6d";
+  overlay.style.textAlign = "center";
+
+  overlay.innerHTML = `
+    <div style="font-size:46px; animation: heartBeat 1.2s infinite;">❤️</div>
+<p style="margin:12px 0 4px;">Choosing something sweet for my Valentine 🌹</p>
+    <p style="margin:4px 0;">Adding to cart 🛒</p>
+    <p style="margin:4px 0;">Almost there, my love 💕</p>
+  `;
+
+  document.body.appendChild(overlay);
+
+  // Inject heartbeat animation (inline, safe)
+  const style = document.createElement("style");
+  style.innerHTML = `
+    @keyframes heartBeat {
+      0% { transform: scale(1); }
+      25% { transform: scale(1.2); }
+      40% { transform: scale(1); }
+      60% { transform: scale(1.25); }
+      100% { transform: scale(1); }
+    }
+  `;
+  document.head.appendChild(style);
+
+  setTimeout(() => {
+    overlay.remove();
+    style.remove();
+    window.open(
+      "https://www.swiggy.com/instamart/item/9ASSZOX9OI",
+      "_blank"
+    );
+  }, 3000);
+}
+
+const checkbox = document.getElementById("visitedAllTabs");
+  const surpriseBtn = document.querySelector(".surprise-btn");
+
+  checkbox.addEventListener("change", function () {
+    if (this.checked) {
+      surpriseBtn.disabled = false;
+    } else {
+      surpriseBtn.disabled = true;
+    }
+  });
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'floating-heart';
+      heart.innerText = '❤️';
+
+      heart.style.left = Math.random() * 100 + 'vw';
+
+      const size = Math.random() * 20 + 15;
+      heart.style.fontSize = size + 'px';
+
+      heart.style.animationDuration =
+        (Math.random() * 5 + 5) + 's';
+
+      document.body.appendChild(heart);
+
+      heart.addEventListener('animationend', () => {
+        heart.remove();
+      });
+    }
+
+    setInterval(createHeart, 800);
+  </script>
+
+</body>
+
+</html>

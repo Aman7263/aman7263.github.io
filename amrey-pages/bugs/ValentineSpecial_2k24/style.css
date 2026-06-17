@@ -1,0 +1,87 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #ffd1dc, #ffe6f0);
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  overflow-x: hidden;
+  padding: 20px;
+}
+
+h1, h2, h3 {
+  color: #8b005d;
+  margin: 15px 0;
+}
+
+.card {
+  max-width: 900px;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.poetry {
+  white-space: pre-wrap;
+  color: #333;
+  font-size: 1.1rem;
+  margin-top: 15px;
+}
+
+.buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 25px;
+}
+
+button {
+  padding: 12px 22px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-yes {
+  background: linear-gradient(135deg, #ff4081, #ff80ab);
+  color: white;
+}
+
+.btn-no {
+  background: linear-gradient(135deg, #444, #777);
+  color: white;
+}
+
+button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+}
+
+.soft-text {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+/* hearts */
+.heart {
+  position: fixed;
+  top: -10px;
+  font-size: 24px;
+  animation: fall linear infinite;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}

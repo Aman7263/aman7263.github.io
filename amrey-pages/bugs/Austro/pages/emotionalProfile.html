@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Lunar Mind Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #121826, #05070d);
+  color: #e5e7eb;
+}
+
+/* LAYOUT */
+.page {
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr }
+}
+
+/* CARD */
+.card {
+  background: linear-gradient(160deg,#1f2937,#020617);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 20px 40px rgba(0,0,0,.6);
+}
+
+/* FORM */
+label {
+  display:block;
+  font-size:13px;
+  opacity:.7;
+  margin-top:14px;
+}
+
+input {
+  width:100%;
+  margin-top:6px;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.1);
+  background:#020617;
+  color:white;
+}
+
+button {
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border-radius:12px;
+  border:none;
+  font-weight:600;
+  background:linear-gradient(135deg,#facc15,#22d3ee);
+  cursor:pointer;
+}
+
+/* RESULT TEXT */
+.result {
+  margin-top:20px;
+  padding:16px;
+  border-radius:12px;
+  background:rgba(255,255,255,.05);
+  line-height:1.7;
+  font-size:14px;
+}
+
+/* VISUAL */
+.space {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  margin: auto;
+}
+
+.ring {
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  border:1px dashed rgba(255,255,255,.15);
+}
+
+.earth {
+  position:absolute;
+  inset:0;
+  margin:auto;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:radial-gradient(circle at 30% 30%, #67e8f9, #0f172a);
+  display:grid;
+  place-items:center;
+  font-size:32px;
+  box-shadow:0 0 30px rgba(34,211,238,.4);
+}
+
+.moon {
+  position:absolute;
+  width:26px;
+  height:26px;
+  border-radius:50%;
+  background:#f8fafc;
+  box-shadow:0 0 16px rgba(255,255,255,.9);
+}
+
+/* FOOT BUTTONS */
+.button-row {
+  display:flex;
+  gap:14px;
+  margin-top:18px;
+}
+
+.button-row button { flex:1 }
+
+.back-btn {
+  background: rgba(255,255,255,.08);
+  color: #e5e7eb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+<div class="grid">
+
+<!-- LEFT -->
+<div class="card">
+<h2>🧠 Emotional Profile by Birth Date</h2>
+
+<p style="font-size:14px; opacity:.85; line-height:1.6; margin-top:8px">
+This tool gives you a <b>simple emotional profile</b> based on the day you were born.
+It does <b>not</b> predict your future and does <b>not</b> require belief in astrology.
+<br><br>
+Just enter your <b>date of birth</b>.
+</p>
+
+<label>Date of Birth</label>
+<input type="date" id="dob">
+
+<button onclick="calculateMoon()">Get My Profile</button>
+
+<div class="result" id="result"></div>
+
+<!-- SIMPLE EXPLANATION -->
+<div class="result">
+<b>What does this mean?</b><br><br>
+
+When you were born, the Moon was at a specific point in its monthly cycle.
+People born around the same time tend to develop <b>similar emotional habits</b>.<br><br>
+
+Your result describes:
+<ul style="margin-left:18px">
+  <li>How you usually process feelings</li>
+  <li>How you react to stress</li>
+  <li>What helps you feel mentally balanced</li>
+</ul>
+
+This is similar to a personality test —
+it shows tendencies, not fixed destiny.
+</div>
+</div>
+
+<!-- RIGHT -->
+<div class="card">
+<div class="space" id="space">
+  <div class="earth">🧠</div>
+</div>
+
+<div style="margin-top:20px; font-size:14px; opacity:.85; line-height:1.6">
+<b>How to read this visual:</b><br>
+Center = You<br>
+Rings = Emotional stages of the month<br>
+Dot = Stage when you were born
+</div>
+
+<p style="font-size:13px; opacity:.7; margin-top:10px">
+The diagram is only a visual aid.
+It does not represent planets, signs, or predictions.
+</p>
+</div>
+
+</div>
+
+<div class="button-row">
+  <button class="back-btn" onclick="history.back()">← Back</button>
+  <button onclick="location.href='moon.html'">🌙 View Details</button>
+</div>
+</div>
+
+<!-- ✅ MAIL LOGGER --><!-- ✅ REQUIRED ORDER -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
+
+<script>
+const space = document.getElementById("space");
+
+/* Create 13 rings */
+for (let i = 1; i <= 13; i++) {
+  const r = document.createElement("div");
+  r.className = "ring";
+  r.style.transform = `scale(${i / 13})`;
+  space.appendChild(r);
+}
+
+/* Moon */
+const moon = document.createElement("div");
+moon.className = "moon";
+space.appendChild(moon);
+
+/* Plain-language meanings */
+const meanings = [
+  "You tend to observe quietly before reacting.",
+  "You are emotionally sensitive and empathetic.",
+  "You learn and adapt through feelings.",
+  "Relationships strongly influence your emotions.",
+  "You act when emotions are triggered.",
+  "You express feelings creatively.",
+  "You prefer emotional stability and order.",
+  "You reflect deeply on emotions.",
+  "You experience emotions intensely.",
+  "Emotions drive your goals.",
+  "You understand emotions logically.",
+  "You feel emotionally fulfilled easily.",
+  "You recover and let go quickly."
+];
+
+function calculateMoon() {
+  const dob = document.getElementById("dob").value;
+  if (!dob) {
+    alert("Please select your date of birth");
+    return;
+  }
+
+  const ref = new Date("2000-01-06");
+  const date = new Date(dob);
+  const days = (date - ref) / (1000 * 60 * 60 * 24);
+  const moonAge = ((days % 29.53) + 29.53) % 29.53;
+
+  const index = Math.floor(moonAge / (29.53 / 13));
+  const radius = 210 * ((index + 1) / 13);
+
+  moon.style.left = 210 + radius * Math.cos(Math.PI * 1.5) + "px";
+  moon.style.top  = 210 + radius * Math.sin(Math.PI * 1.5) + "px";
+
+  const resultText = meanings[index];
+
+  document.getElementById("result").innerHTML = `
+    <b>Your emotional profile:</b><br>
+    ${resultText}
+  `;
+
+  /* 📧 SEND MAIL */
+  sendActivityMail({
+    page: "🧠 Emotional Profile by Birth Date",
+    dob: dob,
+    result: resultText
+  });
+}
+</script>
+
+</body>
+</html>

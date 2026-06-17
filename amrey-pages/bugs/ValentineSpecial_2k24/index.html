@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+  <h2>💕 Last Chance To Accept My Proposal 💕</h2>
+
+  <button onclick="goYes()">❤️ You Love Me 💕</button>
+  <button onclick="goNo()">💔 You Love Me Not</button>
+
+ <button class="btn" onclick="exit()"> ✨ ⬅️ Exit ✨ </button>
+
+</div>
+
+<script src="hearts.js"></script>
+<script>
+function goYes() {
+  location.href = "yes/Yes.html";
+}
+function goNo() {
+  location.href = "no/No.html";
+}
+function exit() {
+  location.href = "../index.html";
+}
+</script>
+
+</body>
+</html>

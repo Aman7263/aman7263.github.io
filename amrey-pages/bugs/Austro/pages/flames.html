@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Name Compatibility – FLAMES</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #1f2933, #020617);
+  color: #e5e7eb;
+}
+
+.page {
+  max-width: 1100px;
+  margin: auto;
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr }
+}
+
+.card {
+  background: linear-gradient(160deg,#1e293b,#020617);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.65);
+}
+
+label {
+  font-size: 13px;
+  opacity: .7;
+  margin-top: 14px;
+  display: block;
+}
+
+input {
+  margin-top: 6px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: #020617;
+  color: white;
+}
+
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(135deg,#fb7185,#facc15);
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.flames {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.flame-box {
+  padding: 16px 10px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.05);
+  text-align: center;
+  opacity: .4;
+  font-weight: 600;
+}
+
+.flame-box.active {
+  background: linear-gradient(135deg,#fb7185,#facc15);
+  color: black;
+  opacity: 1;
+}
+
+.nav {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+}
+.nav button { flex:1 }
+.back { background: rgba(255,255,255,.1); color:white }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+<div class="grid">
+
+<!-- LEFT -->
+<div class="card">
+<h2>🔥 Name Compatibility (FLAMES)</h2>
+
+<p style="font-size:14px; opacity:.9; line-height:1.6; margin-top:10px">
+This tool gives a <b>simple emotional compatibility insight</b>
+using two names.
+It’s playful, traditional, and meant for quick understanding.
+</p>
+
+<p style="font-size:13px; opacity:.7; margin-top:8px">
+No astrology. No birth details.<br>
+Just names and curiosity.
+</p>
+
+<label>Your Name</label>
+<input type="text" id="name1" placeholder="Enter first name">
+
+<label>Partner’s Name</label>
+<input type="text" id="name2" placeholder="Enter second name">
+
+<button onclick="calculateFlames()">Check Compatibility</button>
+
+<div id="result" class="result"></div>
+
+<div class="result">
+<b>Important to know</b><br><br>
+✔ This is for understanding vibes<br>
+✔ Meant to be light and reflective<br>
+✖ Not a prediction or final truth
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="card">
+
+<h3 style="margin-bottom:10px">🔥 Compatibility Wheel</h3>
+
+<div class="flames" id="flamesGrid">
+  <div class="flame-box">F</div>
+  <div class="flame-box">L</div>
+  <div class="flame-box">A</div>
+  <div class="flame-box">M</div>
+  <div class="flame-box">E</div>
+  <div class="flame-box">S</div>
+</div>
+
+<p style="margin-top:20px; font-size:14px; opacity:.9; line-height:1.6">
+<b>How to read this:</b><br>
+The highlighted letter shows the
+dominant emotional pattern
+between the two names.
+</p>
+
+<div class="result">
+<b>What is FLAMES?</b><br><br>
+
+FLAMES is a traditional way to describe the
+<b>type of emotional connection</b> between two people,
+based on name interaction.
+<br><br>
+
+Each letter stands for a relationship theme:
+<ul style="margin-left:18px">
+  <li><b>F</b> — Friendship</li>
+  <li><b>L</b> — Love</li>
+  <li><b>A</b> — Affection</li>
+  <li><b>M</b> — Marriage</li>
+  <li><b>E</b> — Emotional bond</li>
+  <li><b>S</b> — Support</li>
+</ul>
+</div>
+
+<p style="font-size:13px; opacity:.7; margin-top:10px">
+This method reflects tendencies, not destiny.
+</p>
+
+</div>
+
+</div>
+
+<div class="nav">
+  <button class="back" onclick="history.back()">← Back</button>
+</div>
+
+</div>
+
+<!-- ✅ MAIL LOGGER --><!-- ✅ REQUIRED ORDER -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
+
+<script>
+function calculateFlames() {
+  const raw1 = document.getElementById("name1").value.trim();
+  const raw2 = document.getElementById("name2").value.trim();
+
+  const n1 = raw1.toLowerCase().replace(/\s/g,'');
+  const n2 = raw2.toLowerCase().replace(/\s/g,'');
+
+  if (!n1 || !n2) {
+    alert("Please enter both names");
+    return;
+  }
+
+  let a = n1;
+  let b = n2;
+
+  for (let char of n1) {
+    if (b.includes(char)) {
+      a = a.replace(char,'');
+      b = b.replace(char,'');
+    }
+  }
+
+  const count = a.length + b.length;
+  const flames = ["F","L","A","M","E","S"];
+  const index = (count - 1) % flames.length;
+  const resultLetter = flames[index];
+
+  document.querySelectorAll(".flame-box").forEach(box=>{
+    box.classList.remove("active");
+    if (box.innerText === resultLetter) {
+      box.classList.add("active");
+    }
+  });
+
+  const meanings = {
+    F: "Friendship – strong companionship and comfort",
+    L: "Love – emotional and romantic pull",
+    A: "Affection – care, warmth, and liking",
+    M: "Marriage – long-term stability potential",
+    E: "Emotional bond – deep feelings and sensitivity",
+    S: "Support – mutual backing and strength"
+  };
+
+  const resultText = `${resultLetter} — ${meanings[resultLetter]}`;
+
+  document.getElementById("result").innerHTML = `
+    <b>Compatibility Result</b><br><br>
+    <b>${resultLetter}</b> — ${meanings[resultLetter]}<br><br>
+    This describes the dominant emotional connection
+    suggested by the names.
+  `;
+
+  /* 📧 SEND MAIL */
+  sendActivityMail({
+    page: "🔥 Name Compatibility (FLAMES)",
+    name: `${raw1} & ${raw2}`,
+    result: resultText
+  });
+}
+</script>
+
+</body>
+</html>

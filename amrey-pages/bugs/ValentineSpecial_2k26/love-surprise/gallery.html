@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Our Gallery ❤️</title>
+
+<style>
+/* ================= BASE ================= */
+body {
+  margin: 0;
+  font-family: 'Playfair Display', serif;
+  background: #fff0f6;
+  color: #5a2a3c;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: #ffccd6;
+  border-bottom: 2px solid #ff8fb3;
+}
+
+nav a {
+  text-decoration: none;
+  color: #5a2a3c;
+  background: #fff;
+  padding: 8px 18px;
+  border-radius: 20px;
+}
+
+.gallery {
+  width: 95%;
+  max-width: 1400px;
+  margin: 40px auto;
+}
+
+/* ================= YEAR ================= */
+.year-title {
+  text-align: center;
+  font-size: 30px;
+  margin: 60px 0 30px;
+  color: #8a4b65;
+}
+
+/* ================= GRID ================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 40px;
+}
+
+/* ================= MONTH ================= */
+.month {
+  background: #fff;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 0 10px 30px rgba(178,58,100,0.18);
+}
+
+.place {
+  font-size: 20px;
+  font-weight: bold;
+  color: #8a4b65;
+  margin-bottom: 12px;
+}
+
+/* ================= SLIDER ================= */
+.slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.track {
+  display: flex;
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+.track img {
+  flex: 0 0 50%;
+  max-width: 50%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 16px;
+  scroll-snap-align: start;
+  box-shadow: 0 8px 20px rgba(178,58,100,0.25);
+  padding-right: 12px;
+  cursor: pointer;
+}
+
+/* ================= ARROWS ================= */
+.nav {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #ff8fb3;
+  cursor: pointer;
+}
+
+.nav:disabled {
+  opacity: 0.3;
+}
+
+/* ================= POPUP ================= */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 16px;
+}
+
+.popup button {
+  position: absolute;
+  background: none;
+  border: none;
+  font-size: 45px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.popup .close {
+  top: 20px;
+  right: 30px;
+  font-size: 40px;
+}
+
+.popup .left {
+  left: 30px;
+}
+
+.popup .right {
+  right: 30px;
+}
+
+.hint {
+  font-size: 14px;
+  font-weight: normal;
+  margin-top: 6px;
+  color: #c96b8d;
+  opacity: 0.85;
+  font-style: italic;
+  text-align: center;
+  animation: pulse 1.8s infinite;
+}
+
+/* gentle attraction animation */
+@keyframes pulse {
+  0%   { opacity: 0.5; }
+  50%  { opacity: 1; }
+  100% { opacity: 0.5; }
+}
+
+
+/* ================= MOBILE ================= */
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .track img {
+    height: 220px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <h1>Our Gallery ❤️</h1>
+  <a href="index.html">Home</a>
+</nav>
+
+<div class="gallery" id="gallery"></div>
+
+<!-- POPUP -->
+<div class="popup" id="popup">
+  <button class="close">✕</button>
+  <button class="left">❮</button>
+  <img id="popupImg">
+  <button class="right">❯</button>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const TOTAL_MEMORIES = 37;
+const START_MONTH_INDEX = 1;
+
+const MONTHS = [
+  "January","February","March","April","May","June",
+  "July","August","September","October","November","December"
+];
+
+const gallery = document.getElementById("gallery");
+const popup = document.getElementById("popup");
+const popupImg = document.getElementById("popupImg");
+
+let popupImages = [];
+let popupIndex = 0;
+let currentYearIndex = -1;
+let currentGrid;
+
+/* ================= BUILD ================= */
+for (let m = 1; m <= TOTAL_MEMORIES; m++) {
+  const yearIndex = Math.floor((m - 1) / 12);
+
+  if (yearIndex !== currentYearIndex) {
+    currentYearIndex = yearIndex;
+
+    const year = document.createElement("div");
+    year.className = "year-title";
+    year.innerText = `Year ${numberToWord(yearIndex + 1)} ❤️`;
+    gallery.appendChild(year);
+
+    currentGrid = document.createElement("div");
+    currentGrid.className = "grid";
+    gallery.appendChild(currentGrid);
+  }
+
+  const monthIndex = (START_MONTH_INDEX + m - 1) % 12;
+
+  const month = document.createElement("div");
+  month.className = "month";
+  month.innerHTML = `
+    <div class="place">${MONTHS[monthIndex]} Memories <span class="hint"> 👇 Click an image to view full screen 👇</span></div>
+    <div class="slider">
+      <button class="nav left">❮</button>
+      <div class="track"></div>
+      <button class="nav right">❯</button>
+    </div>
+  `;
+
+  currentGrid.appendChild(month);
+
+  const track = month.querySelector(".track");
+  const left = month.querySelector(".left");
+  const right = month.querySelector(".right");
+
+  loadImages(track, m);
+
+  left.onclick = () => track.scrollBy({ left: -track.clientWidth, behavior: "smooth" });
+  right.onclick = () => track.scrollBy({ left: track.clientWidth, behavior: "smooth" });
+}
+
+/* ================= IMAGE LOADER ================= */
+function loadImages(track, memoryNo) {
+  let index = 0;
+
+  function tryLoad() {
+    const file = index === 0
+      ? `memory${memoryNo}.img`
+      : `memory${memoryNo}.${index}.img`;
+
+    const img = new Image();
+    img.src = `images/gallery/${file}`;
+
+    img.onload = () => {
+      img.onclick = () => openPopup([...track.children], img);
+      track.appendChild(img);
+      index++;
+      tryLoad();
+    };
+  }
+  tryLoad();
+}
+
+/* ================= POPUP ================= */
+function openPopup(images, clicked) {
+  popupImages = images;
+  popupIndex = images.indexOf(clicked);
+  popupImg.src = clicked.src;
+  popup.style.display = "flex";
+}
+
+popup.querySelector(".close").onclick = () => popup.style.display = "none";
+
+popup.querySelector(".left").onclick = () => slide(-1);
+popup.querySelector(".right").onclick = () => slide(1);
+
+function slide(dir) {
+  popupIndex = (popupIndex + dir + popupImages.length) % popupImages.length;
+  popupImg.src = popupImages[popupIndex].src;
+}
+
+popup.onclick = e => e.target === popup && (popup.style.display = "none");
+
+document.addEventListener("keydown", e => {
+  if (popup.style.display !== "flex") return;
+  if (e.key === "ArrowLeft") slide(-1);
+  if (e.key === "ArrowRight") slide(1);
+  if (e.key === "Escape") popup.style.display = "none";
+});
+
+/* ================= HELPERS ================= */
+function numberToWord(num) {
+  return ["One","Two","Three","Four","Five","Six","Seven","Eight","Nine","Ten"][num-1] || num;
+}
+</script>
+
+</body>
+</html>

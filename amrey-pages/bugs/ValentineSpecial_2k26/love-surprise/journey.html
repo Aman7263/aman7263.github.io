@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Our Journey</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      font-family: 'Playfair Display', serif;
+      background: #fff0f6;
+      color: #5a2a3c;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px;
+      background: #ffccd6;
+      border-bottom: 2px solid #ff8fb3;
+    }
+
+    nav h1 {
+      margin: 0;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: #5a2a3c;
+      font-weight: 500;
+      background: #fff;
+      padding: 8px 16px;
+      border-radius: 20px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      margin: 40px auto;
+      position: relative;
+    }
+
+    .timeline {
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 4px;
+      background: #ff8fb3;
+      top: 0;
+      bottom: 0;
+      transform: translateX(-50%);
+      border-radius: 2px;
+    }
+
+    .event {
+      position: relative;
+      width: 50%;
+      padding: 20px 40px;
+      box-sizing: border-box;
+    }
+
+    .event:nth-child(odd) {
+      left: 0;
+      text-align: right;
+    }
+
+    .event:nth-child(even) {
+      left: 50%;
+      text-align: left;
+    }
+
+    .event img {
+      width: 150px;
+      border-radius: 15px;
+      margin-bottom: 10px;
+      box-shadow: 0 10px 25px rgba(178,58,100,0.2);
+    }
+
+    .event::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: #ff8fb3;
+      border-radius: 50%;
+      top: 30px;
+      right: -10px;
+      z-index: 1;
+    }
+
+    .event:nth-child(even)::after {
+      left: -10px;
+      right: auto;
+    }
+
+    .event h3 {
+      margin: 10px 0;
+      font-size: 20px;
+    }
+
+    .event p {
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .event::before {
+      content: '';
+      position: absolute;
+      top: 35px;
+      width: 20px;
+      height: 2px;
+      background: #ff8fb3;
+    }
+
+    .event:nth-child(odd)::before {
+      right: -20px;
+    }
+
+    .event:nth-child(even)::before {
+      left: -20px;
+    }
+
+    @media (max-width: 768px) {
+      .event, .event:nth-child(even), .event:nth-child(odd) {
+        width: 100%;
+        left: 0 !important;
+        text-align: left;
+        padding: 20px 20px;
+      }
+      .timeline::before {
+        left: 20px;
+      }
+      .event::after {
+        left: 10px !important;
+      }
+      .event::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <h1>Our Journey</h1>
+  <a href="index.html">Home</a>
+</nav>
+
+<div class="container">
+  <div class="timeline">
+
+  <!-- Event 1 -->
+  <div class="event">
+    <img src="images/journey/journey1.png" alt="journey-1">
+    <h3>The Day We Met 💫</h3>
+    <p>
+      It started with a simple hello,  
+      but my heart somehow knew this was not ordinary.  
+      That moment quietly changed everything for me.
+    </p>
+  </div>
+
+  <!-- Event 2 -->
+  <div class="event">
+    <img src="images/journey/journey2.png" alt="journey-2">
+    <h3>Your First Smile 😊</h3>
+    <p>
+      That smile didn’t just reach my eyes,  
+      it reached straight into my heart.  
+      From there, I was already yours.
+    </p>
+  </div>
+
+  <!-- Event 3 -->
+  <div class="event">
+    <img src="images/journey/journey3.png" alt="journey-3">
+    <h3>Late Night Conversations 🌙</h3>
+    <p>
+      Nights became shorter and hearts grew closer.  
+      Talking to you felt effortless,  
+      like I had known you forever.
+    </p>
+  </div>
+
+  <!-- Event 4 -->
+  <div class="event">
+    <img src="images/journey/journey4.png" alt="journey-4">
+    <h3>First Adventure Together ✨</h3>
+    <p>
+      New places, new memories,  
+      but the best part was always you beside me.  
+      Anywhere with you felt like home.
+    </p>
+  </div>
+
+  <!-- Event 5 -->
+  <div class="event">
+    <img src="images/journey/journey5.png" alt="journey-5">
+    <h3>Inside Jokes 😄</h3>
+    <p>
+      Laughing at the simplest things,  
+      sharing jokes only we understood.  
+      Love quietly grew in those moments.
+    </p>
+  </div>
+
+  <!-- Event 6 -->
+  <div class="event">
+    <img src="images/journey/journey6.png" alt="journey-6">
+    <h3>Our First Fight 💭</h3>
+    <p>
+      We disagreed, emotions ran high,  
+      but love was stronger than pride.  
+      And we found our way back to each other.
+    </p>
+  </div>
+
+  <!-- Event 7 -->
+  <div class="event">
+    <img src="images/journey/journey7.png" alt="journey-7">
+    <h3>Understanding Love ❤️</h3>
+    <p>
+      It wasn’t about perfection anymore,  
+      it was about choosing each other,  
+      even on the hardest days.
+    </p>
+  </div>
+
+  <!-- Event 8 -->
+  <div class="event">
+    <img src="images/journey/journey8.png" alt="journey-8">
+    <h3>Growing Together 🌱</h3>
+    <p>
+      We learned, we changed, we evolved.  
+      Becoming better versions of ourselves,  
+      side by side.
+    </p>
+  </div>
+
+  <!-- Event 9 -->
+  <div class="event">
+    <img src="images/journey/journey9.png" alt="journey-9">
+    <h3>Distance That Tested Us 🌍</h3>
+    <p>
+      Miles tried to pull us apart,  
+      but love held tighter than distance ever could.  
+      Our hearts never left each other.
+    </p>
+  </div>
+
+  <!-- Event 10 -->
+  <div class="event">
+    <img src="images/journey/journey10.png" alt="journey-10">
+    <h3>Reunions & Tight Hugs 🤍</h3>
+    <p>
+      Every meeting felt like magic.  
+      Holding you again reminded me  
+      why waiting was always worth it.
+    </p>
+  </div>
+
+  <!-- Event 11 -->
+  <div class="event">
+    <img src="images/journey/journey11.png" alt="journey-11">
+    <h3>Sharing Dreams ✨</h3>
+    <p>
+      We spoke about hopes and futures,  
+      softly weaving our dreams together.  
+      Life started to feel brighter.
+    </p>
+  </div>
+
+  <!-- Event 12 -->
+  <div class="event">
+    <img src="images/journey/journey12.png" alt="journey-12">
+    <h3>Supporting Each Other 🤝</h3>
+    <p>
+      In wins and losses alike,  
+      we stood strong for each other.  
+      Never alone, always together.
+    </p>
+  </div>
+
+  <!-- Event 13 -->
+  <div class="event">
+    <img src="images/journey/journey13.png" alt="journey-13">
+    <h3>Comfort in Silence 🌙</h3>
+    <p>
+      Even without words,  
+      your presence brought peace.  
+      Love felt calm and safe.
+    </p>
+  </div>
+
+  <!-- Event 14 -->
+  <div class="event">
+    <img src="images/journey/journey14.png" alt="journey-14">
+    <h3>New Traditions 🎉</h3>
+    <p>
+      Small rituals became special,  
+      moments meant only for us.  
+      Our own little world formed.
+    </p>
+  </div>
+
+  <!-- Event 15 -->
+  <div class="event">
+    <img src="images/journey/journey15.png" alt="journey-15">
+    <h3>Learning Patience 🌸</h3>
+    <p>
+      Love taught us patience and trust.  
+      We learned to wait,  
+      knowing good things take time.
+    </p>
+  </div>
+
+  <!-- Event 16 -->
+  <div class="event">
+    <img src="images/journey/journey16.png" alt="journey-16">
+    <h3>Unexpected Surprises 🎁</h3>
+    <p>
+      Little gestures meant everything.  
+      Love showed itself  
+      in the most unexpected ways.
+    </p>
+  </div>
+
+  <!-- Event 17 -->
+  <div class="event">
+    <img src="images/journey/journey17.png" alt="journey-17">
+    <h3>Facing Challenges Together 🛡️</h3>
+    <p>
+      Life tested us again and again,  
+      but together we stayed strong.  
+      Nothing felt impossible anymore.
+    </p>
+  </div>
+
+  <!-- Event 18 -->
+  <div class="event">
+    <img src="images/journey/journey18.png" alt="journey-18">
+    <h3>Unconditional Love 💞</h3>
+    <p>
+      Loving every flaw and strength,  
+      choosing each other daily.  
+      Love became our constant.
+    </p>
+  </div>
+
+  <!-- Event 19 -->
+  <div class="event">
+    <img src="images/journey/journey19.png" alt="journey-19">
+    <h3>Building a Future 🏡</h3>
+    <p>
+      Plans slowly turned into promises.  
+      Dreams began to feel real,  
+      shaped by love and hope.
+    </p>
+  </div>
+
+  <!-- Event 20 -->
+  <div class="event">
+    <img src="images/journey/journey20.png" alt="journey-20">
+    <h3>Choosing Forever 💍</h3>
+    <p>
+      Commitment became a promise,  
+      spoken through actions and love.  
+      Forever finally made sense.
+    </p>
+  </div>
+
+  <!-- Event 21 -->
+  <div class="event">
+    <img src="images/journey/journey21.png" alt="journey-21">
+    <h3>Everyday Happiness ☀️</h3>
+    <p>
+      Love showed up in daily moments,  
+      in laughter, care, and warmth.  
+      Life felt fuller.
+    </p>
+  </div>
+
+  <!-- Event 22 -->
+  <div class="event">
+    <img src="images/journey/journey22.png" alt="journey-22">
+    <h3>Growing Old Together 🕊️</h3>
+    <p>
+      Imagining grey hairs and smiles,  
+      holding hands through time.  
+      Love only grows deeper.
+    </p>
+  </div>
+
+  <!-- Event 23 -->
+  <div class="event">
+    <img src="images/journey/journey23.png" alt="journey-23">
+    <h3>Gratitude for You 💝 -- Forever & Always ♾️</h3>
+    <p>
+      Thankful for every moment,  
+      every lesson, every memory.  
+      You are my greatest blessing.
+      
+      This journey has no ending,  
+      only chapters filled with love.  
+      Today, tomorrow, and always — us.
+    </p>
+  </div>
+
+</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Kundali Viewer – Zodiac Ring</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing: border-box; margin:0; padding:0 }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e5e7eb;
+}
+
+.page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr }
+}
+
+.card {
+  background: linear-gradient(160deg,#1e293b,#020617);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.65);
+}
+
+label {
+  font-size: 13px;
+  opacity: .7;
+  margin-top: 14px;
+  display: block;
+}
+
+input {
+  margin-top: 6px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: #020617;
+  color: white;
+}
+
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(135deg,#facc15,#22d3ee);
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.zodiac {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  margin: auto;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,.15);
+}
+
+.earth {
+  position:absolute;
+  inset:0;
+  margin:auto;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #67e8f9, #0f172a);
+  display:grid;
+  place-items:center;
+  font-size:36px;
+  box-shadow:0 0 30px rgba(34,211,238,.4);
+}
+
+.pointer {
+  position:absolute;
+  width:18px;
+  height:18px;
+  border-radius:50%;
+  background:#f8fafc;
+  box-shadow:0 0 14px rgba(255,255,255,.9);
+}
+
+.nav {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+}
+.nav button { flex:1 }
+.back { background: rgba(255,255,255,.1); color:white }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+<div class="grid">
+
+<!-- LEFT -->
+<div class="card">
+<h2>♈ Kundali Viewer</h2>
+
+<p style="font-size:14px; opacity:.9; line-height:1.6; margin-top:10px">
+This tool shows a <b>visual emotional map</b> based on your date of birth.
+It explains how you are naturally wired to <b>feel, react, and process life</b>.
+</p>
+
+<p style="font-size:13px; opacity:.7; margin-top:8px">
+You don’t need astrology knowledge.  
+This is about self-understanding, not prediction.
+</p>
+
+<label>Date of Birth</label>
+<input type="date" id="dob">
+
+<button onclick="calculateRashi()">View My Emotional Pattern</button>
+
+<div id="result" class="result"></div>
+
+<div class="result">
+<b>What is a Rāshi (in simple words)?</b><br><br>
+Imagine the zodiac as a circular calendar of emotions.
+Each section represents a different emotional style.
+</div>
+
+<div class="result">
+<b>Important to know</b><br><br>
+This describes tendencies — not destiny.
+</div>
+</div>
+
+<!-- RIGHT -->
+<div class="card">
+<div class="zodiac" id="zodiac">
+  <div class="earth">🌍</div>
+</div>
+
+<p style="margin-top:20px; font-size:14px; opacity:.9; line-height:1.6">
+<b>How to read this diagram:</b><br>
+🌍 Center = You<br>
+⭕ Circle = Emotional map<br>
+⚪ Dot = Moon position at birth
+</p>
+</div>
+
+</div>
+
+<div class="nav">
+  <button class="back" onclick="history.back()">← Back</button>
+</div>
+
+</div>
+
+<!-- ✅ MAIL SCRIPT --><!-- ✅ REQUIRED ORDER -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
+
+<script>
+const zodiac = document.getElementById("zodiac");
+
+const signs = [
+  "Aries – Energetic and direct emotions",
+  "Taurus – Stable and grounded emotions",
+  "Gemini – Curious and flexible emotions",
+  "Cancer – Deeply sensitive emotions",
+  "Leo – Expressive and warm emotions",
+  "Virgo – Thoughtful and careful emotions",
+  "Libra – Balanced and relational emotions",
+  "Scorpio – Intense and transformative emotions",
+  "Sagittarius – Optimistic and free emotions",
+  "Capricorn – Controlled and serious emotions",
+  "Aquarius – Independent and detached emotions",
+  "Pisces – Intuitive and empathetic emotions"
+];
+
+const pointer = document.createElement("div");
+pointer.className = "pointer";
+zodiac.appendChild(pointer);
+
+function calculateRashi() {
+  const dob = document.getElementById("dob").value;
+  if (!dob) {
+    alert("Please select your date of birth");
+    return;
+  }
+
+  const date = new Date(dob);
+  const index = (date.getMonth() + date.getDate()) % 12;
+
+  const angle = (index / 12) * Math.PI * 2 - Math.PI / 2;
+  const r = 180;
+  const c = 210;
+
+  pointer.style.left = c + r * Math.cos(angle) + "px";
+  pointer.style.top  = c + r * Math.sin(angle) + "px";
+
+  const resultText = signs[index];
+
+  document.getElementById("result").innerHTML = `
+    <b>Your Emotional Pattern (Rāshi)</b><br><br>
+    ${resultText}<br><br>
+    This reflects how you naturally feel, respond, and emotionally adapt.
+  `;
+
+  /* 📧 SEND MAIL */
+  sendActivityMail({
+    page: "♈ Kundali Viewer",
+    dob: dob,
+    result: resultText
+  });
+}
+</script>
+
+</body>
+</html>

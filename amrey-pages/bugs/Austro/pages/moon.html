@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Moon on Your Birth Day</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e5e7eb;
+}
+
+.page {
+  max-width: 900px;
+  margin: auto;
+  padding: 24px;
+}
+
+.card {
+  background: linear-gradient(160deg,#1e293b,#020617);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.65);
+}
+
+h2 { font-size: 22px }
+
+p {
+  line-height: 1.6;
+  opacity: .9;
+  margin-top: 10px;
+}
+
+label {
+  display:block;
+  font-size:13px;
+  opacity:.7;
+  margin-top:18px;
+}
+
+input {
+  width:100%;
+  margin-top:6px;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid rgba(255,255,255,.12);
+  background:#020617;
+  color:white;
+}
+
+button {
+  width:100%;
+  margin-top:18px;
+  padding:14px;
+  border-radius:14px;
+  border:none;
+  font-weight:600;
+  background:linear-gradient(135deg,#facc15,#22d3ee);
+  cursor:pointer;
+}
+
+.result {
+  margin-top:20px;
+  padding:18px;
+  border-radius:14px;
+  background:rgba(255,255,255,.06);
+  font-size:14px;
+  line-height:1.7;
+  text-align:center;
+}
+
+img {
+  max-width:100%;
+  border-radius:16px;
+  margin-top:12px;
+}
+
+.back {
+  margin-top:18px;
+  background:rgba(255,255,255,.1);
+  color:white;
+}
+</style>
+</head>
+
+<body>
+
+<div class="page">
+  <div class="card">
+
+    <h2>🌙 Moon on Your Birth Day</h2>
+
+    <p>
+      Enter your date of birth to see an <b>AI-generated visual</b>
+      of how the Moon looked on that day.
+    </p>
+
+    <p style="font-size:13px; opacity:.7">
+      This helps you understand your natural emotional tone —
+      no astrology knowledge required.
+    </p>
+
+    <label>Date of Birth</label>
+    <input type="date" id="dob">
+
+    <button onclick="generateMoonImage()">Generate My Birth-Day Moon</button>
+
+    <div id="moonImageBox" class="result">
+      Your Moon image will appear here 🌙
+    </div>
+
+    <button class="back" onclick="history.back()">← Back</button>
+
+  </div>
+</div>
+
+<script>
+async function generateMoonImage() {
+  const dob = document.getElementById("dob").value;
+  if (!dob) {
+    alert("Please select your date of birth");
+    return;
+  }
+
+  const box = document.getElementById("moonImageBox");
+  box.innerHTML = "Creating your Moon image… ✨";
+
+  try {
+    const res = await fetch("/generate-moon", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ dob })
+    });
+
+    const data = await res.json();
+
+    if (!data.image) throw new Error();
+
+    box.innerHTML = `
+      <img src="${data.image}">
+      <p style="font-size:12px; opacity:.6; margin-top:8px">
+        AI-generated artistic representation of the Moon
+        on your birth date (symbolic, not astronomical).
+      </p>
+    `;
+  } catch {
+    box.innerHTML = "Unable to generate image. Please try again.";
+  }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>What Do You Love? 💕</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .container {
+      text-align: center;
+      animation: fadeIn 1.2s ease;
+      max-width: 500px;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      opacity: 0.85;
+      margin: 20px 0 10px;
+      text-align: center;
+    }
+
+    .soft-text {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      line-height: 1.6;
+      text-align: center;
+    }
+
+    /* TEXT BOX */
+    .feelings-box {
+      width: 100%;
+      max-width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      border: 1px solid #ffc1d1;
+      font-size: 0.9rem;
+      resize: none;
+      outline: none;
+      margin-top: 12px;
+      box-sizing: border-box;
+    }
+
+    .feelings-box::placeholder {
+      opacity: 0.7;
+    }
+
+    /* EMOTION CHECKBOXES */
+    .emotions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .emotion {
+      background: #ffe6ec;
+      padding: 10px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .emotion input {
+      display: none;
+    }
+
+    .emotion:hover {
+      transform: scale(1.05);
+    }
+
+    .emotion input:checked + span {
+      background: #ff91af;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 20px;
+    }
+
+    .emotion span {
+      display: inline-block;
+    }
+
+    .send-btn {
+      margin-top: 20px;
+      padding: 12px 26px;
+      border-radius: 30px;
+      border: none;
+      font-size: 1rem;
+      cursor: pointer;
+      background: linear-gradient(135deg, #ff9aa2, #ffb7c5);
+      transition: 0.3s;
+    }
+
+    .send-btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255,105,180,0.35);
+    }
+    .feelings-box {
+  background: #fff7fa;
+  border: 1px solid #ffc1d1;
+  box-shadow: inset 0 2px 6px rgba(255, 182, 193, 0.25);
+}
+
+.feelings-box:focus {
+  border-color: #ff8fab;
+  box-shadow: 0 0 0 3px rgba(255, 143, 171, 0.25);
+}
+
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <h3>What Do You Love About Us? 💕</h3>
+
+  <p class="poetry soft-text">
+    I already love you —
+    the way you are,
+    the way you look,
+    the way you smile,
+    the way you laugh,
+    the way you talk,
+    the way you feel,
+    and the way you exist… being honest 💞 💞
+  </p>
+
+  <div class="subtitle">
+  Want to say something in your own words? 🤍
+</div>
+
+<!-- TEXT AREA -->
+<textarea
+  class="feelings-box"
+  id="feelingText"
+  rows="4"
+  placeholder="Tell me how you feel about me… the love, the anger, the confusion, the warmth — I want to know it all 🤍">
+</textarea>
+
+<div class="subtitle">
+  Pick everything that feels true 😌
+</div>
+
+<!-- EMOTIONS -->
+<div class="emotions">
+
+  <!-- LOVE & CARE -->
+  <label class="emotion"><input type="checkbox" value="Love ❤️"><span>❤️ Love</span></label>
+  <label class="emotion"><input type="checkbox" value="Deep Love 💞"><span>💞 Deep Love</span></label>
+  <label class="emotion"><input type="checkbox" value="Affection 🥰"><span>🥰 Affection</span></label>
+  <label class="emotion"><input type="checkbox" value="Caring 🌸"><span>🌸 Caring</span></label>
+  <label class="emotion"><input type="checkbox" value="Romantic 💘"><span>💘 Romantic</span></label>
+
+  <!-- SAFETY & COMFORT -->
+  <label class="emotion"><input type="checkbox" value="Comforting 🤍"><span>🤍 Comforting</span></label>
+  <label class="emotion"><input type="checkbox" value="Safe 🫶"><span>🫶 Safe</span></label>
+  <label class="emotion"><input type="checkbox" value="Secure 🔐"><span>🔐 Secure</span></label>
+  <label class="emotion"><input type="checkbox" value="Peaceful 🌙"><span>🌙 Peaceful</span></label>
+
+  <!-- CONNECTION -->
+  <label class="emotion"><input type="checkbox" value="Connected 🔗"><span>🔗 Connected</span></label>
+  <label class="emotion"><input type="checkbox" value="Understood 🧠"><span>🧠 Understood</span></label>
+  <label class="emotion"><input type="checkbox" value="Protective 🛡️"><span>🛡️ Protective</span></label>
+  <label class="emotion"><input type="checkbox" value="Trust 🤝"><span>🤝 Trust</span></label>
+
+  <!-- PLAYFUL & ENERGY -->
+  <label class="emotion"><input type="checkbox" value="Fun 😄"><span>😄 Fun</span></label>
+  <label class="emotion"><input type="checkbox" value="Playful 🫧"><span>🫧 Playful</span></label>
+  <label class="emotion"><input type="checkbox" value="Exciting ⚡"><span>⚡ Exciting</span></label>
+  <label class="emotion"><input type="checkbox" value="Dreamy ☁️"><span>☁️ Dreamy</span></label>
+
+  <!-- DEEP & INTENSE -->
+  <label class="emotion"><input type="checkbox" value="Longing 💫"><span>💫 Longing</span></label>
+  <label class="emotion"><input type="checkbox" value="Attachment 🧲"><span>🧲 Attachment</span></label>
+  <label class="emotion"><input type="checkbox" value="Obsessed 🖤"><span>🖤 Obsessed</span></label>
+  <label class="emotion"><input type="checkbox" value="Forever ♾️"><span>♾️ Forever</span></label>
+
+  <!-- HARD / HONEST FEELINGS -->
+  <label class="emotion"><input type="checkbox" value="Anger 😠"><span>😠 Anger</span></label>
+  <label class="emotion"><input type="checkbox" value="Hurt 💔"><span>💔 Hurt</span></label>
+  <label class="emotion"><input type="checkbox" value="Jealousy 😶‍🌫️"><span>😶‍🌫️ Jealousy</span></label>
+  <label class="emotion"><input type="checkbox" value="Confused 😕"><span>😕 Confused</span></label>
+  <label class="emotion"><input type="checkbox" value="Hate 🖤"><span>🖤 Hate</span></label>
+
+  <!-- SELF -->
+  <label class="emotion"><input type="checkbox" value="Grateful 🙏"><span>🙏 Grateful</span></label>
+  <label class="emotion"><input type="checkbox" value="Hopeful ✨"><span>✨ Hopeful</span></label>
+  <label class="emotion"><input type="checkbox" value="Missing You 🫂"><span>🫂 Missing You</span></label>
+
+</div>
+
+  <button class="send-btn" onclick="sendEmotions()">
+    💌 Send My Feelings
+  </button>
+
+</div>
+
+<script src="hearts.js"></script>
+
+<!-- EMAILJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+  emailjs.init("qpU9rhcIiteDcetie");
+
+  function sendEmotions() {
+    const text = document.getElementById("feelingText").value.trim();
+    const checked = document.querySelectorAll(".emotion input:checked");
+
+    if (!text && checked.length === 0) {
+      alert("Write something or pick a feeling 😌");
+      return;
+    }
+
+    const emotions = Array.from(checked)
+      .map(e => e.value)
+      .join(", ");
+
+    const finalMessage =
+      (text ? `Her Words:\n${text}\n\n` : "") +
+      (emotions ? `Emotions Chosen:\n${emotions}` : "");
+
+    emailjs.send(
+      "service_s5vx7yl",
+      "template_fq9lhw7",
+      {
+        project: "ValentineSpecial_2k24 -- 🩵",
+        page: "What Do You Love About Us? 💕",
+        message: finalMessage,
+        date: new Date().toLocaleDateString(),
+        time: new Date().toLocaleTimeString()
+      }
+    ).then(() => {
+      alert("You know, I love you sooooooo sooooo much....🥰");
+    }).catch(() => {
+      alert("Oops 😅 Try again");
+    });
+  }
+</script>
+
+</body>
+</html>

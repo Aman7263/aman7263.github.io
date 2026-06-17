@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Marriage Compatibility – Guna Matching</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+* { box-sizing:border-box; margin:0; padding:0 }
+
+body {
+  font-family: system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0f172a, #020617);
+  color: #e5e7eb;
+}
+
+.page {
+  max-width: 1200px;
+  margin: auto;
+  padding: 24px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+}
+
+@media (max-width: 900px) {
+  .grid { grid-template-columns: 1fr }
+}
+
+.card {
+  background: linear-gradient(160deg,#1e293b,#020617);
+  border-radius: 20px;
+  padding: 26px;
+  box-shadow: 0 30px 60px rgba(0,0,0,.65);
+}
+
+label {
+  font-size: 13px;
+  opacity: .7;
+  margin-top: 14px;
+  display: block;
+}
+
+input {
+  margin-top: 6px;
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: #020617;
+  color: white;
+}
+
+button {
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 600;
+  background: linear-gradient(135deg,#22d3ee,#a78bfa);
+  cursor: pointer;
+}
+
+.result {
+  margin-top: 20px;
+  padding: 18px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.06);
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.guna-ring {
+  position: relative;
+  width: 420px;
+  height: 420px;
+  margin: auto;
+  border-radius: 50%;
+  border: 1px dashed rgba(255,255,255,.15);
+  display: grid;
+  place-items: center;
+}
+
+.score {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 36px;
+  font-weight: 700;
+  background: radial-gradient(circle at 30% 30%, #c4b5fd, #312e81);
+  box-shadow: 0 0 30px rgba(167,139,250,.5);
+}
+
+.nav {
+  display: flex;
+  gap: 14px;
+  margin-top: 20px;
+}
+.nav button { flex:1 }
+.back { background: rgba(255,255,255,.1); color:white }
+</style>
+</head>
+
+<body>
+
+<div class="page">
+<div class="grid">
+
+<!-- LEFT CARD -->
+<div class="card">
+<h2>💍 Marriage Compatibility (Guna Matching)</h2>
+
+<p style="font-size:14px; opacity:.9; line-height:1.6; margin-top:10px">
+This tool offers a <b>traditional compatibility overview</b>
+based on two birth dates.
+It focuses on emotional harmony, mindset alignment,
+and long-term balance.
+</p>
+
+<p style="font-size:13px; opacity:.7; margin-top:8px">
+No deep astrology knowledge required.<br>
+Think of this as a structured compatibility checklist.
+</p>
+
+<label>Your Date of Birth</label>
+<input type="date" id="dob1">
+
+<label>Partner’s Date of Birth</label>
+<input type="date" id="dob2">
+
+<button onclick="calculateGuna()">Check Marriage Compatibility</button>
+
+<div id="result" class="result"></div>
+
+<div class="result">
+<b>How to interpret the score</b><br><br>
+✔ Higher score → smoother understanding<br>
+✔ Middle score → workable with awareness<br>
+✔ Low score → needs conscious effort
+</div>
+
+<div class="result">
+<b>Important to remember</b><br><br>
+This system shows tendencies — not guarantees.<br>
+Real relationships grow through communication,
+respect, and shared effort.
+</div>
+
+</div>
+
+<!-- RIGHT CARD -->
+<div class="card">
+
+<h3 style="margin-bottom:10px">💞 Compatibility Score</h3>
+
+<div class="guna-ring">
+  <div class="score" id="score">–</div>
+</div>
+
+<p style="margin-top:20px; font-size:14px; opacity:.9; line-height:1.6">
+<b>How to read this:</b><br>
+The number represents overall compatibility out of <b>36 points</b>.
+</p>
+
+<div class="result">
+<b>What is Guna Matching (simple words)?</b><br><br>
+
+Guna matching is an ancient method that compares
+<b>emotional nature, thinking style, and daily-life balance</b>
+between two people.
+</div>
+
+<p style="font-size:13px; opacity:.7; margin-top:10px">
+This is a simplified representation for learning purposes.
+</p>
+
+</div>
+
+</div>
+
+<div class="nav">
+  <button class="back" onclick="history.back()">← Back</button>
+</div>
+
+</div>
+
+<!-- ✅ MAIL SCRIPT --><!-- ✅ REQUIRED ORDER -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="email.js"></script>
+
+<script>
+function calculateGuna() {
+  const d1 = document.getElementById("dob1").value;
+  const d2 = document.getElementById("dob2").value;
+
+  if (!d1 || !d2) {
+    alert("Please enter both birth dates");
+    return;
+  }
+
+  const date1 = new Date(d1);
+  const date2 = new Date(d2);
+
+  const diff = Math.abs(
+    (date1.getTime() - date2.getTime()) / (1000 * 60 * 60 * 24)
+  );
+
+  const score = Math.max(10, 36 - Math.floor(diff % 18));
+  document.getElementById("score").innerText = score;
+
+  let message = "";
+  if (score >= 27) {
+    message = "Strong compatibility. Natural understanding and harmony.";
+  } else if (score >= 18) {
+    message = "Moderate compatibility. Works well with communication.";
+  } else {
+    message = "Challenging compatibility. Needs patience and effort.";
+  }
+
+  document.getElementById("result").innerHTML = `
+    <b>Compatibility Result</b><br><br>
+    <b>${score} / 36</b><br><br>
+    ${message}
+    <br><br>
+    This score reflects balance potential, not relationship success.
+  `;
+
+  /* 📧 SEND MAIL */
+  sendActivityMail({
+    page: "💍 Marriage Compatibility (Guna Matching)",
+    dob: `${d1} & ${d2}`,
+    result: `${score}/36 — ${message}`
+  });
+}
+</script>
+
+</body>
+</html>

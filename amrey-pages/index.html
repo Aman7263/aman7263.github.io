@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Theamrey Projects</title>
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --accent: #c8f04e;
+      --text: #e8e8e8;
+      --muted: #666;
+      --font-display: 'DM Serif Display', Georgia, serif;
+      --font-body: 'DM Sans', system-ui, sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    /* Google Fonts */
+    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap');
+
+    .wordmark {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: -0.5px;
+      color: var(--text);
+      margin-bottom: 0.35rem;
+    }
+
+    .wordmark span {
+      color: var(--accent);
+    }
+
+    .tagline {
+      font-size: 0.8rem;
+      color: var(--muted);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+    }
+
+    .nav-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 720px;
+    }
+
+    .nav-card {
+      background: var(--surface);
+      padding: 1.5rem 1.75rem;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      transition: background 0.15s ease;
+      position: relative;
+    }
+
+    .nav-card:hover {
+      background: #1e1e1e;
+    }
+
+    .nav-card.default-card::after {
+      content: 'HOME';
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      color: var(--accent);
+      background: rgba(200, 240, 78, 0.1);
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(200, 240, 78, 0.25);
+    }
+
+    .nav-card-name {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      color: var(--text);
+    }
+
+    .nav-card-path {
+      font-size: 0.75rem;
+      color: var(--muted);
+      font-family: 'Courier New', monospace;
+    }
+
+    .nav-card:hover .nav-card-name {
+      color: var(--accent);
+    }
+
+    footer {
+      margin-top: 3rem;
+      font-size: 0.72rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 class="wordmark">theamrey<span>.</span></h1>
+  <p class="tagline">Select a project</p>
+
+  <nav class="nav-grid">
+    <a href="./theamreyblog/" class="nav-card default-card">
+      <span class="nav-card-name">Blog</span>
+      <span class="nav-card-path">/theamreyblog</span>
+    </a>
+    <a href="./xfeed/" class="nav-card">
+      <span class="nav-card-name">xFeed</span>
+      <span class="nav-card-path">/xfeed</span>
+    </a>
+    <a href="./theamreyInvista/" class="nav-card">
+      <span class="nav-card-name">Invista</span>
+      <span class="nav-card-path">/theamreylnvista</span>
+    </a>
+    <a href="./bugs/" class="nav-card">
+      <span class="nav-card-name">Bugs</span>
+      <span class="nav-card-path">/bugs</span>
+    </a>
+  </nav>
+
+  <footer>theamrey projects — 2026</footer>
+
+  <script>
+    // Auto-redirect to /theamreyblog if visiting the root with no path
+    (function () {
+      const path = window.location.pathname.replace(/\/$/, '');
+      const knownRoutes = ['theamreyblog', 'theamreylnvista', 'xfeed', 'bugs'];
+
+      // Only redirect if we're at the true root (e.g. /, /index.html)
+      const isRoot = path === '' || path === '/index.html' || /^\/[^/]+$/.test(path) === false
+        || path.split('/').filter(Boolean).length === 0;
+
+      // Check if the URL has a subfolder matching a known route
+      const segments = window.location.pathname.split('/').filter(Boolean);
+      const firstSegment = segments[0] || '';
+
+      if (knownRoutes.includes(firstSegment)) {
+        // Already in a known route — do nothing, let the folder serve its own index.html
+        return;
+      }
+
+      // If sitting at root with no matching route → redirect to theamreyblog
+      if (!firstSegment || firstSegment === 'index.html') {
+        window.location.replace('./theamreyblog/');
+      }
+    })();
+  </script>
+
+</body>
+
+</html>
