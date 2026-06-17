@@ -5,6 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Theamrey Projects</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap"
+    rel="stylesheet">
   <style>
     *,
     *::before,
@@ -15,164 +19,268 @@
     }
 
     :root {
-      --bg: #0d0d0d;
-      --surface: #161616;
-      --border: #2a2a2a;
+      --bg: #0a0a0a;
+      --surface: #111111;
+      --surface2: #181818;
+      --border: #222222;
       --accent: #c8f04e;
-      --text: #e8e8e8;
-      --muted: #666;
+      --accent2: rgba(200, 240, 78, 0.08);
+      --text: #efefef;
+      --muted: #555;
       --font-display: 'DM Serif Display', Georgia, serif;
       --font-body: 'DM Sans', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
     }
 
+    html,
     body {
+      height: 100%;
       background: var(--bg);
       color: var(--text);
       font-family: var(--font-body);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
     }
 
-    /* Google Fonts */
-    @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;500&display=swap');
+    body {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      align-items: center;
+    }
+
+    /* ── MAIN ── */
+    main {
+      width: 100%;
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 2rem;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      margin-bottom: 3rem;
+    }
 
     .wordmark {
       font-family: var(--font-display);
-      font-size: clamp(1.6rem, 4vw, 2.4rem);
-      letter-spacing: -0.5px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      letter-spacing: -1px;
       color: var(--text);
-      margin-bottom: 0.35rem;
+      line-height: 1;
+      margin-bottom: 0.5rem;
     }
 
     .wordmark span {
       color: var(--accent);
     }
 
-    .tagline {
+    .sub {
       font-size: 0.8rem;
       color: var(--muted);
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 3rem;
+      font-weight: 500;
     }
 
-    .nav-grid {
+    /* ── GRID ── */
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
       background: var(--border);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 16px;
       overflow: hidden;
-      width: 100%;
-      max-width: 720px;
     }
 
-    .nav-card {
+    /* ── CARD ── */
+    .card {
       background: var(--surface);
-      padding: 1.5rem 1.75rem;
+      padding: 1.6rem 1.8rem;
       text-decoration: none;
+      color: inherit;
       display: flex;
       flex-direction: column;
-      gap: 0.4rem;
-      transition: background 0.15s ease;
+      gap: 0.55rem;
       position: relative;
+      transition: background 0.15s ease;
+      min-height: 130px;
     }
 
-    .nav-card:hover {
-      background: #1e1e1e;
+    .card:hover {
+      background: var(--surface2);
     }
 
-    .nav-card.default-card::after {
-      content: 'HOME';
+    .card:hover .card-name {
+      color: var(--accent);
+    }
+
+    .card:hover .card-arrow {
+      opacity: 1;
+      transform: translate(2px, -2px);
+    }
+
+    /* HOME badge */
+    .card[data-home]::before {
+      content: 'DEFAULT';
       position: absolute;
       top: 1rem;
       right: 1rem;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
+      font-size: 0.55rem;
+      font-family: var(--font-mono);
+      letter-spacing: 0.14em;
       color: var(--accent);
-      background: rgba(200, 240, 78, 0.1);
-      padding: 2px 7px;
+      background: var(--accent2);
+      border: 1px solid rgba(200, 240, 78, 0.2);
+      padding: 2px 8px;
       border-radius: 999px;
-      border: 1px solid rgba(200, 240, 78, 0.25);
     }
 
-    .nav-card-name {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      color: var(--text);
-    }
-
-    .nav-card-path {
-      font-size: 0.75rem;
+    /* type badge */
+    .card-type {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
       color: var(--muted);
-      font-family: 'Courier New', monospace;
+      letter-spacing: 0.05em;
     }
 
-    .nav-card:hover .nav-card-name {
+    .card-name {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--text);
+      transition: color 0.15s;
+      line-height: 1.2;
+    }
+
+    .card-desc {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.2rem;
+    }
+
+    .card-path {
+      font-family: var(--font-mono);
+      font-size: 0.68rem;
+      color: #333;
+    }
+
+    .card-arrow {
+      font-size: 0.85rem;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.15s, transform 0.15s;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.7rem;
+      color: #333;
+      font-family: var(--font-mono);
+      border-top: 1px solid var(--border);
+    }
+
+    footer a {
+      color: #444;
+      text-decoration: none;
+    }
+
+    footer a:hover {
       color: var(--accent);
     }
 
-    footer {
-      margin-top: 3rem;
-      font-size: 0.72rem;
-      color: var(--muted);
+    /* ── MOBILE ── */
+    @media (max-width: 560px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: auto;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <h1 class="wordmark">theamrey<span>.</span></h1>
-  <p class="tagline">Select a project</p>
+  <main>
+    <div class="header">
+      <h1 class="wordmark">theamrey<span>.</span></h1>
+      <p class="sub">Project directory</p>
+    </div>
 
-  <nav class="nav-grid">
-    <a href="./theamreyblog/" class="nav-card default-card">
-      <span class="nav-card-name">Blog</span>
-      <span class="nav-card-path">/theamreyblog</span>
-    </a>
-    <a href="./xfeed/" class="nav-card">
-      <span class="nav-card-name">xFeed</span>
-      <span class="nav-card-path">/xfeed</span>
-    </a>
-    <a href="./theamreyInvista/" class="nav-card">
-      <span class="nav-card-name">Invista</span>
-      <span class="nav-card-path">/theamreylnvista</span>
-    </a>
-    <a href="./bugs/" class="nav-card">
-      <span class="nav-card-name">Bugs</span>
-      <span class="nav-card-path">/bugs</span>
-    </a>
-  </nav>
+    <nav class="grid">
 
-  <footer>theamrey projects — 2026</footer>
+      <!-- Blog — Expo web build, index.html lives at folder root -->
+      <a href="/amrey-pages/theamreyblog/" class="card" data-home>
+        <span class="card-type">expo web · supabase</span>
+        <span class="card-name">TheAmreyBlog</span>
+        <span class="card-desc">Daily Shayari, songs, funny stories and automated AI-generated articles.</span>
+        <div class="card-footer">
+          <span class="card-path">/theamreyblog/</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- XFeed — Expo web build -->
+      <a href="/amrey-pages/xfeed/" class="card">
+        <span class="card-type">expo web · supabase</span>
+        <span class="card-name">XFeed Social</span>
+        <span class="card-desc">Shop and socialize in one place — smart purchasing meets social connection.</span>
+        <div class="card-footer">
+          <span class="card-path">/xfeed/</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- Invista — plain HTML page -->
+      <a href="/amrey-pages/theamreylnvista/" class="card">
+        <span class="card-type">html · gemini ai</span>
+        <span class="card-name">Invista</span>
+        <span class="card-desc">AI-powered investment analyzer with portfolio insights via Gemini API.</span>
+        <div class="card-footer">
+          <span class="card-path">/theamreylnvista/</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+      <!-- Bugs — plain HTML page -->
+      <a href="/amrey-pages/bugs/" class="card">
+        <span class="card-type">html · tracker</span>
+        <span class="card-name">Bugs</span>
+        <span class="card-desc">Internal bug tracker and issue log for active projects.</span>
+        <div class="card-footer">
+          <span class="card-path">/bugs/</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+    </nav>
+  </main>
+
+  <footer>
+    <a href="https://aman7263.github.io">aman7263.github.io</a>
+    &nbsp;·&nbsp; theamrey projects 2026
+  </footer>
 
   <script>
-    // Auto-redirect to /theamreyblog if visiting the root with no path
+    // Redirect root visits to theamreyblog (the default project)
     (function () {
-      const path = window.location.pathname.replace(/\/$/, '');
-      const knownRoutes = ['theamreyblog', 'theamreylnvista', 'xfeed', 'bugs'];
-
-      // Only redirect if we're at the true root (e.g. /, /index.html)
-      const isRoot = path === '' || path === '/index.html' || /^\/[^/]+$/.test(path) === false
-        || path.split('/').filter(Boolean).length === 0;
-
-      // Check if the URL has a subfolder matching a known route
-      const segments = window.location.pathname.split('/').filter(Boolean);
-      const firstSegment = segments[0] || '';
-
-      if (knownRoutes.includes(firstSegment)) {
-        // Already in a known route — do nothing, let the folder serve its own index.html
-        return;
-      }
-
-      // If sitting at root with no matching route → redirect to theamreyblog
-      if (!firstSegment || firstSegment === 'index.html') {
-        window.location.replace('./theamreyblog/');
+      const segments = location.pathname.replace(/\/$/, '').split('/').filter(Boolean);
+      // We're inside amrey-pages/ — if there's nothing after it, redirect
+      const idx = segments.indexOf('amrey-pages');
+      const afterBase = segments.slice(idx + 1);
+      if (afterBase.length === 0) {
+        location.replace('/amrey-pages/theamreyblog/');
       }
     })();
   </script>
