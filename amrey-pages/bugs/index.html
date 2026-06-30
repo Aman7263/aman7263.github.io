@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard</title>
-
 <style>
 * {
   margin: 0;
@@ -12,60 +11,51 @@
   box-sizing: border-box;
   font-family: Arial, sans-serif;
 }
-
 body {
   background: #0f172a;
   color: white;
 }
-
 /* ===== Page Handling ===== */
 .page {
   display: none;
   min-height: 100vh;
   padding: 20px;
 }
-
 .page:target,
 #home {
   display: block;
 }
-
 h1 {
   text-align: center;
   margin-bottom: 20px;
 }
-
 /* ===== GRID ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr); /* Desktop: 4 in one row */
   gap: 15px;
 }
-
 /* Tablet */
 @media (max-width: 900px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 /* Mobile */
 @media (max-width: 480px) {
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
-
   .card {
     padding: 20px;
   }
-
   .icon {
     font-size: 28px;
   }
 }
-
 /* ===== CARDS ===== */
 .card {
+  position: relative;
   background: #1e293b;
   border-radius: 16px;
   padding: 25px;
@@ -80,22 +70,47 @@ h1 {
   align-items: center;
   justify-content: center;
 }
-
 .card:hover {
   background: #334155;
   transform: scale(1.05);
 }
-
 .icon {
   font-size: 36px;
   margin-bottom: 10px;
 }
-
+/* ===== TYPE BADGE ===== */
+.badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  padding: 3px 7px;
+  border-radius: 6px;
+  text-transform: uppercase;
+}
+.badge.web {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid #38bdf8;
+}
+.badge.apk {
+  background: rgba(74, 222, 128, 0.15);
+  color: #4ade80;
+  border: 1px solid #4ade80;
+}
+.badge svg {
+  width: 11px;
+  height: 11px;
+}
 /* ===== SUB PAGE ===== */
 .subpage {
   text-align: center;
 }
-
 .back {
   display: inline-block;
   margin-top: 20px;
@@ -105,51 +120,72 @@ h1 {
 }
 </style>
 </head>
-
 <body>
-
 <!-- ===== HOME / PARENT SCREEN ===== -->
 <section id="home" class="page">
   <h1>📂 My Dashboard</h1>
-
   <div class="grid">
 
     <a href="ValentineSpecial_2k24/index.html" class="card">
+      <span class="badge web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        Web
+      </span>
       <div class="icon">❤️</div>
       Love 2k24
     </a>
 
     <a href="ValentineSpecial_2k26/parent.html" class="card">
+      <span class="badge web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        Web
+      </span>
       <div class="icon">💖</div>
       Love 2k26
     </a>
 
     <a href="spyCell/index.html" class="card">
+      <span class="badge web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        Web
+      </span>
       <div class="icon">🕵️</div>
       SpyCell
     </a>
 
     <a href="Austro/index.html" class="card">
+      <span class="badge web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20M12 2a15 15 0 0 0 0 20"/></svg>
+        Web
+      </span>
       <div class="icon">🕉</div>
       Austro 
     </a>
 
     <a href="https://expo.dev/artifacts/eas/qh99QSrtN7R2iZFzGi8rjx.apk" class="card">
-  <div class="icon">💞</div>
-  TheAmreyWorld
-<small style="font-size: 12px; opacity: 0.7; margin-top: 4px;">
-<b>TheAmreyWorld</b> keeps you connected with your partner and friends, wherever they are.
-</small>
-</a>
+      <span class="badge apk">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 0 0-.83.22l-1.88 3.24c-1.41-.66-2.99-1.04-4.66-1.04s-3.25.38-4.66 1.04L5.27 5.67a.637.637 0 0 0-.83-.22c-.3.16-.42.54-.26.85L6.02 9.48C2.99 11.41.7 14.5 0 18.13h24c-.7-3.63-2.99-6.72-6.4-8.65zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>
+        Apk
+      </span>
+      <div class="icon">💞</div>
+      TheAmreyWorld
+      <small style="font-size: 12px; opacity: 0.7; margin-top: 4px;">
+        Stay connected with your partner and friends, wherever they are.
+      </small>
+    </a>
 
-<a href="https://expo.dev/artifacts/eas/4TQDBE3bdoKV1hBgv2KZsg4wnKN9NYVBrt8TIa70Z3o.apk" class="card">
-  <div class="icon">🐞</div>
-  Bugs
-  <small style="font-size: 12px; opacity: 0.7; margin-top: 4px;">
-Welcome to your personalized space. Everything has been thoughtfully organized in one app, created exclusively for you.
-</small>
-</a>
-    
+    <a href="https://expo.dev/artifacts/eas/4TQDBE3bdoKV1hBgv2KZsg4wnKN9NYVBrt8TIa70Z3o.apk" class="card">
+      <span class="badge apk">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.6 9.48l1.84-3.18c.16-.31.04-.69-.26-.85a.637.637 0 0 0-.83.22l-1.88 3.24c-1.41-.66-2.99-1.04-4.66-1.04s-3.25.38-4.66 1.04L5.27 5.67a.637.637 0 0 0-.83-.22c-.3.16-.42.54-.26.85L6.02 9.48C2.99 11.41.7 14.5 0 18.13h24c-.7-3.63-2.99-6.72-6.4-8.65zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>
+        Apk
+      </span>
+      <div class="icon">🐞</div>
+      Bugs
+      <small style="font-size: 12px; opacity: 0.7; margin-top: 4px;">
+        Your personalized space, organized in one app.
+      </small>
+    </a>
+
     <a href="#more" class="card">
       <div class="icon">➕</div>
       More
@@ -157,13 +193,11 @@ Welcome to your personalized space. Everything has been thoughtfully organized i
 
   </div>
 </section>
-
 <!-- ===== MORE PAGE (INTERNAL) ===== -->
 <section id="more" class="page subpage">
   <h1>➕ More</h1>
   <p>More features coming soon</p>
   <a href="#home" class="back">⬅ Back</a>
 </section>
-
 </body>
 </html>
