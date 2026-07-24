@@ -179,6 +179,180 @@
       transition: opacity 0.15s, transform 0.15s;
     }
 
+    /* ── DEVELOPER SECTION ── */
+    .devs-section {
+      margin-top: 3.5rem;
+    }
+
+    .devs-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 1.2rem;
+    }
+
+    .devs-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .devs-subtitle {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+      max-width: 540px;
+      line-height: 1.4;
+    }
+
+    .slider-controls {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .slider-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      font-size: 1.1rem;
+      user-select: none;
+    }
+
+    .slider-btn:hover {
+      background: var(--surface2);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .devs-slider {
+      display: flex;
+      gap: 1.2rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding-bottom: 0.8rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+    }
+
+    .devs-slider::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .devs-slider::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .devs-slider::-webkit-scrollbar-thumb {
+      background: var(--border);
+      border-radius: 999px;
+    }
+
+    .dev-card {
+      flex: 0 0 calc(50% - 0.6rem);
+      min-width: 320px;
+      scroll-snap-align: start;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      position: relative;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .dev-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(200, 240, 78, 0.3);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .dev-card.highlighted {
+      border-color: var(--accent);
+    }
+
+    .dev-icon-box {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      margin-bottom: 0.2rem;
+    }
+
+    .dev-name {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      color: var(--text);
+      line-height: 1.2;
+    }
+
+    .dev-role {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-top: -0.35rem;
+    }
+
+    .dev-bio {
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.4rem;
+    }
+
+    .tech-pill {
+      font-family: var(--font-mono);
+      font-size: 0.62rem;
+      background: var(--accent2);
+      color: var(--accent);
+      border: 1px solid rgba(200, 240, 78, 0.2);
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 500;
+    }
+
+    .dev-action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.8rem;
+      padding-top: 0.8rem;
+      border-top: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--accent);
+      font-size: 0.78rem;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+
+    .dev-action-btn:hover {
+      color: #fff;
+    }
+
     /* ── FOOTER ── */
     footer {
       padding: 1.5rem;
@@ -199,13 +373,18 @@
     }
 
     /* ── MOBILE ── */
-    @media (max-width: 560px) {
+    @media (max-width: 640px) {
       .grid {
         grid-template-columns: 1fr;
       }
 
       .card {
         min-height: auto;
+      }
+
+      .dev-card {
+        flex: 0 0 100%;
+        min-width: 100%;
       }
     }
   </style>
@@ -234,39 +413,121 @@
 
       <!-- TheAmreyShop — Expo web build -->
       <a href="/amrey-pages/theamreyshop/" class="card">
-        <span class="card-type">expo web · supabase</span>
+        <span class="card-type">react native · supabase</span>
         <span class="card-name">TheAmreyShop</span>
-        <span class="card-desc">Shop and socialize in one place — smart purchasing meets social connection.</span>
+        <span class="card-desc">Location-based local shopping platform with real-time inventory and seamless online ordering.</span>
         <div class="card-footer">
           <span class="card-path">/theamreyshop/</span>
           <span class="card-arrow">↗</span>
         </div>
       </a>
 
-      <!-- Invista — plain HTML page -->
+      <!-- Investment Analyzer — plain HTML page -->
       <a href="/amrey-pages/theamreyInvista/" class="card">
-        <span class="card-type">html · gemini ai</span>
-        <span class="card-name">Invista</span>
-        <span class="card-desc">AI-powered investment analyzer with portfolio insights via Gemini API.</span>
+        <span class="card-type">html · css · js · gemini</span>
+        <span class="card-name">Investment Analyzer</span>
+        <span class="card-desc">AI-powered investment assistant for personalized stock and cryptocurrency insights.</span>
         <div class="card-footer">
           <span class="card-path">/theamreyInvista/</span>
           <span class="card-arrow">↗</span>
         </div>
       </a>
 
-      <!-- Bugs — plain HTML page -->
-      <a href="/amrey-pages/bugs/" class="card">
-        <span class="card-type">html · tracker</span>
-        <span class="card-name">Bugs</span>
-        <span class="card-desc">Internal bug tracker and issue log for active projects.</span>
+      <!-- Project Archive — plain HTML page -->
+      <a href="https://aman7263.github.io/Final-Year-Projects/" class="card">
+        <span class="card-type">html · css · javascript</span>
+        <span class="card-name">Project Archive</span>
+        <span class="card-desc">Where all my "let’s build this" ideas live.</span>
         <div class="card-footer">
-          <span class="card-path">/bugs/</span>
+          <span class="card-path">/Final-Year-Projects/</span>
           <span class="card-arrow">↗</span>
         </div>
       </a>
 
     </nav>
+
+    <!-- ── DEVELOPERS SECTION ── -->
+    <section class="devs-section">
+      <div class="devs-header">
+        <div>
+          <h2 class="devs-title">Meet the Developers</h2>
+          <p class="devs-subtitle">The creators behind the design, architecture, and deployment of this high-performance developer hub.</p>
+        </div>
+        <div class="slider-controls">
+          <button class="slider-btn" onclick="scrollDevs(-1)" aria-label="Previous developer">‹</button>
+          <button class="slider-btn" onclick="scrollDevs(1)" aria-label="Next developer">›</button>
+        </div>
+      </div>
+
+      <div class="devs-slider" id="devsSlider">
+        <!-- Aman Aryan -->
+        <div class="dev-card highlighted">
+          <div class="dev-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3 class="dev-name">Aman Aryan</h3>
+          <span class="dev-role">Lead Full Stack &amp; Mobile Engineer</span>
+          <p class="dev-bio">Full Stack Developer specializing in Java, Spring Boot, Angular, and React Native. Currently working on the OBPS Next Gen project for MCD.</p>
+          <div class="tech-pills">
+            <span class="tech-pill">Java</span>
+            <span class="tech-pill">Spring Boot</span>
+            <span class="tech-pill">React Native</span>
+            <span class="tech-pill">Angular</span>
+            <span class="tech-pill">TypeScript</span>
+            <span class="tech-pill">AWS</span>
+            <span class="tech-pill">Docker</span>
+            <span class="tech-pill">PostgreSQL</span>
+            <span class="tech-pill">MariaDB</span>
+            <span class="tech-pill">Microservices</span>
+            <span class="tech-pill">Git &amp; GitHub</span>
+          </div>
+          <a href="https://aman7263.github.io/Portfolio/index.html" class="dev-action-btn" target="_blank" rel="noopener noreferrer">
+            <span>View Full Profile &amp; CV</span>
+            <span>↗</span>
+          </a>
+        </div>
+
+        <!-- Reymon Choudhary -->
+        <div class="dev-card">
+          <div class="dev-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"></circle>
+              <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"></circle>
+              <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"></circle>
+              <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"></circle>
+              <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.71 1.7-1.67 0-.43-.16-.83-.44-1.14-.28-.31-.44-.73-.44-1.19 0-.92.75-1.67 1.67-1.67H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9z"></path>
+            </svg>
+          </div>
+          <h3 class="dev-name">Reymon Choudhary</h3>
+          <span class="dev-role">Collaborator &amp; Developer</span>
+          <p class="dev-bio">Frontend engineer specializing in building responsive interfaces, premium user experience details, and interactive application components.</p>
+          <div class="tech-pills">
+            <span class="tech-pill">HTML &amp; CSS</span>
+            <span class="tech-pill">JavaScript</span>
+            <span class="tech-pill">UI &amp; UX</span>
+            <span class="tech-pill">Systems Design</span>
+          </div>
+          <a href="https://aman7263.github.io/Portfolio/index.html" class="dev-action-btn" target="_blank" rel="noopener noreferrer">
+            <span>View Full Profile &amp; CV</span>
+            <span>↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <script>
+    function scrollDevs(direction) {
+      const container = document.getElementById('devsSlider');
+      if (container) {
+        const scrollAmount = container.clientWidth * 0.8;
+        container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
+      }
+    }
+  </script>
 
   <footer>
     <a href="https://aman7263.github.io">aman7263.github.io</a>
