@@ -105,6 +105,9 @@
       position: relative;
       transition: background 0.15s ease;
       min-height: 130px;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
     }
 
     .card:hover {
@@ -527,6 +530,21 @@
         container.scrollBy({ left: direction * scrollAmount, behavior: 'smooth' });
       }
     }
+
+    // Prevent double-triggering navigation on mobile touch devices
+    document.addEventListener('DOMContentLoaded', function () {
+      var lastClick = 0;
+      document.querySelectorAll('a.card').forEach(function (card) {
+        card.addEventListener('click', function (e) {
+          var now = Date.now();
+          if (now - lastClick < 600) {
+            e.preventDefault();
+            return false;
+          }
+          lastClick = now;
+        });
+      });
+    });
   </script>
 
   <footer>
