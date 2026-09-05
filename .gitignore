@@ -1,7 +1,7 @@
 # Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
 
 # dependencies
-node_modules/
+/node_modules/
 
 # Expo
 .expo/
@@ -11,9 +11,13 @@ expo-env.d.ts
 
 # Un-ignore Expo web build output
 !amrey-pages/**/_expo/
+!amrey-pages/**/_expo/**
 !amrey-pages/**/assets/
+!amrey-pages/**/assets/**
 !veyano-pages/**/_expo/
+!veyano-pages/**/_expo/**
 !veyano-pages/**/assets/
+!veyano-pages/**/assets/**
 
 # Native
 .kotlin/
