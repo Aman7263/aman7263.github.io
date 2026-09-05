@@ -10,9 +10,10 @@ web-build/
 expo-env.d.ts
 
 # Un-ignore Expo web build output
-!amrey-pages/**/  
 !amrey-pages/**/_expo/
 !amrey-pages/**/assets/
+!veyano-pages/**/_expo/
+!veyano-pages/**/assets/
 
 # Native
 .kotlin/
